@@ -1,0 +1,15 @@
+GET http://localhost:2410/test
+
+################################
+
+POST http://localhost:2410/register
+Content-Type: application/json
+
+{
+  "vorname": "Lukas",
+  "nachname": "Semler",
+  "email": "lukas.semler@gmail.com", 
+  "password": "Lukas1", 
+  "type": "Spieler", 
+  "avatarPath": "blablabla"
+}
