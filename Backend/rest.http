@@ -13,3 +13,15 @@ Content-Type: application/json
   "type": "Trainer", 
   "avatarPath": "blablabla"
 }
+
+#################
+POST http://localhost:2410/addTeam
+Content-Type: application/json
+
+{
+  "titel": "test",
+  "beschreibung": "bla",
+  "farbe": "#11111", 
+  "zugangscode": "sefased", 
+  "t_id": 1
+}
