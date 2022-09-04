@@ -8,9 +8,12 @@ import AboutUsView from '../views/AboutUsView.vue';
 import HomeView from '../views/HomeView.vue';
 import TeamErstellenView from '../views/TeamErstellenView.vue';
 
-// Subviews
+// Subviews Trainer
 import TrainerHome from '../views/SubViews/Trainer/TrainerHome.vue';
 import TrainerTeams from '../views/SubViews/Trainer/TrainerKarten.vue';
+import TrainerSettings from '../views/SubViews/Trainer/TrainerSettings.vue';
+
+import ChangeTeam from '../views/MannschaftChange.vue';
 
 import { PiniaStore } from '../Store/Store.js';
 
@@ -49,11 +52,12 @@ const router = createRouter({
       children: [
         { path: '', component: TrainerHome },
         { path: 'teams', component: TrainerTeams },
+        { path: 'settings', component: TrainerSettings },
       ],
       beforeEnter: (to, from, next) => {
         const store = PiniaStore();
         if (store.getAktivenUser) {
-          if (store.isTrainer === 'Trainer') {
+          if (store.isTrainer) {
             next();
           }
         } else {
@@ -65,6 +69,11 @@ const router = createRouter({
       path: '/addTeam',
       name: 'addTeam',
       component: TeamErstellenView,
+    },
+    {
+      path: '/changeTeam',
+      name: 'Change Team',
+      component: ChangeTeam,
     },
 
     { path: '/:pathmatch(.*)*', name: 'not-found', component: NotFoundView },

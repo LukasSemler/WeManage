@@ -133,18 +133,19 @@ async function login(e) {
         email: state.email,
         password: state.password,
       });
+      console.log(result);
       // Ergebnis auswerten
-      if (result.status === 200) {
-        // Person im Store setzen
-        store.setAktivenUser(result.data);
 
-        if (result.data.type === 'Trainer') {
-          // Home Seite vomn Trainer Pushen
-          router.push('/homeTrainer');
-        } else {
-          // router.push('/homeSpieler');
-          alert('Spieler sind noch nicht supported');
-        }
+      // Person im Store setzen
+      store.setAktivenUser(result.data);
+
+      if (result.data.type == 'Trainer') {
+        // Home Seite vomn Trainer Pushen
+        console.log('push');
+        router.push('/homeTrainer');
+      } else {
+        // router.push('/homeSpieler');
+        alert('Spieler sind noch nicht supported');
       }
     } catch (error) {
       console.log(error.message);

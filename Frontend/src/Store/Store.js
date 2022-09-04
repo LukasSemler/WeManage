@@ -61,7 +61,12 @@ export const PiniaStore = defineStore('weManage', {
       return this.teams;
     },
     isTrainer() {
-      return this.aktiverUser.type;
+      try {
+        if (this.aktiverUser.type === 'Trainer') return true;
+        else return false;
+      } catch (error) {
+        return false;
+      }
     },
   },
   //Actions

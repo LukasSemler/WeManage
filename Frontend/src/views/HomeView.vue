@@ -133,11 +133,14 @@
                 <span class="flex min-w-0 items-center justify-between space-x-3">
                   <img
                     class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
-                    src="../assets/icons/Avatar_platzhalter.png"
+                    :src="store.getAktivenUser.data.avatarpath"
                     alt=""
                   />
                   <span class="flex min-w-0 flex-1 flex-col">
-                    <span class="truncate text-sm font-medium text-gray-900">Lukas Semler</span>
+                    <span class="truncate text-sm font-medium text-gray-900"
+                      >{{ store.getAktivenUser.data.vorname }}
+                      {{ store.getAktivenUser.data.nachname }}</span
+                    >
                   </span>
                 </span>
                 <ChevronUpDownIcon
@@ -360,7 +363,7 @@ const router = useRouter();
 const navigation = [
   { name: 'Home', icon: HomeIcon, current: false, path: '/homeTrainer' },
   { name: 'My teams', icon: Bars4Icon, current: false, path: '/homeTrainer/teams' },
-  { name: 'Settings', icon: Cog6ToothIcon, current: false },
+  { name: 'Settings', icon: Cog6ToothIcon, current: false, path: '/homeTrainer/settings' },
 ];
 
 const sidebarOpen = ref(false);

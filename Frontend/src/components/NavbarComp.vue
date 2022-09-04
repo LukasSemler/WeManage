@@ -61,12 +61,13 @@
                 <span class="sr-only">Open user menu</span>
                 <img
                   class="h-8 w-8 rounded-full"
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  :src="store.getAktivenUser.data.avatarpath"
                   alt=""
                 />
               </MenuButton>
             </div>
             <transition
+              class="z-40"
               enter-active-class="transition ease-out duration-200"
               enter-from-class="transform opacity-0 scale-95"
               enter-to-class="transform opacity-100 scale-100"
@@ -79,9 +80,9 @@
               >
                 <MenuItem v-slot="{ active }">
                   <a
-                    href="#"
+                    @click="toSoftware"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
-                    >Your Profile</a
+                    >Zur Software</a
                   >
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
@@ -93,7 +94,7 @@
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                   <a
-                    href="#"
+                    @click="logout"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                     >Sign out</a
                   >
@@ -156,4 +157,14 @@ import { useRouter } from 'vue-router';
 
 const store = PiniaStore();
 const router = useRouter();
+
+function toSoftware() {
+  if (store.isTrainer) router.push('/homeTrainer');
+  // else router.push()
+}
+
+function logout() {
+  store.deleteAktivenUser();
+  router.push('/');
+}
 </script>
