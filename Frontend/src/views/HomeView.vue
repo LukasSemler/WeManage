@@ -173,7 +173,7 @@
               <div class="py-1">
                 <MenuItem v-slot="{ active }">
                   <a
-                    href="#"
+                    @click="logout"
                     :class="[
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                       'block px-4 py-2 text-sm',
@@ -364,4 +364,9 @@ const navigation = [
 ];
 
 const sidebarOpen = ref(false);
+
+function logout() {
+  store.deleteAktivenUser();
+  router.push('/');
+}
 </script>

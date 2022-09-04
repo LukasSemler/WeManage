@@ -1,19 +1,19 @@
 import { defineStore } from 'pinia';
 
 //Die Funktion läuft intern bei allen actions ab um den State im localstorage zu speichern
-// function SaveState(abmelden) {
-//   const store = PiniaStore();
+function SaveState(abmelden) {
+  const store = PiniaStore();
 
-//   // State speichern
-//   if (store.aktiverUser != null) {
-//     localStorage.setItem(store.$id, JSON.stringify(store.$state));
-//   } else if (abmelden) {
-//     localStorage.setItem(store.$id, JSON.stringify(store.$state));
-//   }
-// }
+  //   State speichern
+  if (store.aktiverUser != null) {
+    localStorage.setItem(store.$id, JSON.stringify(store.$state));
+  } else if (abmelden) {
+    localStorage.setItem(store.$id, JSON.stringify(store.$state));
+  }
+}
 
 //MainStore
-export const PiniaStore = defineStore('electronicCity', {
+export const PiniaStore = defineStore('weManage', {
   //State
   state: () => ({
     aktiverUser: null,
@@ -60,7 +60,20 @@ export const PiniaStore = defineStore('electronicCity', {
     getTeams() {
       return this.teams;
     },
+    isTrainer() {
+      return this.aktiverUser.type;
+    },
   },
   //Actions
-  actions: {},
+  actions: {
+    setAktivenUser(user) {
+      this.aktiverUser = user;
+
+      SaveState();
+    },
+    deleteAktivenUser() {
+      this.aktiverUser = null;
+      SaveState(true);
+    },
+  },
 });

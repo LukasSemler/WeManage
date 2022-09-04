@@ -20,6 +20,7 @@
             </label>
             <div class="mt-1">
               <input
+                v-model="state.email"
                 id="email"
                 name="email"
                 type="email"
@@ -28,9 +29,9 @@
                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
 
-              <!-- <p v-if="v$.email.$invalid" class="mt-2 text-sm text-red-600" id="email-error">
-                {{ v$.email.$silentErrors[0].$message }}
-              </p> -->
+              <p v-if="validator.email.$invalid" class="mt-2 text-sm text-red-600" id="email-error">
+                {{ validator.email.$silentErrors[0].$message }}
+              </p>
             </div>
           </div>
 
@@ -38,6 +39,7 @@
             <label for="password" class="block text-sm font-medium text-gray-700"> Password </label>
             <div class="mt-1">
               <input
+                v-model="state.password"
                 id="password"
                 name="password"
                 type="password"
@@ -46,9 +48,13 @@
                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
 
-              <!-- <p v-if="v$.password.$invalid" class="mt-2 text-sm text-red-600" id="email-error">
-                {{ v$.password.$silentErrors[0].$message }}
-              </p> -->
+              <p
+                v-if="validator.password.$invalid"
+                class="mt-2 text-sm text-red-600"
+                id="email-error"
+              >
+                {{ validator.password.$silentErrors[0].$message }}
+              </p>
             </div>
           </div>
 
@@ -90,9 +96,69 @@
 </template>
 
 <script setup>
+import { ref, computed, reactive } from 'vue';
 import { useRouter } from 'vue-router';
-
 import { PiniaStore } from '../Store/Store';
+import axios from 'axios';
+
+// Vuelidate import
+import useValidate from '@vuelidate/core';
+import { required, email } from '@vuelidate/validators';
+
 const store = PiniaStore();
 const router = useRouter();
+
+// Inputs
+let state = reactive({
+  email: '',
+  password: '',
+});
+// Rules for vuelidate
+const rules = computed(() => {
+  return {
+    email: { required, email },
+    password: { required },
+  };
+});
+
+const validator = useValidate(rules, state);
+
+async function login(e) {
+  e.preventDefault();
+
+  if (validator.value.$silentErrors.length == 0) {
+    try {
+      // Daten an den Server schicken
+      const result = await axios.post('/login', {
+        email: state.email,
+        password: state.password,
+      });
+      // Ergebnis auswerten
+      if (result.status === 200) {
+        // Person im Store setzen
+        store.setAktivenUser(result.data);
+
+        if (result.data.type === 'Trainer') {
+          // Home Seite vomn Trainer Pushen
+          router.push('/homeTrainer');
+        } else {
+          // router.push('/homeSpieler');
+          alert('Spieler sind noch nicht supported');
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+      // if (error.message.includes('400')) {
+      //   duplicateError.value = true;
+      //   setTimeout(() => (duplicateError.value = false), 3000);
+      // }
+      // if (error.message.includes('500')) {
+      //   error.value = true;
+      //   setTimeout(() => (error.value = false), 3000);
+      // }
+    }
+  } else {
+    console.log('fehler');
+  }
+}
 </script>

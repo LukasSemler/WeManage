@@ -12,7 +12,7 @@ import TeamErstellenView from '../views/TeamErstellenView.vue';
 import TrainerHome from '../views/SubViews/Trainer/TrainerHome.vue';
 import TrainerTeams from '../views/SubViews/Trainer/TrainerKarten.vue';
 
-// import { PiniaStore } from '../Store/Store.js';
+import { PiniaStore } from '../Store/Store.js';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +50,16 @@ const router = createRouter({
         { path: '', component: TrainerHome },
         { path: 'teams', component: TrainerTeams },
       ],
+      beforeEnter: (to, from, next) => {
+        const store = PiniaStore();
+        if (store.getAktivenUser) {
+          if (store.isTrainer === 'Trainer') {
+            next();
+          }
+        } else {
+          next('/');
+        }
+      },
     },
     {
       path: '/addTeam',
