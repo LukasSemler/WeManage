@@ -102,7 +102,13 @@
               <label for="photo" class="block text-sm font-medium text-gray-700">Farbe</label>
               <div class="mt-1 sm:col-span-2 sm:mt-0">
                 <div class="flex items-center">
-                  <input v-model="state.farbe" type="color" id="head" name="head" />
+                  <input
+                    class="rounded-md"
+                    v-model="state.farbe"
+                    type="color"
+                    id="head"
+                    name="head"
+                  />
                   <p
                     v-if="validator.farbe.$invalid"
                     class="mt-2 text-sm text-red-600"
@@ -210,7 +216,9 @@ async function makeTeam(e) {
         t_id: store.getAktivenUser.data.t_id,
       });
       console.log(result);
+      
       // Ergebnis auswerten
+      if (result.status == 200) router.push('/homeTrainer');
     } catch (error) {
       console.log(error.message);
       // if (error.message.includes('400')) {

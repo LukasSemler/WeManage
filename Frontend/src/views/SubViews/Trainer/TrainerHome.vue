@@ -28,19 +28,16 @@
         class="relative col-span-1 flex rounded-md shadow-sm"
       >
         <div
-          :class="[
-            project.bgColorClass,
-            'flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md',
-          ]"
+          :class="`flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md  bg-[${project.farbe}]`"
         >
-          {{ project.initials }}
+          {{ project.farbe }}
         </div>
         <div
           class="flex flex-1 items-center justify-between truncate rounded-r-md border-t border-r border-b border-gray-200 bg-white"
         >
           <div class="flex-1 truncate px-4 py-2 text-sm">
-            <a class="font-medium text-gray-900 hover:text-gray-600">{{ project.title }}</a>
-            <p class="text-gray-500">{{ project.totalMembers }} Spieler</p>
+            <a class="font-medium text-gray-900 hover:text-gray-600">{{ project.titel }}</a>
+            <p class="text-gray-500">12 Spieler</p>
           </div>
           <Menu as="div" class="flex-shrink-0 pr-2">
             <MenuButton

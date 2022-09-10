@@ -24,13 +24,13 @@
         :key="project.id"
         class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
       >
-        <div :class="[project.bgColorClass, 'flex flex-1 flex-col p-16 rounded-t-lg']"></div>
+        <div :class="`flex flex-1 flex-col p-16 rounded-t-lg bg-[${project.farbe}]`"></div>
         <div class="flex flex-1 flex-col pb-4">
-          <h3 class="mt-6 text-sm font-medium text-gray-900">{{ project.title }}</h3>
+          <h3 class="mt-6 text-sm font-medium text-gray-900">{{ project.titel }}</h3>
           <dl class="mt-1 flex flex-grow flex-col justify-between">
             <dt class="sr-only">Title</dt>
-            <dd class="text-sm text-gray-500">{{ project.initials }}</dd>
-            <dd class="text-sm text-gray-500">{{ project.totalMembers }} Spieler</dd>
+            <dd class="text-sm text-gray-500">{{ project.farbe }}</dd>
+            <dd class="text-sm text-gray-500">12 Spieler</dd>
           </dl>
         </div>
 

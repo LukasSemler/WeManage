@@ -77,7 +77,7 @@
                         ]"
                         aria-hidden="true"
                       />
-                      {{ item.name }}
+                      {{ item.titel }}
                     </a>
                   </div>
                   <div class="mt-8">
@@ -91,15 +91,14 @@
                     >
                       <a
                         v-for="team in store.getTeams"
-                        :key="team.name"
-                        :href="team.href"
+                        :key="team.t_id"
                         class="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                       >
                         <span
-                          :class="[team.bgColorClass, 'w-2.5 h-2.5 mr-4 rounded-full']"
+                          :class="`w-2.5 h-2.5 mr-4 rounded-full bg-[#50d71e] `"
                           aria-hidden="true"
                         />
-                        <span class="truncate">{{ team.name }}</span>
+                        <span class="truncate">{{ team.titel }}</span>
                       </a>
                     </div>
                   </div>
@@ -226,11 +225,8 @@
                 :key="team.id"
                 class="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
               >
-                <span
-                  :class="[team.bgColorClass, 'w-2.5 h-2.5 mr-4 rounded-full']"
-                  aria-hidden="true"
-                />
-                <span class="truncate">{{ team.title }}</span>
+                <span :class="`w-2.5 h-2.5 mr-4 rounded-full bg-[${team.farbe}]`" aria-hidden="true" />
+                <span class="truncate">{{ team.titel }}</span>
               </a>
             </div>
           </div>
@@ -333,7 +329,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import {
   Dialog,
   DialogPanel,
@@ -356,9 +352,12 @@ import { ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { RouterView, useRouter } from 'vue-router';
 // Store impotieren
 import { PiniaStore } from '../Store/Store';
-const store = PiniaStore();
+import axios from 'axios';
 
+const store = PiniaStore();
 const router = useRouter();
+
+const sidebarOpen = ref(false);
 
 const navigation = [
   { name: 'Home', icon: HomeIcon, current: false, path: '/homeTrainer' },
@@ -366,7 +365,14 @@ const navigation = [
   { name: 'Settings', icon: Cog6ToothIcon, current: false, path: '/homeTrainer/settings' },
 ];
 
-const sidebarOpen = ref(false);
+onMounted(async () => {
+  console.log(store.getAktivenUser);
+  const { data } = await axios.post('/mannschaftenTrainer', {
+    t_id: store.getAktivenUser.data.t_id,
+  });
+
+  store.setMannschaften(data);
+});
 
 function logout() {
   store.deleteAktivenUser();

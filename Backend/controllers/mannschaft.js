@@ -1,5 +1,5 @@
 import validator from 'is-my-json-valid';
-import { addTeamDB } from '../models/mannschaftDB.js';
+import { addTeamDB, mannschaftenTrainerDB } from '../models/mannschaftDB.js';
 
 const validateAdd = validator({
   required: true,
@@ -35,6 +35,20 @@ const addTeam = async (req, res) => {
 
   const { titel, beschreibung, farbe, zugangscode, t_id } = req.body;
   const result = await addTeamDB(titel, beschreibung, farbe, zugangscode, t_id);
+
+  if (result) return res.status(200).json(result);
+
+  return res.status(500).send('Fehler');
 };
 
-export { addTeam };
+const mannschaftenTrainer = async (req, res) => {
+  console.log(req.body);
+  const { t_id } = req.body;
+  const result = await mannschaftenTrainerDB(t_id);
+
+  if (result) return res.status(200).json(result);
+
+  return res.status(500).send('Fehler');
+};
+
+export { addTeam, mannschaftenTrainer };
