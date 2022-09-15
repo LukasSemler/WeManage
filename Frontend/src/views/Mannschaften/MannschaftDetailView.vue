@@ -118,7 +118,7 @@
       class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 lg:bg-gray-100 lg:pt-5 lg:pb-4"
     >
       <div class="flex flex-shrink-0 items-center px-6">
-        <img class="h-8 w-auto" src="../assets/icons/placeholder_icon.png" alt="Your Company" />
+        <img class="h-8 w-auto" src="../../assets/icons/placeholder_icon.png" alt="Your Company" />
       </div>
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="mt-6 flex h-0 flex-1 flex-col overflow-y-auto">
@@ -214,25 +214,6 @@
               {{ item.name }}
             </a>
           </div>
-          <div class="mt-8">
-            <!-- Secondary navigation -->
-            <h3 class="px-3 text-sm font-medium text-gray-500" id="desktop-teams-headline">
-              Teams
-            </h3>
-            <div class="mt-1 space-y-1" role="group" aria-labelledby="desktop-teams-headline">
-              <a
-                v-for="team in store.getTeams"
-                :key="team.id"
-                class="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-              >
-                <span
-                  :class="`w-2.5 h-2.5 mr-4 rounded-full bg-[${team.farbe}]`"
-                  aria-hidden="true"
-                />
-                <span class="truncate">{{ team.titel }}</span>
-              </a>
-            </div>
-          </div>
         </nav>
       </div>
     </div>
@@ -278,7 +259,7 @@
                   <span class="sr-only">Open user menu</span>
                   <img
                     class="h-8 w-8 rounded-full"
-                    src="../assets/icons/Avatar_platzhalter.png"
+                    src="../../assets/icons/Avatar_platzhalter.png"
                     alt=""
                   />
                 </MenuButton>
@@ -345,16 +326,17 @@ import {
 } from '@headlessui/vue';
 import {
   Bars3CenterLeftIcon,
-  Bars4Icon,
-  Cog6ToothIcon,
+  BellIcon,
+  UserGroupIcon,
   HomeIcon,
   XMarkIcon,
+  CalendarDaysIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
 
 import { RouterView, useRouter } from 'vue-router';
 // Store impotieren
-import { PiniaStore } from '../Store/Store';
+import { PiniaStore } from '../../Store/Store.js';
 import axios from 'axios';
 
 const store = PiniaStore();
@@ -363,9 +345,10 @@ const router = useRouter();
 const sidebarOpen = ref(false);
 
 const navigation = [
-  { name: 'Home', icon: HomeIcon, current: false, path: '/homeTrainer' },
-  { name: 'My teams', icon: Bars4Icon, current: false, path: '/homeTrainer/teams' },
-  { name: 'Settings', icon: Cog6ToothIcon, current: false, path: '/homeTrainer/settings' },
+  { name: 'Übersicht', icon: HomeIcon, current: false, path: '/homeTrainer' },
+  { name: 'Ankündigungen', icon: BellIcon, current: false, path: '/homeTrainer/teams' },
+  { name: 'Trainings', icon: MapPinIcon, current: false, path: '/homeTrainer/settings' },
+  { name: 'Mitglieder', icon: CalendarDaysIcon, current: false, path: '/homeTrainer/settings' },
 ];
 
 onMounted(async () => {

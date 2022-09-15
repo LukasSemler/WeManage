@@ -39,61 +39,6 @@
             <a class="font-medium text-gray-900 hover:text-gray-600">{{ project.titel }}</a>
             <p class="text-gray-500">12 Spieler</p>
           </div>
-          <Menu as="div" class="flex-shrink-0 pr-2">
-            <MenuButton
-              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
-            >
-              <span class="sr-only">Open options</span>
-              <EllipsisVerticalIcon class="h-5 w-5" aria-hidden="true" />
-            </MenuButton>
-            <transition
-              enter-active-class="transition ease-out duration-100"
-              enter-from-class="transform opacity-0 scale-95"
-              enter-to-class="transform opacity-100 scale-100"
-              leave-active-class="transition ease-in duration-75"
-              leave-from-class="transform opacity-100 scale-100"
-              leave-to-class="transform opacity-0 scale-95"
-            >
-              <MenuItems
-                class="absolute right-10 top-3 z-10 mx-3 mt-1 w-48 origin-top-right divide-y divide-gray-200 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-              >
-                <div class="py-1">
-                  <MenuItem v-slot="{ active }">
-                    <a
-                      href="#"
-                      :class="[
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm',
-                      ]"
-                      >View</a
-                    >
-                  </MenuItem>
-                </div>
-                <div class="py-1">
-                  <MenuItem v-slot="{ active }">
-                    <a
-                      href="#"
-                      :class="[
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm',
-                      ]"
-                      >Removed from pinned</a
-                    >
-                  </MenuItem>
-                  <MenuItem v-slot="{ active }">
-                    <a
-                      href="#"
-                      :class="[
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm',
-                      ]"
-                      >Share</a
-                    >
-                  </MenuItem>
-                </div>
-              </MenuItems>
-            </transition>
-          </Menu>
         </div>
       </li>
     </ul>
@@ -110,8 +55,8 @@ import { useRouter } from 'vue-router';
 import Kalender_comp from '../../../components/Kalender_comp.vue';
 
 // Tailwind imports
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
-import { EllipsisVerticalIcon, PlusIcon } from '@heroicons/vue/20/solid';
+
+import { PlusIcon } from '@heroicons/vue/20/solid';
 
 // Store impotieren
 import { PiniaStore } from '../../../Store/Store';

@@ -15,6 +15,8 @@ import TrainerSettings from '../views/SubViews/Trainer/TrainerSettings.vue';
 
 import ChangeTeam from '../views/MannschaftChange.vue';
 
+import MannschaftDetail from '../views/Mannschaften/MannschaftDetailView.vue';
+
 import { PiniaStore } from '../Store/Store.js';
 
 const router = createRouter({
@@ -74,6 +76,12 @@ const router = createRouter({
       path: '/changeTeam',
       name: 'Change Team',
       component: ChangeTeam,
+    },
+    {
+      path: '/detailMannschaft/:id',
+      name: 'Change Team',
+      component: MannschaftDetail,
+      params: true,
     },
 
     { path: '/:pathmatch(.*)*', name: 'not-found', component: NotFoundView },
