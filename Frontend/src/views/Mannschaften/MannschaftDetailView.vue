@@ -345,10 +345,27 @@ const router = useRouter();
 const sidebarOpen = ref(false);
 
 const navigation = [
-  { name: 'Übersicht', icon: HomeIcon, current: false, path: '/homeTrainer' },
-  { name: 'Ankündigungen', icon: BellIcon, current: false, path: '/homeTrainer/teams' },
-  { name: 'Trainings', icon: MapPinIcon, current: false, path: '/homeTrainer/settings' },
-  { name: 'Mitglieder', icon: CalendarDaysIcon, current: false, path: '/homeTrainer/settings' },
+  {
+    name: 'Übersicht',
+    icon: HomeIcon,
+    current: false,
+    path: `/detailMannschaft/${router.currentRoute.value.params.id}`,
+    params: true,
+  },
+  {
+    name: 'Ankündigungen',
+    icon: BellIcon,
+    current: false,
+    path: `/detailMannschaft/${router.currentRoute.value.params.id}/ankuendigungen`,
+    params: true,
+  },
+  {
+    name: 'Trainings',
+    icon: CalendarDaysIcon,
+    current: false,
+    path: `/detailMannschaft/${router.currentRoute.value.params.id}/trainings`,
+  },
+  { name: 'Mitglieder', icon: UserGroupIcon, current: false, path: '/mitglieder' },
 ];
 
 onMounted(async () => {

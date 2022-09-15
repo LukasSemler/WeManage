@@ -40,7 +40,9 @@
               <a
                 class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500"
               >
-                <span class="ml-3">Details</span>
+                <span @click="router.push(`/detailMannschaft/${project.m_id}`)" class="ml-3"
+                  >Details</span
+                >
               </a>
             </div>
           </div>
