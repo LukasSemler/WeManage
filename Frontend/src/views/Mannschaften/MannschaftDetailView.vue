@@ -123,12 +123,19 @@
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="mt-6 flex h-0 flex-1 flex-col overflow-y-auto">
         <!-- User account dropdown -->
-        <div class="mt-6 px-3">
+        <div class="mt-6 mb-3 px-3 flex-row">
           <div class="space-y-1">
-            <ArrowLeftIcon class="w-10"></ArrowLeftIcon>
-            Back
+            <div
+              @click="router.push('/homeTrainer')"
+              class="text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+            >
+              <ArrowLeftIcon class="h-10 w-10"></ArrowLeftIcon>
+              <p class="text-2xl font-bold mx-2">Back</p>
+            </div>
           </div>
         </div>
+
+        <hr />
 
         <!-- Navigation -->
         <nav class="mt-6 px-3">
