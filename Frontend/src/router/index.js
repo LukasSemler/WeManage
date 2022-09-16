@@ -18,6 +18,9 @@ import ChangeTeam from '../views/MannschaftChange.vue';
 import MannschaftDetail from '../views/Mannschaften/MannschaftDetailView.vue';
 
 import Uebersicht from '../views/Mannschaften/Subview/Uebersicht.vue';
+import Ankuendigungen from '../views/Mannschaften/Subview/ankuendigungen.vue';
+import Trainings from '../views/Mannschaften/Subview/trainings.vue';
+import Mitglieder from '../views/Mannschaften/Subview/Mitglieder.vue';
 
 import { PiniaStore } from '../Store/Store.js';
 
@@ -86,9 +89,9 @@ const router = createRouter({
       params: true,
       children: [
         { path: '', component: Uebersicht },
-        { path: 'ankuendigungen', component: TrainerSettings },
-        { path: 'trainings', component: TrainerSettings },
-        { path: 'mitglieder', component: TrainerSettings },
+        { path: 'ankuendigungen', component: Ankuendigungen },
+        { path: 'trainings', component: Trainings },
+        { path: 'mitglieder', component: Mitglieder },
       ],
     },
 
