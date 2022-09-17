@@ -51,4 +51,39 @@ from mannschaft m
   return false;
 };
 
-export { addTeamDB, mannschaftenTrainerDB };
+const addSpielerMannschaftDB = async (s_id, m_id) => {
+  const client = await pool.connect();
+
+  try {
+    //Transaktion beginnen
+    await client.query('BEGIN');
+
+    const { rows: vorhanden } = await client.query(
+      'SELECT s_id from spieler_mannschaft WHERE m_id = $1 and s_id = $2 ',
+      [m_id, s_id],
+    );
+
+    console.log(vorhanden);
+
+    if (vorhanden[0]) return false;
+
+    const { rows: insert } = await client.query(
+      'INSERT INTO spieler_mannschaft (s_id, m_id) VALUES ($1, $2) returning *;',
+      [s_id, m_id],
+    );
+
+    if (insert[0]) {
+      await client.query('COMMIT');
+      return insert[0];
+    }
+
+    return false;
+  } catch (error) {
+    await client.query('ROLLBACK');
+    throw error;
+  } finally {
+    client.release();
+  }
+};
+
+export { addTeamDB, mannschaftenTrainerDB, addSpielerMannschaftDB };

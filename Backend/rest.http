@@ -25,3 +25,8 @@ Content-Type: application/json
   "zugangscode": "sefased", 
   "t_id": 1
 }
+
+#######
+
+
+GET http://localhost:2410/getAllSpieler

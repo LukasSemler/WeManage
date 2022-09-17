@@ -126,7 +126,7 @@
         <div class="mt-6 mb-3 px-3 flex-row">
           <div class="space-y-1">
             <div
-              @click="router.push('/homeTrainer')"
+              @click="router.push('/homeTrainer/teams')"
               class="text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
             >
               <ArrowLeftIcon class="h-10 w-10"></ArrowLeftIcon>
@@ -209,16 +209,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import {
-  Dialog,
-  DialogPanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  TransitionChild,
-  TransitionRoot,
-} from '@headlessui/vue';
+import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
 import {
   Bars3CenterLeftIcon,
   BellIcon,
@@ -228,7 +219,7 @@ import {
   CalendarDaysIcon,
   ArrowLeftIcon,
 } from '@heroicons/vue/24/outline';
-import { ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
+import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
 
 import { RouterView, useRouter } from 'vue-router';
 // Store impotieren
@@ -270,20 +261,12 @@ const navigation = [
 ];
 
 onMounted(async () => {
-  console.log(store.getAktivenUser);
   const { data } = await axios.post('/mannschaftenTrainer', {
     t_id: store.getAktivenUser.data.t_id,
   });
 
-  console.log(data);
-
   store.setMannschaften(data);
 });
-
-function logout() {
-  store.deleteAktivenUser();
-  router.push('/');
-}
 
 const id = ref(router.currentRoute.value.params.id);
 </script>
