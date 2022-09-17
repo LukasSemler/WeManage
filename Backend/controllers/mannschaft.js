@@ -4,6 +4,8 @@ import {
   mannschaftenTrainerDB,
   addSpielerMannschaftDB,
   addTrainerMannschaftDB,
+  deleteTrainerMannschaftDB,
+  deleteSpielerMannschaftDB,
 } from '../models/mannschaftDB.js';
 
 const validateAdd = validator({
@@ -80,4 +82,31 @@ const addTrainerMannschaft = async (req, res) => {
   return res.status(500).send('Fehler beim Einfügen');
 };
 
-export { addTeam, mannschaftenTrainer, addSpielerMannschaft, addTrainerMannschaft };
+const deleteTrainerMannschaftDel = async (req, res) => {
+  const { m_id, t_id } = req.params;
+
+  console.log(m_id, t_id);
+
+  await deleteTrainerMannschaftDB(m_id, t_id);
+
+  return res.status(200).send('Trainer gelöscht');
+};
+
+const deleteSpielerMannschaftDel = async (req, res) => {
+  const { m_id, s_id } = req.params;
+
+  console.log(m_id, s_id);
+
+  await deleteSpielerMannschaftDB(m_id, s_id);
+
+  return res.status(200).send('Trainer gelöscht');
+};
+
+export {
+  addTeam,
+  mannschaftenTrainer,
+  addSpielerMannschaft,
+  addTrainerMannschaft,
+  deleteTrainerMannschaftDel,
+  deleteSpielerMannschaftDel,
+};

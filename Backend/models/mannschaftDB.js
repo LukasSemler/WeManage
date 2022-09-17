@@ -117,4 +117,19 @@ const addTrainerMannschaftDB = async (t_id, m_id) => {
   }
 };
 
-export { addTeamDB, mannschaftenTrainerDB, addSpielerMannschaftDB, addTrainerMannschaftDB };
+const deleteTrainerMannschaftDB = async (m_id, t_id) => {
+  await query('DELETE FROM trainer_mannschaft WHERE m_id = $1 and t_id = $2;', [m_id, t_id]);
+};
+
+const deleteSpielerMannschaftDB = async (m_id, s_id) => {
+  await query('DELETE FROM spieler_mannschaft WHERE m_id = $1 and s_id = $2;', [m_id, s_id]);
+};
+
+export {
+  addTeamDB,
+  mannschaftenTrainerDB,
+  addSpielerMannschaftDB,
+  addTrainerMannschaftDB,
+  deleteTrainerMannschaftDB,
+  deleteSpielerMannschaftDB,
+};

@@ -6,6 +6,8 @@ import {
   mannschaftenTrainer,
   addSpielerMannschaft,
   addTrainerMannschaft,
+  deleteTrainerMannschaftDel,
+  deleteSpielerMannschaftDel,
 } from '../controllers/mannschaft.js';
 import { getAllSpieler, getSpieler } from '../controllers/spieler.js';
 import { getAllTrainer, getTrainer } from '../controllers/trainer.js';
@@ -29,4 +31,6 @@ router.get('/getTrainer/:id', asyncHandler(getTrainer));
 router.post('/addSpielerMannschaft', asyncHandler(addSpielerMannschaft));
 router.post('/addTrainerMannschaft', asyncHandler(addTrainerMannschaft));
 
+router.delete('/trainerMannschaftDel/:t_id/:m_id', asyncHandler(deleteTrainerMannschaftDel));
+router.delete('/spielerMannschaftDel/:s_id/:m_id', asyncHandler(deleteSpielerMannschaftDel));
 export default router;

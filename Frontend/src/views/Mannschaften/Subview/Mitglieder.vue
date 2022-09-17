@@ -116,6 +116,7 @@
                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
                   >
                     <button
+                      @click="trainerDel(person)"
                       type="button"
                       class="inline-flex items-center rounded-md border border-red-600 bg-white text-red-600 px-4 py-2 text-sm font-medium shadow-sm hover:text-red-700"
                     >
@@ -198,6 +199,7 @@
                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
                   >
                     <button
+                      @click="spielerDel(person)"
                       type="button"
                       class="inline-flex items-center rounded-md border border-red-600 bg-white text-red-600 px-4 py-2 text-sm font-medium shadow-sm hover:text-red-700"
                     >
@@ -530,5 +532,26 @@ async function getTrainer() {
   } catch (error) {
     console.log(error);
   }
+}
+
+async function trainerDel(person) {
+  // console.log(store.getAktivenUser);
+  if (person.t_id != store.getAktivenUser.data.t_id) {
+    // Trainer lokal löschen
+    trainer.value = trainer.value.filter((trainer) => trainer.t_id != person.t_id);
+
+    //Trainer aus der Datenbank löschen
+    await axios.delete(`/trainerMannschaftDel/${person.t_id}/${id.value}`);
+  }
+}
+
+async function spielerDel(person) {
+  // console.log(store.getAktivenUser);
+
+  // Trainer lokal löschen
+  spieler.value = spieler.value.filter((spieler) => spieler.s_id != person.s_id);
+
+  //Trainer aus der Datenbank löschen
+  await axios.delete(`/spielerMannschaftDel/${person.s_id}/${id.value}`);
 }
 </script>
