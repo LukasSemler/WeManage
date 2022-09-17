@@ -23,9 +23,9 @@
                 <XMarkIcon class="h-6 w-6 text-red-500" aria-hidden="true" />
               </div>
               <div class="ml-3 w-0 flex-1 pt-0.5">
-                <p class="text-sm font-medium text-gray-900">Der Spieler ist schon vorhanden</p>
+                <p class="text-sm font-medium text-gray-900">Die Person ist schon vorhanden</p>
                 <p class="mt-1 text-sm text-gray-500">
-                  Du kannst einen Spieler nur einmal zu einer Mannschaft hinzufügen
+                  Du kannst jede Person nur einmal zu einer Mannschaft hinzufügen.
                 </p>
               </div>
               <div class="ml-4 flex flex-shrink-0">
@@ -115,9 +115,13 @@
                   <td
                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
                   >
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                      >Edit<span class="sr-only">, {{ person.name }}</span></a
+                    <button
+                      type="button"
+                      class="inline-flex items-center rounded-md border border-red-600 bg-white text-red-600 px-4 py-2 text-sm font-medium shadow-sm hover:text-red-700"
                     >
+                      <TrashIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                      Entfernen
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -193,9 +197,13 @@
                   <td
                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
                   >
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                      >Edit<span class="sr-only">, {{ person.name }}</span></a
+                    <button
+                      type="button"
+                      class="inline-flex items-center rounded-md border border-red-600 bg-white text-red-600 px-4 py-2 text-sm font-medium shadow-sm hover:text-red-700"
                     >
+                      <TrashIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                      Entfernen
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -395,7 +403,7 @@ import {
   TransitionRoot,
 } from '@headlessui/vue';
 
-import { XMarkIcon } from '@heroicons/vue/20/solid';
+import { XMarkIcon, TrashIcon } from '@heroicons/vue/20/solid';
 import axios from 'axios';
 
 const store = PiniaStore();
@@ -454,10 +462,19 @@ const filteredTrainer = computed(() =>
       }),
 );
 
-function onSelectTrainer(person) {
-  trainer.value.push(person);
+async function onSelectTrainer(person) {
+  try {
+    await axios.post('/addTrainerMannschaft', { t_id: person.t_id, m_id: id.value });
 
-  openTrainerSearch.value = false;
+    trainer.value.push(person);
+    openTrainerSearch.value = false;
+  } catch (error) {
+    showError.value = true;
+    openTrainerSearch.value = false;
+    console.log('Der Trainer ist schon vorhanden');
+
+    setTimeout(() => (showError.value = false), 3000);
+  }
 }
 
 async function openSearchTrainer() {

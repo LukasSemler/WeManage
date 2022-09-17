@@ -3,6 +3,7 @@ import {
   addTeamDB,
   mannschaftenTrainerDB,
   addSpielerMannschaftDB,
+  addTrainerMannschaftDB,
 } from '../models/mannschaftDB.js';
 
 const validateAdd = validator({
@@ -59,8 +60,6 @@ const addSpielerMannschaft = async (req, res) => {
   const s_id = req.body.s_id;
   const m_id = Number(req.body.m_id);
 
-  console.log(s_id, m_id);
-
   const result = await addSpielerMannschaftDB(s_id, m_id);
 
   if (result) return res.status(200).json(result);
@@ -69,4 +68,16 @@ const addSpielerMannschaft = async (req, res) => {
   return res.status(500).send('Fehler beim Einfügen');
 };
 
-export { addTeam, mannschaftenTrainer, addSpielerMannschaft };
+const addTrainerMannschaft = async (req, res) => {
+  const t_id = req.body.t_id;
+  const m_id = Number(req.body.m_id);
+
+  const result = await addTrainerMannschaftDB(t_id, m_id);
+
+  if (result) return res.status(200).json(result);
+  console.log(result);
+
+  return res.status(500).send('Fehler beim Einfügen');
+};
+
+export { addTeam, mannschaftenTrainer, addSpielerMannschaft, addTrainerMannschaft };
