@@ -17,40 +17,6 @@ export const PiniaStore = defineStore('weManage', {
   //State
   state: () => ({
     aktiverUser: null,
-    // teams: [
-    //   {
-    //     id: 1,
-    //     title: 'West Wien 07/08',
-    //     initials: '07/08',
-    //     totalMembers: 12,
-
-    //     bgColorClass: 'bg-indigo-500',
-    //   },
-    //   {
-    //     id: 2,
-    //     title: 'West Wien 09/10',
-    //     initials: '09/10',
-    //     totalMembers: 12,
-
-    //     bgColorClass: 'bg-green-500',
-    //   },
-    //   {
-    //     id: 3,
-    //     title: 'Future Team',
-    //     initials: 'U20',
-    //     totalMembers: 12,
-
-    //     bgColorClass: 'bg-yellow-500',
-    //   },
-    //   {
-    //     id: 4,
-    //     title: 'Future Team',
-    //     initials: 'U20',
-    //     totalMembers: 12,
-
-    //     bgColorClass: 'bg-lime-500',
-    //   },
-    // ],
     teams: [],
   }),
   //Getter
@@ -68,6 +34,9 @@ export const PiniaStore = defineStore('weManage', {
       } catch (error) {
         return false;
       }
+    },
+    getNamen() {
+      return `${this.aktiverUser.data.vorname} ${this.aktiverUser.data.nachname}`;
     },
   },
   //Actions
