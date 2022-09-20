@@ -28,9 +28,7 @@ WHERE n.t_id = t.t_id AND m.m_id = $1; `,
 };
 
 const delNewsDB = async (id) => {
-  const result = await query('DELETE FROM news where n_id = $1', [id]);
-
-  console.log(result);
+  await query('DELETE FROM news where n_id = $1', [id]);
 };
 
 export { postNewsDB, getNewsDB, delNewsDB };
