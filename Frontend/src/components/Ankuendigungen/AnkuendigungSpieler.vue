@@ -7,10 +7,10 @@
         </div>
         <div class="min-w-0 flex-1">
           <p class="text-sm font-medium text-gray-900">
-            <a href="#" class="hover:underline">{{ news.vorname }} {{ news.nachname }}</a>
+            <p class="hover:underline">{{ news.vorname }} {{ news.nachname }}</p>
           </p>
           <p class="text-sm text-gray-500">
-            <a href="#" class="hover:underline">{{ news.datetime }}</a>
+            <p  class="hover:underline">{{ news.datetime }}</p>
           </p>
         </div>
       </div>

@@ -32,7 +32,7 @@
                 <button
                   type="button"
                   @click="showError = false"
-                  class="inline-flex rounded-md bg-gray-200 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  class="inline-flex rounded-md bg-gray-200 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring--500 focus:ring-offset-2"
                 >
                   <span class="sr-only">Close</span>
                   <XMarkIcon class="h-5 w-5" aria-hidden="true" />
@@ -67,7 +67,7 @@
         <button
           @click="openSearchTrainer"
           type="button"
-          class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+          class="inline-flex items-center justify-center rounded-md border border-transparent bg--600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg--700 focus:outline-none focus:ring-2 focus:ring--500 focus:ring-offset-2 sm:w-auto"
         >
           Add Trainer
         </button>
@@ -150,7 +150,7 @@
         <button
           @click="openSearchSpieler"
           type="button"
-          class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+          class="inline-flex items-center justify-center rounded-md border border-transparent bg--600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg--700 focus:outline-none focus:ring-2 focus:ring--500 focus:ring-offset-2 sm:w-auto"
         >
           Add Spieler
         </button>
@@ -287,7 +287,7 @@
                   <li
                     :class="[
                       'cursor-default select-none px-4 py-2',
-                      active && 'bg-indigo-600 text-white',
+                      active && 'bg--600 text-white',
                     ]"
                   >
                     {{ person.vorname }} {{ person.nachname }}
@@ -364,7 +364,7 @@
                   <li
                     :class="[
                       'cursor-default select-none px-4 py-2',
-                      active && 'bg-indigo-600 text-white',
+                      active && 'bg--600 text-white',
                     ]"
                   >
                     {{ person.vorname }} {{ person.nachname }}

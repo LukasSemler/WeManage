@@ -11,7 +11,7 @@ import {
 } from '../controllers/mannschaft.js';
 import { getAllSpieler, getSpieler } from '../controllers/spieler.js';
 import { getAllTrainer, getTrainer } from '../controllers/trainer.js';
-import { postNews, getNews } from '../controllers/news.js';
+import { postNews, getNews, delNews } from '../controllers/news.js';
 
 const router = express.Router();
 
@@ -37,4 +37,5 @@ router.delete('/spielerMannschaftDel/:s_id/:m_id', asyncHandler(deleteSpielerMan
 
 router.post('/postNews', asyncHandler(postNews));
 router.get('/getNews/:id', asyncHandler(getNews));
+router.delete('/delNews/:id', asyncHandler(delNews));
 export default router;
