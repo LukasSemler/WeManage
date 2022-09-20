@@ -8,6 +8,7 @@
     </div>
     <div class="mt-4 flex sm:mt-0 sm:ml-4">
       <button
+        v-if="store.getAktivenUser.type == 'Trainer'"
         @click="open = true"
         type="button"
         class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -18,7 +19,13 @@
     </div>
   </div>
 
-  <AnkuendigungenTrainer :add="open" @sidebar="closeSideBar"></AnkuendigungenTrainer>
+  <AnkuendigungenTrainer
+    v-if="store.getAktivenUser.type == 'Trainer'"
+    :add="open"
+    @sidebar="closeSideBar"
+  ></AnkuendigungenTrainer>
+
+  <AnkuendigungSpieler v-else></AnkuendigungSpieler>
 </template>
 
 <script setup>
@@ -27,11 +34,16 @@ import { ref } from 'vue';
 // Tailwind imports
 import { PlusIcon } from '@heroicons/vue/20/solid';
 
+import { PiniaStore } from '../../../Store/Store';
+
 import AnkuendigungenTrainer from '../../../components/Ankuendigungen/AnkuendigungenTrainer.vue';
+import AnkuendigungSpieler from '../../../components/Ankuendigungen/AnkuendigungSpieler.vue';
+
+const store = PiniaStore();
 
 let open = ref(false);
 
-function closeSideBar(val) {
+function closeSideBar() {
   open.value = false;
 }
 </script>

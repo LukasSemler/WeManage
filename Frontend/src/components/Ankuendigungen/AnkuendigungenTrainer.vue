@@ -192,7 +192,6 @@
       </div>
     </div>
   </div>
-  {{ props.add }}
 </template>
 
 <script setup>
