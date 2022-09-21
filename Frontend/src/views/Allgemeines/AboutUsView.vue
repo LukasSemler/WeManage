@@ -77,7 +77,7 @@
 </template>
 
 <script setup>
-import NavbarComp from '../components/NavbarComp.vue';
+import NavbarComp from '../../components/NavbarComp.vue';
 
 const people = [
   {

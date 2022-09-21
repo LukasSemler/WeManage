@@ -98,7 +98,7 @@
 <script setup>
 import { ref, computed, reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import { PiniaStore } from '../Store/Store';
+import { PiniaStore } from '../../Store/Store';
 import axios from 'axios';
 
 // Vuelidate import

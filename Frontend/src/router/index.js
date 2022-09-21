@@ -1,17 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import LandingPageView from '../views/LandingPageView.vue';
-import LoginView from '../views/LoginView.vue';
-import RegisterView from '../views/RegisterView.vue';
-import NotFoundView from '../views/NotFoundView.vue';
-import ContactView from '../views/ContactView.vue';
-import AboutUsView from '../views/AboutUsView.vue';
-import HomeView from '../views/HomeView.vue';
-import TeamErstellenView from '../views/TeamErstellenView.vue';
 
-// Subviews Trainer
-import TrainerHome from '../views/SubViews/Trainer/TrainerHome.vue';
-import TrainerTeams from '../views/SubViews/Trainer/TrainerKarten.vue';
-import TrainerSettings from '../views/SubViews/Trainer/TrainerSettings.vue';
+import TeamErstellenView from '../views/TeamErstellenView.vue';
 
 import ChangeTeam from '../views/MannschaftChange.vue';
 
@@ -21,6 +10,35 @@ import Uebersicht from '../views/Mannschaften/Subview/Uebersicht.vue';
 import Ankuendigungen from '../views/Mannschaften/Subview/ankuendigungen.vue';
 import Trainings from '../views/Mannschaften/Subview/trainings.vue';
 import Mitglieder from '../views/Mannschaften/Subview/Mitglieder.vue';
+
+//! Allgemeines:
+
+import LandingPageView from '../views/Allgemeines/LandingPageView.vue';
+import NotFoundView from '../views/Allgemeines/NotFoundView.vue';
+import ContactView from '../views/Allgemeines/ContactView.vue';
+import AboutUsView from '../views/Allgemeines/AboutUsView.vue';
+import LoginView from '../views/Allgemeines/LoginView.vue';
+import RegisterView from '../views/Allgemeines/RegisterView.vue';
+
+//* _______________________________________________________________________
+
+//! Trainer:
+import HomeViewTrainer from '../views/Trainer/HomeViewTrainer.vue';
+
+//? TrainerHomeSubviews
+import TrainerHome from '../views/Trainer/Subviews/TrainerHome.vue';
+import TrainerTeams from '../views/Trainer/Subviews/TrainerKarten.vue';
+import TrainerSettings from '../views/Trainer/Subviews/TrainerSettings.vue';
+
+//* _______________________________________________________________________
+
+//! Spieler:
+import HomeViewSpieler from '../views/Spieler/HomeViewSpieler.vue';
+
+//? SpielerHomeSubviews
+import SpielerHome from '../views/Spieler/Subviews/SpielerHome.vue';
+import SpielerTeams from '../views/Spieler/Subviews/SpielerTeams.vue';
+import SpielerSettings from '../views/Spieler/Subviews/SpielerSettings.vue';
 
 import { PiniaStore } from '../Store/Store.js';
 
@@ -55,7 +73,7 @@ const router = createRouter({
     {
       path: '/homeTrainer',
       name: 'Home',
-      component: HomeView,
+      component: HomeViewTrainer,
       children: [
         { path: '', component: TrainerHome },
         { path: 'teams', component: TrainerTeams },
@@ -110,11 +128,11 @@ const router = createRouter({
       name: 'HomeSpieler',
       component: () => import('@/views/HomeSpielerView.vue'),
       children: [
-        { path: '', component: () => import('@/views/SubViews/Spieler/SpielerHome.vue') },
-        { path: 'teams', component: () => import('@/views/SubViews/Spieler/SpielerTeams.vue') },
+        { path: '', component: SpielerHome },
+        { path: 'teams', component: SpielerTeams },
         {
           path: 'settings',
-          component: () => import('@/views/SubViews/Spieler/SpielerSettings.vue'),
+          componen: SpielerSettings,
         },
       ],
       beforeEnter: (to, from, next) => {

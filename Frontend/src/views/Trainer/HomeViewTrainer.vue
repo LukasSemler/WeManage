@@ -338,11 +338,11 @@ import {
   HomeIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline';
-import { ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
+import { ChevronUpDownIcon } from '@heroicons/vue/20/solid';
 
 import { RouterView, useRouter } from 'vue-router';
 // Store impotieren
-import { PiniaStore } from '../Store/Store';
+import { PiniaStore } from '../../Store/Store';
 import axios from 'axios';
 
 const store = PiniaStore();

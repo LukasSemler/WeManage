@@ -498,7 +498,7 @@
 </template>
 
 <script setup>
-import NavbarComp from '../components/NavbarComp.vue';
+import NavbarComp from '../../components/NavbarComp.vue';
 
 import { ref } from 'vue';
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/vue/24/outline';
