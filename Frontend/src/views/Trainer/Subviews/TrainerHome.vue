@@ -28,7 +28,7 @@
         class="relative col-span-1 flex rounded-md shadow-sm"
       >
         <div
-          :class="`flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md  bg-[${project.farbe}]`"
+          :class="`flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md  bg-indigo-400`"
         >
           {{ project.farbe }}
         </div>
