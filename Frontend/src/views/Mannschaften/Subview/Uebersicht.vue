@@ -6,7 +6,7 @@
     <div class="min-w-0 flex-1">
       <h1 class="text-2xl font-bold leading-6 text-gray-900 sm:truncate my-2">Übersicht</h1>
     </div>
-    <div class="mt-4 flex sm:mt-0 sm:ml-4">
+    <div class="mt-4 flex sm:mt-0 sm:ml-4" v-if="store.isTrainer">
       <button
         @click="router.push('/addTeam')"
         type="button"

@@ -5,6 +5,7 @@ import {
   addSpielerMannschaftDB,
   addTrainerMannschaftDB,
   deleteTrainerMannschaftDB,
+  mannschaftenSpielerDB,
   deleteSpielerMannschaftDB,
 } from '../models/mannschaftDB.js';
 
@@ -58,6 +59,13 @@ const mannschaftenTrainer = async (req, res) => {
   return res.status(500).send('Fehler');
 };
 
+const mannschaftenSpieler = async (req, res) => {
+  const result = await mannschaftenSpielerDB(req.params.s_id);
+
+  if (result) return res.status(200).json(result);
+  return res.status(500).send('Leider keine Mannschaften vorhanden :(');
+};
+
 const addSpielerMannschaft = async (req, res) => {
   const s_id = req.body.s_id;
   const m_id = Number(req.body.m_id);
@@ -109,4 +117,5 @@ export {
   addTrainerMannschaft,
   deleteTrainerMannschaftDel,
   deleteSpielerMannschaftDel,
+  mannschaftenSpieler,
 };

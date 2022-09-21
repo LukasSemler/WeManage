@@ -12,10 +12,10 @@ if (location.origin === 'http://localhost:8080' || location.origin === 'http://l
 
 const app = createApp(App);
 
-app.use(router);
-
 //Pinia Store
 const pinia = createPinia();
 app.use(pinia);
+
+app.use(router);
 
 app.mount('#app');

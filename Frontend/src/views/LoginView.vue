@@ -144,8 +144,7 @@ async function login(e) {
         console.log('push');
         router.push('/homeTrainer');
       } else {
-        // router.push('/homeSpieler');
-        alert('Spieler sind noch nicht supported');
+        router.push('/homeSpieler');
       }
     } catch (error) {
       console.log(error.message);

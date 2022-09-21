@@ -125,6 +125,18 @@ const deleteSpielerMannschaftDB = async (m_id, s_id) => {
   await query('DELETE FROM spieler_mannschaft WHERE m_id = $1 and s_id = $2;', [m_id, s_id]);
 };
 
+const mannschaftenSpielerDB = async (s_id) => {
+  const { rows } = await query(
+    'SELECT m.* FROM mannschaft m JOIN spieler_mannschaft sm on m.m_id = sm.m_id WHERE sm.s_id = $1',
+    [s_id],
+  );
+
+  console.log(rows);
+
+  if (rows[0]) return rows;
+  return false;
+};
+
 export {
   addTeamDB,
   mannschaftenTrainerDB,
@@ -132,4 +144,5 @@ export {
   addTrainerMannschaftDB,
   deleteTrainerMannschaftDB,
   deleteSpielerMannschaftDB,
+  mannschaftenSpielerDB,
 };

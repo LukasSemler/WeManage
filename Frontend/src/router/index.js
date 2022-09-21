@@ -76,6 +76,17 @@ const router = createRouter({
       path: '/addTeam',
       name: 'addTeam',
       component: TeamErstellenView,
+      beforeEnter: (to, from, next) => {
+        const store = PiniaStore();
+
+        if (store.getAktivenUser) {
+          if (store.isTrainer) {
+            return next();
+          } else {
+            return next('/HomeSpieler/');
+          }
+        } else return next('/');
+      },
     },
     {
       path: '/changeTeam',
@@ -93,6 +104,29 @@ const router = createRouter({
         { path: 'trainings', component: Trainings },
         { path: 'mitglieder', component: Mitglieder },
       ],
+    },
+    {
+      path: '/homeSpieler',
+      name: 'HomeSpieler',
+      component: () => import('@/views/HomeSpielerView.vue'),
+      children: [
+        { path: '', component: () => import('@/views/SubViews/Spieler/SpielerHome.vue') },
+        { path: 'teams', component: () => import('@/views/SubViews/Spieler/SpielerTeams.vue') },
+        {
+          path: 'settings',
+          component: () => import('@/views/SubViews/Spieler/SpielerSettings.vue'),
+        },
+      ],
+      beforeEnter: (to, from, next) => {
+        const store = PiniaStore();
+        if (store.getAktivenUser) {
+          if (!store.isSpieler) {
+            next();
+          }
+        } else {
+          next('/');
+        }
+      },
     },
 
     { path: '/:pathmatch(.*)*', name: 'not-found', component: NotFoundView },
