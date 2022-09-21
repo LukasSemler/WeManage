@@ -12,7 +12,6 @@ import Trainings from '../views/Mannschaften/Subview/trainings.vue';
 import Mitglieder from '../views/Mannschaften/Subview/Mitglieder.vue';
 
 //! Allgemeines:
-
 import LandingPageView from '../views/Allgemeines/LandingPageView.vue';
 import NotFoundView from '../views/Allgemeines/NotFoundView.vue';
 import ContactView from '../views/Allgemeines/ContactView.vue';
@@ -39,6 +38,11 @@ import HomeViewSpieler from '../views/Spieler/HomeViewSpieler.vue';
 import SpielerHome from '../views/Spieler/Subviews/SpielerHome.vue';
 import SpielerTeams from '../views/Spieler/Subviews/SpielerTeams.vue';
 import SpielerSettings from '../views/Spieler/Subviews/SpielerSettings.vue';
+
+//* _______________________________________________________________________
+
+//!Trainings
+import TrainingDetail from '../views/Trainings/TrainingDetail.vue';
 
 import { PiniaStore } from '../Store/Store.js';
 
@@ -145,6 +149,12 @@ const router = createRouter({
         { path: 'trainings', component: Trainings },
         { path: 'mitglieder', component: Mitglieder },
       ],
+    },
+    {
+      path: '/training/:id',
+      name: 'Training',
+      component: TrainingDetail,
+      params: true,
     },
 
     { path: '/:pathmatch(.*)*', name: 'not-found', component: NotFoundView },

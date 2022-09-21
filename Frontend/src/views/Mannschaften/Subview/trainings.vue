@@ -17,6 +17,7 @@
       </button>
     </div>
   </div>
+  <TrainerTrainings></TrainerTrainings>
 </template>
 
 <script setup>
@@ -27,6 +28,7 @@ import { PlusIcon } from '@heroicons/vue/20/solid';
 
 // Store impotieren
 import { PiniaStore } from '../../../Store/Store';
+import TrainerTrainings from '../../../components/Trainings/TrainerTrainings.vue';
 
 const store = PiniaStore();
 const router = useRouter();
