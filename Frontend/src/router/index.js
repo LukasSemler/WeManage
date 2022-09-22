@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import TeamErstellenView from '../views/TeamErstellenView.vue';
-
 import ChangeTeam from '../views/MannschaftChange.vue';
 
 import MannschaftDetail from '../views/Mannschaften/MannschaftDetailView.vue';
@@ -43,6 +41,10 @@ import SpielerSettings from '../views/Spieler/Subviews/SpielerSettings.vue';
 
 //!Trainings
 import TrainingDetail from '../views/Trainings/TrainingDetail.vue';
+
+//* _______________________________________________________________________
+//!Team erstellen/Beitreten
+import TeamErstellenView from '../views/TeamErstellenBeitreten/TeamErstellenView.vue';
 
 import { PiniaStore } from '../Store/Store.js';
 

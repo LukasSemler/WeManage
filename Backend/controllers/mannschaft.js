@@ -7,6 +7,7 @@ import {
   deleteTrainerMannschaftDB,
   mannschaftenSpielerDB,
   deleteSpielerMannschaftDB,
+  getCodeDB,
 } from '../models/mannschaftDB.js';
 
 const validateAdd = validator({
@@ -110,6 +111,16 @@ const deleteSpielerMannschaftDel = async (req, res) => {
   return res.status(200).send('Trainer gelöscht');
 };
 
+const getCode = async (req, res) => {
+  const { id } = req.params;
+
+  const result = await getCodeDB(id);
+
+  if (result) return res.status(200).json(result);
+
+  return res.status(500).send('Error when getting the code');
+};
+
 export {
   addTeam,
   mannschaftenTrainer,
@@ -118,4 +129,5 @@ export {
   deleteTrainerMannschaftDel,
   deleteSpielerMannschaftDel,
   mannschaftenSpieler,
+  getCode,
 };

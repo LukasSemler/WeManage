@@ -371,7 +371,7 @@ async function posten(e) {
 
   let date = new Date();
 
-  let weekday = date.getDay();
+  let weekday = date.getDate();
   let monthL = date.toLocaleString('de-de', { month: 'long' });
   let year = date.toLocaleString('de-de', { year: 'numeric' });
   let stunden = date.getHours();

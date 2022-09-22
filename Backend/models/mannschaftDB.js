@@ -137,6 +137,14 @@ const mannschaftenSpielerDB = async (s_id) => {
   return false;
 };
 
+const getCodeDB = async (id) => {
+  const { rows } = await query('SELECT zugangscode from mannschaft where m_id = $1;', [id]);
+
+  if (rows[0]) return rows[0];
+  
+  return false;
+};
+
 export {
   addTeamDB,
   mannschaftenTrainerDB,
@@ -145,4 +153,5 @@ export {
   deleteTrainerMannschaftDB,
   deleteSpielerMannschaftDB,
   mannschaftenSpielerDB,
+  getCodeDB,
 };
