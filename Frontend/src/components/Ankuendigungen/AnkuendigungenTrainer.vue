@@ -380,13 +380,13 @@ async function posten(e) {
   const dateTime = `${weekday}. ${monthL} ${year} um ${stunden}:${minuten}`;
 
   // lokal Pushen
-  nachrichten.value.push({
-    titel: titel.value,
-    nachricht: message.value,
-    name: store.getNamen,
-    dateTime: dateTime,
-    avatarPath: store.getAktivenUser.data.avatarpath,
-  });
+  // nachrichten.value.push({
+  //   titel: titel.value,
+  //   nachricht: message.value,
+  //   name: store.getNamen,
+  //   dateTime: dateTime,
+  //   avatarPath: store.getAktivenUser.data.avatarpath,
+  // });
 
   // in Datebase speichern
   const result = await axios.post('/postNews', {
@@ -398,6 +398,7 @@ async function posten(e) {
   });
 
   console.log(result);
+  nachrichten.value.push(result.data);
 
   //! open.value = false;
   closeSideBar();

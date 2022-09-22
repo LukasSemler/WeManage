@@ -225,10 +225,7 @@
                 :key="team.id"
                 class="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
               >
-                <span
-                  :class="`w-2.5 h-2.5 mr-4 rounded-full bg-indigo-400`"
-                  aria-hidden="true"
-                />
+                <span :class="`w-2.5 h-2.5 mr-4 rounded-full bg-indigo-400`" aria-hidden="true" />
                 <span class="truncate">{{ team.titel }}</span>
               </a>
             </div>

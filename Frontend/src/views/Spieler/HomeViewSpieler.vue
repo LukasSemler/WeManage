@@ -85,6 +85,7 @@
                       Teams
                     </h3>
                     <div
+                      v-if="store.teams.length > 0"
                       class="mt-1 space-y-1"
                       role="group"
                       aria-labelledby="mobile-teams-headline"
@@ -100,6 +101,9 @@
                         />
                         <span class="truncate">{{ team.titel }}</span>
                       </a>
+                    </div>
+                    <div v-else>
+                      <h1 class="text-center font-bold">Du bist in keinen Teams</h1>
                     </div>
                   </div>
                 </nav>
@@ -118,7 +122,7 @@
       class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 lg:bg-gray-100 lg:pt-5 lg:pb-4"
     >
       <div class="flex flex-shrink-0 items-center px-6">
-        <img class="h-8 w-auto" src="../assets/icons/placeholder_icon.png" alt="Your Company" />
+        <img class="h-8 w-auto" src="../../assets/icons/placeholder_icon.png" alt="Your Company" />
       </div>
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="mt-6 flex h-0 flex-1 flex-col overflow-y-auto">
@@ -278,7 +282,7 @@
                   <span class="sr-only">Open user menu</span>
                   <img
                     class="h-8 w-8 rounded-full"
-                    src="../assets/icons/Avatar_platzhalter.png"
+                    src="../../assets/icons/Avatar_platzhalter.png"
                     alt=""
                   />
                 </MenuButton>
@@ -369,9 +373,16 @@ const navigation = [
 ];
 
 onMounted(async () => {
-  //Alle Mannschaften holen, wo Spieler spielt
-  const { data: teams } = await axios.get(`/mannschaftenSpieler/${store.getAktivenUser.data.s_id}`);
-  store.setMannschaften(teams);
+  try {
+    // Alle Mannschaften holen, wo Spieler spielt
+    const { data: teams } = await axios.get(
+      `/mannschaftenSpieler/${store.getAktivenUser.data.s_id}`,
+    );
+    console.log(teams);
+    store.setMannschaften(teams);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 function logout() {

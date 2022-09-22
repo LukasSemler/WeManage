@@ -123,17 +123,17 @@ const router = createRouter({
       path: '/addTeam',
       name: 'addTeam',
       component: TeamErstellenView,
-      beforeEnter: (to, from, next) => {
-        const store = PiniaStore();
+      // beforeEnter: (to, from, next) => {
+      //   const store = PiniaStore();
 
-        if (store.getAktivenUser) {
-          if (store.isTrainer) {
-            return next();
-          } else {
-            return next('/HomeSpieler/');
-          }
-        } else return next('/');
-      },
+      //   if (store.getAktivenUser) {
+      //     if (store.isTrainer) {
+      //       return next();
+      //     } else {
+      //       return next('/HomeSpieler/');
+      //     }
+      //   } else return next('/');
+      // },
     },
     {
       path: '/changeTeam',
