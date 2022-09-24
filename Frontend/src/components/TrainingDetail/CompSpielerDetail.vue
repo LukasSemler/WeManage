@@ -8,7 +8,7 @@
 
             <div class="overflow-hidden bg-white shadow sm:rounded-lg col-span-full mx-3 my-3">
               <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">Trainings Info Trainer</h3>
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Trainings Info Spieler</h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">
                   Hier siehst du alle Informationen zu diesem Training
                 </p>
