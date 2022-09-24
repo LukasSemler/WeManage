@@ -1,6 +1,6 @@
 <template>
   <h1 class="text-xl px-5 pt-3 font-bold">Letzte Ankündigungen:</h1>
-  <div v-for="news of nachrichten" v-if="nachrichten.length > 0">
+  <div v-for="news of nachrichten" v-if="nachrichten.length != 0">
     <div class="bg-white px-4 py-6 sm:px-6">
       <div class="flex space-x-3">
         <div class="flex-shrink-0">
@@ -26,6 +26,9 @@
         </p>
       </div>
     </div>
+  </div>
+  <div v-else>
+    <p class="text-center">Keine Nachrichten vorhanden</p>
   </div>
   <p
     class="text-center text-gray-500 underline cursor-pointer"
@@ -93,9 +96,9 @@ const id = ref(router.currentRoute.value.params.id);
 
 onMounted(async () => {
   const { data } = await axios.get(`/getNews/${id.value}`);
-  console.log(data);
   nachrichten.value = data;
-  nachrichten.value.length = 2;
+
+  if (nachrichten.value.length > 2) nachrichten.value.length = 2;
 });
 
 const positions = [

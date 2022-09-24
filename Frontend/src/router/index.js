@@ -41,6 +41,7 @@ import SpielerSettings from '../views/Spieler/Subviews/SpielerSettings.vue';
 
 //!Trainings
 import TrainingDetail from '../views/Trainings/TrainingDetail.vue';
+import TrainingErstellen from '../views/Trainings/TrainingErstellen.vue';
 
 //* _______________________________________________________________________
 //!Team erstellen/Beitreten
@@ -156,6 +157,12 @@ const router = createRouter({
       path: '/training/:id',
       name: 'Training',
       component: TrainingDetail,
+      params: true,
+    },
+    {
+      path: '/trainingerstellen/:id',
+      name: 'Training erstellen',
+      component: TrainingErstellen,
       params: true,
     },
 
