@@ -1,4 +1,4 @@
-import { addTrainingDB } from '../models/trainingDB.js';
+import { addTrainingDB, getTrainingsDB } from '../models/trainingDB.js';
 
 const addTraining = async (req, res) => {
   console.log(req.body);
@@ -35,4 +35,12 @@ const addTraining = async (req, res) => {
   return res.status(500).send('Fehler beim Erstellen des Trainings');
 };
 
-export { addTraining };
+const getTrainings = async (req, res) => {
+  const { id } = req.params;
+  const result = await getTrainingsDB(id);
+
+  if (result) return res.status(200).json(result);
+  return res.status(500).send('Fehler beim Trainings holen');
+};
+
+export { addTraining, getTrainings };

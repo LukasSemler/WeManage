@@ -2,8 +2,8 @@
   <vue-cal
     style="height: 500px"
     class="vuecal--blue-theme"
-    :events="events"
-    :time-from="12 * 60"
+    :time-from="10 * 60"
+    :events="termine"
   ></vue-cal>
 </template>
 
@@ -11,24 +11,9 @@
 import VueCal from 'vue-cal';
 import 'vue-cal/dist/vuecal.css';
 
-let events = [
-  {
-    start: '2022-09-02 17:00',
-    end: '2022-09-02 19:00',
-    title: 'Training',
-  },
-  {
-    start: '2022-09-01 17:00',
-    end: '2022-09-01 19:00',
-    title: 'Training',
-  },
-  {
-    start: '2022-09-03 17:00',
-    end: '2022-09-03 19:00',
-    title: 'Training',
-    background: true,
-  },
-];
+const props = defineProps({
+  termine: Array,
+});
 </script>
 
 <style>
@@ -59,5 +44,11 @@ let events = [
 .vuecal__arrow.vuecal__arrow--highlighted,
 .vuecal__view-btn.vuecal__view-btn--highlighted {
   background-color: rgba(0, 81, 255, 0.25);
+}
+
+.vuecal__event {
+  background-color: rgba(173, 216, 230, 0.5);
+  box-sizing: border-box;
+  padding: 5px;
 }
 </style>

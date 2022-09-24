@@ -18,7 +18,6 @@
     </div>
   </div>
   <TrainerTrainings></TrainerTrainings>
-  {{ id }}
 </template>
 
 <script setup>
@@ -27,12 +26,8 @@ import { useRouter } from 'vue-router';
 // Tailwind imports
 import { PlusIcon } from '@heroicons/vue/20/solid';
 
-// Store impotieren
-import { PiniaStore } from '../../../Store/Store';
 import TrainerTrainings from '../../../components/Trainings/TrainerTrainings.vue';
 
-const store = PiniaStore();
 const router = useRouter();
-
 const id = router.currentRoute.value.params.id;
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="mx-4 mt-4">
-    <Kalender_comp></Kalender_comp>
+    <Kalender_comp :termine="trainingKalender"></Kalender_comp>
   </div>
   <br /><br />
   <h1 class="ml-5 text-xl font-bold">Nächsten Trainings</h1>
@@ -8,14 +8,14 @@
   <div class="overflow-hidden bg-white shadow sm:rounded-md mx-3 mb-3">
     <ul role="list" class="divide-y divide-gray-200">
       <li
-        v-for="position in positions"
-        :key="position.id"
-        @click="$router.push(`/training/${position.id}`)"
+        v-for="training in trainings"
+        :key="training.training_id"
+        @click="$router.push(`/training/${training.training_id}`)"
       >
         <a class="block hover:bg-gray-50">
           <div class="px-4 py-4 sm:px-6">
             <div class="flex items-center justify-between">
-              <p class="truncate text-sm font-medium text-indigo-600">{{ position.title }}</p>
+              <p class="truncate text-sm font-medium text-indigo-600">{{ training.titel }}</p>
             </div>
             <div class="mt-2 sm:flex sm:justify-between">
               <div class="sm:flex">
@@ -24,14 +24,17 @@
                     class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                     aria-hidden="true"
                   />
-                  <p>2.September 2022 um 13:00</p>
+                  <p>
+                    {{ training.trainingdatum }} | Beginn: {{ training.trainingbeginn }}, Ende:
+                    {{ training.trainingende }}
+                  </p>
                 </div>
                 <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                   <MapPinIcon
                     class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                     aria-hidden="true"
                   />
-                  HTL Ottakring
+                  {{ training.wo }}
                 </p>
               </div>
               <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
@@ -50,38 +53,36 @@
 
 <script setup>
 import Kalender_comp from '../Kalender_comp.vue';
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 
 // Tailwind imports
 import { CalendarIcon, MapPinIcon, ArrowRightIcon } from '@heroicons/vue/20/solid';
+const router = useRouter();
+let trainings = ref([]);
+let trainingKalender = ref([]);
 
-const positions = [
-  {
-    id: 1,
-    title: 'Montag Training',
-    location: 'HTL Ottakring',
-    closeDate: '2020-01-07',
-    closeDateFull: 'January 7, 2020',
-  },
-  {
-    id: 2,
-    title: 'Mittwoch Training',
-    location: 'Spallartgasse',
-    closeDate: '2020-01-07',
-    closeDateFull: 'January 7, 2020',
-  },
-  {
-    id: 3,
-    title: 'Donnerstag Training',
-    location: 'HTL Ottakring',
-    closeDate: '2020-01-14',
-    closeDateFull: 'January 14, 2020',
-  },
-  {
-    id: 4,
-    title: 'Samstag Training',
-    location: 'HTL Ottakring',
-    closeDate: '2020-01-14',
-    closeDateFull: 'January 14, 2020',
-  },
-];
+onMounted(async () => {
+  const { data: training } = await axios.get(`/getTrainings/${id}`);
+  trainings.value = training;
+
+  trainingKalender.value = trainings.value.map((training) => {
+    let date = new Date(training.trainingdatum);
+
+    let beginn = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${
+      training.trainingbeginn
+    }`;
+
+    let end = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${
+      training.trainingende
+    }`;
+
+    return { title: training.titel, start: beginn, end };
+  });
+
+  console.log(trainingKalender.value);
+});
+
+const id = router.currentRoute.value.params.id;
 </script>

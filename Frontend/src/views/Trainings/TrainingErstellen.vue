@@ -220,9 +220,21 @@ const format = (date) => {
 async function trainingErstellen(e) {
   e.preventDefault();
 
-  const result = await axios.post('/addTraining', { state, m_id: id });
+  await axios.post('/addTraining', { state, m_id: id });
+  clearFields();
 
-  console.log(result);
+  router.go(-1);
+}
+
+function clearFields() {
+  titel = '';
+  halle = '';
+  datum = '';
+  treffpunkt = '';
+  beginn = '';
+  ende = '';
+  wiederholen = false;
+  endDatum = null;
 }
 
 const id = router.currentRoute.value.params.id;

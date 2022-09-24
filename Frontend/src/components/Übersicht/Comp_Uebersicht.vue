@@ -43,11 +43,11 @@
   <br />
   <div class="overflow-hidden bg-white shadow sm:rounded-md mx-3 mb-3">
     <ul role="list" class="divide-y divide-gray-200">
-      <li v-for="position in positions" :key="position.id">
+      <li v-for="training in trainings" :key="training.training_id">
         <a href="#" class="block hover:bg-gray-50">
           <div class="px-4 py-4 sm:px-6">
             <div class="flex items-center justify-between">
-              <p class="truncate text-sm font-medium text-indigo-600">{{ position.title }}</p>
+              <p class="truncate text-sm font-medium text-indigo-600">{{ training.titel }}</p>
             </div>
             <div class="mt-2 sm:flex sm:justify-between">
               <div class="sm:flex">
@@ -56,14 +56,14 @@
                     class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                     aria-hidden="true"
                   />
-                  <p>2.September 2022 um 13:00</p>
+                  <p>{{ training.trainingdatum }} Treffpunkt: {{ training.trainingtreffpunkt }}</p>
                 </div>
                 <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                   <MapPinIcon
                     class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                     aria-hidden="true"
                   />
-                  HTL Ottakring
+                  {{ training.wo }}
                 </p>
               </div>
               <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
@@ -92,42 +92,15 @@ import axios from 'axios';
 const router = useRouter();
 
 let nachrichten = ref([]);
+let trainings = ref([]);
 const id = ref(router.currentRoute.value.params.id);
 
 onMounted(async () => {
   const { data } = await axios.get(`/getNews/${id.value}`);
   nachrichten.value = data;
-
   if (nachrichten.value.length > 2) nachrichten.value.length = 2;
-});
 
-const positions = [
-  {
-    id: 1,
-    title: 'Back End Developer',
-    type: 'Full-time',
-    location: 'Remote',
-    department: 'Engineering',
-    closeDate: '2020-01-07',
-    closeDateFull: 'January 7, 2020',
-  },
-  {
-    id: 2,
-    title: 'Front End Developer',
-    type: 'Full-time',
-    location: 'Remote',
-    department: 'Engineering',
-    closeDate: '2020-01-07',
-    closeDateFull: 'January 7, 2020',
-  },
-  {
-    id: 3,
-    title: 'User Interface Designer',
-    type: 'Full-time',
-    location: 'Remote',
-    department: 'Design',
-    closeDate: '2020-01-14',
-    closeDateFull: 'January 14, 2020',
-  },
-];
+  const { data: training } = await axios.get(`/getTrainings/${id.value}`);
+  trainings.value = training;
+});
 </script>
