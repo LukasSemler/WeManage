@@ -1,4 +1,9 @@
-import { addTrainingDB, getTrainingsDB } from '../models/trainingDB.js';
+import {
+  addTrainingDB,
+  getTrainingsDB,
+  getTrainingDetailDB,
+  getTrainingDetailSpielerDB,
+} from '../models/trainingDB.js';
 
 const addTraining = async (req, res) => {
   console.log(req.body);
@@ -43,4 +48,20 @@ const getTrainings = async (req, res) => {
   return res.status(500).send('Fehler beim Trainings holen');
 };
 
-export { addTraining, getTrainings };
+const getTrainingDetail = async (req, res) => {
+  const { id } = req.params;
+
+  const result = await getTrainingDetailDB(id);
+  if (result) return res.status(200).json(result);
+  return res.status(500).send('Fehler beim Trainings holen');
+};
+
+const getTrainingDetailSpieler = async (req, res) => {
+  const { id } = req.params;
+
+  const result = await getTrainingDetailSpielerDB(id);
+  if (result) return res.status(200).json(result);
+  return res.status(500).send('Fehler beim Trainings holen');
+};
+
+export { addTraining, getTrainings, getTrainingDetail, getTrainingDetailSpieler };

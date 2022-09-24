@@ -18,24 +18,32 @@
                   <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Datum</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                      Donnerstag, 22.09.2022
+                      {{ neuesDatum }}
                     </dd>
                   </div>
                   <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Treffpunkt:</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">17:45</dd>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      {{ training.trainingtreffpunkt }}
+                    </dd>
                   </div>
                   <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Start:</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">18:00</dd>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      {{ training.trainingbeginn }}
+                    </dd>
                   </div>
                   <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Ende:</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">19:30</dd>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      {{ training.trainingende }}
+                    </dd>
                   </div>
                   <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Halle:</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">HTL Ottakring</dd>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      {{ training.wo }}
+                    </dd>
                   </div>
                 </dl>
               </div>
@@ -70,21 +78,23 @@
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
-                  <tr v-for="person in people" :key="person.email">
+                  <tr v-for="(spieler, i) of spielerListe" :key="i">
                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                       <div class="flex items-center">
                         <div class="h-10 w-10 flex-shrink-0">
-                          <img class="h-10 w-10 rounded-full" :src="person.image" alt="" />
+                          <img class="h-10 w-10 rounded-full" :src="spieler.avatarpath" alt="" />
                         </div>
                         <div class="ml-4">
-                          <div class="font-medium text-gray-900">{{ person.name }}</div>
-                          <div class="text-gray-500">{{ person.email }}</div>
+                          <div class="font-medium text-gray-900">
+                            {{ spieler.vorname }} {{ spieler.nachname }}
+                          </div>
+                          <div class="text-gray-500">{{ spieler.email }}</div>
                         </div>
                       </div>
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <span
-                        v-if="person.kommt"
+                        v-if="spieler.kommt"
                         class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800"
                         >Ja</span
                       >
@@ -107,11 +117,33 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-
 import { ArrowLeftIcon } from '@heroicons/vue/20/solid';
+import { onMounted, ref, computed } from 'vue';
+import axios from 'axios';
 
 const router = useRouter();
 const id = router.currentRoute.value.params.id;
+const training = ref({});
+const spielerListe = ref([]);
+
+onMounted(async () => {
+  const { data } = await axios.get(`/getTrainingDetail/${id}`);
+  training.value = data[0];
+
+  const { data: spieler } = await axios.get(`/getTrainingDetailSpieler/${id}`);
+  spielerListe.value = spieler;
+});
+
+const neuesDatum = computed(() => {
+  let date = new Date(training.value.trainingdatum);
+
+  let weekday = date.getDate();
+  let weekdayText = date.toLocaleString('de-de', { weekday: 'long' });
+  let monthL = date.toLocaleString('de-de', { month: 'long' });
+  let year = date.toLocaleString('de-de', { year: 'numeric' });
+
+  return `${weekdayText}, ${weekday}. ${monthL} ${year}`;
+});
 
 const people = [
   {
