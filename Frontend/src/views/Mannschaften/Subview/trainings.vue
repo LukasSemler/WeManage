@@ -6,7 +6,7 @@
     <div class="min-w-0 flex-1">
       <h1 class="text-3xl font-bold text-gray-900 sm:truncate">Trainings</h1>
     </div>
-    <div class="mt-4 flex sm:mt-0 sm:ml-4">
+    <div class="mt-4 flex sm:mt-0 sm:ml-4" v-if="store.getAktivenUser.type == 'Trainer'">
       <button
         @click="router.push(`/trainingerstellen/${id}`)"
         type="button"
@@ -22,12 +22,13 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-
+import { PiniaStore } from '../../../Store/Store';
 // Tailwind imports
 import { PlusIcon } from '@heroicons/vue/20/solid';
 
 import TrainerTrainings from '../../../components/Trainings/TrainerTrainings.vue';
 
 const router = useRouter();
+const store = PiniaStore();
 const id = router.currentRoute.value.params.id;
 </script>

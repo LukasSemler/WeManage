@@ -218,6 +218,7 @@ import {
   XMarkIcon,
   CalendarDaysIcon,
   ArrowLeftIcon,
+  ChartPieIcon,
 } from '@heroicons/vue/24/outline';
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
 
@@ -257,6 +258,12 @@ const navigation = [
     icon: UserGroupIcon,
     current: false,
     path: `/detailMannschaft/${router.currentRoute.value.params.id}/mitglieder`,
+  },
+  {
+    name: 'Statistik',
+    icon: ChartPieIcon,
+    current: false,
+    path: `/detailMannschaft/${router.currentRoute.value.params.id}/statistik`,
   },
 ];
 

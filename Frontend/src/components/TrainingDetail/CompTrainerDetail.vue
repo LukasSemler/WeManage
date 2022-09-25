@@ -54,6 +54,24 @@
     </div>
 
     <div class="mx-auto max-w-screen-xl px-4pb-6 sm:px-6 lg:px-10 lg:pb-16 mt-5">
+      <div>
+        <h3 class="text-xl font-bold leading-6 text-gray-900">Statistik zum Training</h3>
+        <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+          <div
+            v-for="item in stats"
+            :key="item.name"
+            class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6"
+          >
+            <dt class="truncate text-sm font-medium text-gray-500">{{ item.name }}</dt>
+            <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
+              {{ item.stat }}
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="mx-auto max-w-screen-xl px-4pb-6 sm:px-6 lg:px-10 lg:pb-16 mt-5">
       <h1 class="text-xl font-bold">Anwesenheit:</h1>
       <div class="mt-8 flex flex-col">
         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -95,12 +113,12 @@
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <span
                         v-if="spieler.kommt"
-                        class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800"
+                        class="inline-flex rounded-full bg-green-500 px-2 text-xs font-semibold leading-5 text-white"
                         >Ja</span
                       >
                       <span
                         v-else
-                        class="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-red-800"
+                        class="inline-flex rounded-full bg-red-600 px-2 text-xs font-semibold leading-5 text-white"
                         >Nein</span
                       >
                     </td>
@@ -117,7 +135,6 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-import { ArrowLeftIcon } from '@heroicons/vue/20/solid';
 import { onMounted, ref, computed } from 'vue';
 import axios from 'axios';
 
@@ -145,48 +162,9 @@ const neuesDatum = computed(() => {
   return `${weekdayText}, ${weekday}. ${monthL} ${year}`;
 });
 
-const people = [
-  {
-    name: 'Lindsay Walton',
-    email: 'lindsay.walton@example.com',
-    kommt: true,
-    image:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    name: 'Lindsay Walton',
-    email: 'lindsay.walton@example.com',
-    kommt: true,
-    image:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    name: 'Lindsay Walton',
-    email: 'lindsay.walton@example.com',
-    kommt: false,
-    image:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    name: 'Lindsay Walton',
-    email: 'lindsay.walton@example.com',
-    kommt: true,
-    image:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    name: 'Lindsay Walton',
-    email: 'lindsay.walton@example.com',
-    kommt: false,
-    image:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    name: 'Lindsay Walton',
-    email: 'lindsay.walton@example.com',
-    kommt: false,
-    image:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
+const stats = [
+  { name: 'Anzahl an Spielern', stat: '20' },
+  { name: 'Anzahl an Spielern (%)', stat: '90%' },
+  { name: 'Fehlende Spieler', stat: '2' },
 ];
 </script>

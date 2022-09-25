@@ -20,4 +20,19 @@ from spieler s
   if (rows[0]) return rows;
   else return false;
 };
-export { getAllSpielerDB, getSpielerDB };
+
+const changeSpielerKommtDB = async (id, kommt, train_id) => {
+  try {
+    const { rows } = await query(
+      'UPDATE spielerbesuchttraining SET kommt = $1 WHERE fk_s_id = $2 and fk_training_id = $3;',
+      [kommt, id, train_id],
+    );
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return true;
+};
+
+export { getAllSpielerDB, getSpielerDB, changeSpielerKommtDB };

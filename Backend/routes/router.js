@@ -11,7 +11,7 @@ import {
   mannschaftenSpieler,
   getCode,
 } from '../controllers/mannschaft.js';
-import { getAllSpieler, getSpieler } from '../controllers/spieler.js';
+import { getAllSpieler, getSpieler, changeSpielerKommt } from '../controllers/spieler.js';
 import { getAllTrainer, getTrainer } from '../controllers/trainer.js';
 import { postNews, getNews, delNews } from '../controllers/news.js';
 import {
@@ -55,5 +55,8 @@ router.post('/addTraining', asyncHandler(addTraining));
 router.get('/getTrainings/:id', asyncHandler(getTrainings));
 router.get('/getTrainingDetail/:id', asyncHandler(getTrainingDetail));
 router.get('/getTrainingDetailSpieler/:id', asyncHandler(getTrainingDetailSpieler));
+
+
+router.patch('/changeSpielerKommt/:id', asyncHandler(changeSpielerKommt));
 
 export default router;

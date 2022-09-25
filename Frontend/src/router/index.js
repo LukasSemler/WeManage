@@ -47,6 +47,8 @@ import TrainingErstellen from '../views/Trainings/TrainingErstellen.vue';
 //!Team erstellen/Beitreten
 import TeamErstellenView from '../views/TeamErstellenBeitreten/TeamErstellenView.vue';
 
+import UnderConstruction from '../views/UnderConstruction.vue';
+
 import { PiniaStore } from '../Store/Store.js';
 
 const router = createRouter({
@@ -151,6 +153,7 @@ const router = createRouter({
         { path: 'ankuendigungen', component: Ankuendigungen },
         { path: 'trainings', component: Trainings },
         { path: 'mitglieder', component: Mitglieder },
+        { path: 'statistik', component: UnderConstruction },
       ],
     },
     {

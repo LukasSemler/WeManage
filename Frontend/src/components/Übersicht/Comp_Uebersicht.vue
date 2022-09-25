@@ -44,7 +44,7 @@
   <div class="overflow-hidden bg-white shadow sm:rounded-md mx-3 mb-3">
     <ul role="list" class="divide-y divide-gray-200">
       <li v-for="training in trainings" :key="training.training_id">
-        <a href="#" class="block hover:bg-gray-50">
+        <p href="#" class="block hover:bg-gray-50">
           <div class="px-4 py-4 sm:px-6">
             <div class="flex items-center justify-between">
               <p class="truncate text-sm font-medium text-indigo-600">{{ training.titel }}</p>
@@ -56,7 +56,7 @@
                     class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                     aria-hidden="true"
                   />
-                  <p>{{ training.trainingdatum }} Treffpunkt: {{ training.trainingtreffpunkt }}</p>
+                  <p>{{ neuesDatum }} Treffpunkt: {{ training.trainingtreffpunkt }}</p>
                 </div>
                 <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                   <MapPinIcon
@@ -74,14 +74,14 @@
               </div>
             </div>
           </div>
-        </a>
+        </p>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 // Tailwind imports
@@ -102,5 +102,18 @@ onMounted(async () => {
 
   const { data: training } = await axios.get(`/getTrainings/${id.value}`);
   trainings.value = training;
+});
+
+const neuesDatum = computed(() => {
+  // let date = new Date(training.trainingdatum);
+
+  // let weekday = date.getDate();
+  // let weekdayText = date.toLocaleString('de-de', { weekday: 'long' });
+  // let monthL = date.toLocaleString('de-de', { month: 'long' });
+  // let year = date.toLocaleString('de-de', { year: 'numeric' });
+
+  // return `${weekdayText}, ${weekday}. ${monthL} ${year}`;
+
+  return 'test';
 });
 </script>
