@@ -135,13 +135,16 @@ const neuesDatum = computed(() => {
 });
 
 async function changeKommt() {
-  kommt.value = !kommt.value;
+  if (kommt.value) kommt.value = false;
+  else kommt.value = true;
 
-  console.log(id);
+  console.log(kommt.value);
 
   const result = await axios.patch(`/changeSpielerKommt/${aktiverSpieler.value.s_id}`, {
-    kommt,
+    kommt: kommt.value,
     train_id: id,
   });
+
+  console.log(result);
 }
 </script>

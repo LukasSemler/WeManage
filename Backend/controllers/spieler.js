@@ -22,7 +22,7 @@ const changeSpielerKommt = async (req, res) => {
   let { id } = req.params;
   let { kommt, train_id } = req.body;
 
-  kommt = !Boolean(kommt);
+  kommt = Boolean(kommt);
   train_id = Number(train_id);
   id = Number(id);
   console.log(kommt);
