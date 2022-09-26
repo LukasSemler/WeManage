@@ -151,7 +151,7 @@
               <DialogPanel class="pointer-events-auto w-screen max-w-md">
                 <form class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
                   <div class="h-0 flex-1 overflow-y-auto">
-                    <div class="bg-indigo-700 py-6 px-4 sm:px-6">
+                    <div class="bg-lime-500 py-6 px-4 sm:px-6">
                       <div class="flex items-center justify-between">
                         <DialogTitle class="text-lg font-medium text-white"
                           >Neue Ankündigung</DialogTitle
@@ -159,7 +159,7 @@
                         <div class="ml-3 flex h-7 items-center">
                           <button
                             type="button"
-                            class="rounded-md bg-indigo-700 text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+                            class="rounded-md bg-white text-lime-500 hover:text-lime-600 focus:outline-none focus:ring-2 focus:ring-white"
                             @click="closeSideBar"
                           >
                             <span class="sr-only">Close panel</span>
@@ -168,7 +168,7 @@
                         </div>
                       </div>
                       <div class="mt-1">
-                        <p class="text-sm text-indigo-300">
+                        <p class="text-sm text-white">
                           Hier kannst du eine neue Ankündigung posten. Diese ist für alle Spieler
                           sichtbar.
                         </p>
@@ -187,7 +187,7 @@
                                 type="text"
                                 name="titel"
                                 id="titel"
-                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-500 focus:ring-lime-500 sm:text-sm"
                               />
                             </div>
                           </div>
@@ -201,7 +201,7 @@
                                 id="message"
                                 name="message"
                                 rows="4"
-                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-500 focus:ring-lime-500 sm:text-sm"
                               />
                             </div>
                           </div>
@@ -220,7 +220,7 @@
                     <button
                       @click="posten"
                       type="submit"
-                      class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-lime-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Posten
                     </button>

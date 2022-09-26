@@ -6,8 +6,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'warm-gray': colors.stone,
-        teal: colors.teal,
+        // weManageOrange: '#00CFD6',
+        // weManageOrange: '#07D600',
+        weManageOrange: '#E80C3B',
+        weManageOrangeHover: '#BD0930',
+        weManageGray: '#2C2C2C',
+        weManageLightGray: '#383838',
       },
     },
   },

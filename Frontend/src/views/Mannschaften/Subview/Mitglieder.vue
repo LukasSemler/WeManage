@@ -90,7 +90,7 @@
               <div class="mt-5 sm:mt-6">
                 <button
                   type="button"
-                  class="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+                  class="inline-flex w-full justify-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none sm:text-sm"
                   @click="showCode = false"
                 >
                   Close
@@ -114,7 +114,7 @@
         v-if="store.getAktivenUser.type == 'Trainer'"
         @click="getCode"
         type="button"
-        class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        class="inline-flex items-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none"
       >
         Code Anzeigen
         <EyeIcon class="ml-2 -mr-1 h-5 w-5" aria-hidden="true" />
@@ -132,12 +132,10 @@ import { useRouter } from 'vue-router';
 // Store impotieren
 import { PiniaStore } from '../../../Store/Store';
 
-import { computed, ref, onMounted } from 'vue';
+import { ref } from 'vue';
 
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
-
-import { XMarkIcon, TrashIcon, EyeIcon } from '@heroicons/vue/20/solid';
-import { CheckIcon } from '@heroicons/vue/24/outline';
+import { XMarkIcon, EyeIcon } from '@heroicons/vue/20/solid';
 import axios from 'axios';
 import MitgliederTrainer from '../../../components/Mitglieder/MitgliederTrainer.vue';
 import MitgliederSpieler from '../../../components/Mitglieder/MitgliederSpieler.vue';
@@ -148,148 +146,6 @@ const id = ref(router.currentRoute.value.params.id);
 let showError = ref(false);
 let showCode = ref(false);
 let zugangscode = ref(null);
-
-//*---------------------------------------------------------------------------
-//#region Spieler Search
-let spielerSearch = ref([]);
-const openSpielerSearch = ref(false);
-const query = ref('');
-const filteredSpieler = computed(() =>
-  query.value === ''
-    ? []
-    : spielerSearch.value.filter((person) => {
-        console.log(person);
-        return person.vorname.toLowerCase().includes(query.value.toLowerCase());
-      }),
-);
-
-async function onSelectSpieler(person) {
-  try {
-    await axios.post('/addSpielerMannschaft', { s_id: person.s_id, m_id: id.value });
-
-    spieler.value.push(person);
-    openSpielerSearch.value = false;
-  } catch (error) {
-    showError.value = true;
-    openSpielerSearch.value = false;
-    console.log('Der Spieler ist schon vorhanden');
-
-    setTimeout(() => (showError.value = false), 3000);
-  }
-}
-
-async function openSearchSpieler() {
-  const spieler = await getAllSpieler();
-  spielerSearch.value = spieler;
-  openSpielerSearch.value = true;
-}
-
-//#endregion
-
-//*----------------------------------------------------------------------------------
-//#region Trainer Search
-//Spieler anzeigen und hinzufügen
-const trainerSearch = ref([]);
-
-const openTrainerSearch = ref(false);
-const filteredTrainer = computed(() =>
-  query.value === ''
-    ? []
-    : trainerSearch.value.filter((person) => {
-        return person.vorname.toLowerCase().includes(query.value.toLowerCase());
-      }),
-);
-
-async function onSelectTrainer(person) {
-  try {
-    await axios.post('/addTrainerMannschaft', { t_id: person.t_id, m_id: id.value });
-
-    trainer.value.push(person);
-    openTrainerSearch.value = false;
-  } catch (error) {
-    showError.value = true;
-    openTrainerSearch.value = false;
-    console.log('Der Trainer ist schon vorhanden');
-
-    setTimeout(() => (showError.value = false), 3000);
-  }
-}
-
-async function openSearchTrainer() {
-  const trainer = await getAllTrainer();
-  console.log(trainer);
-  trainerSearch.value = trainer;
-  openTrainerSearch.value = true;
-}
-
-//#endregion
-
-//*----------------------------------------------------------------------------------
-
-const trainer = ref([]);
-const spieler = ref([]);
-let keinerSpielerVorhanden = ref(false);
-
-onMounted(async () => {
-  console.log(id.value);
-  const spielerDB = await getSpieler();
-  const trainerDB = await getTrainer();
-
-  spieler.value = spielerDB;
-  trainer.value = trainerDB;
-});
-
-//Funktionen um alle Personen zu holen
-async function getAllSpieler() {
-  const { data: spieler } = await axios.get('/getAllSpieler');
-  return spieler;
-}
-
-async function getAllTrainer() {
-  const { data: trainer } = await axios.get('/getAllTrainer');
-  return trainer;
-}
-
-//Funktionen um alle Personen zu holen
-async function getSpieler() {
-  try {
-    const { data: spieler } = await axios.get(`/getSpieler/${id.value}`);
-    return spieler;
-  } catch (error) {
-    keinerSpielerVorhanden.value = true;
-    console.log(error);
-  }
-}
-
-async function getTrainer() {
-  try {
-    const { data: trainer } = await axios.get(`/getTrainer/${id.value}`);
-    return trainer;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function trainerDel(person) {
-  // console.log(store.getAktivenUser);
-  if (person.t_id != store.getAktivenUser.data.t_id) {
-    // Trainer lokal löschen
-    trainer.value = trainer.value.filter((trainer) => trainer.t_id != person.t_id);
-
-    //Trainer aus der Datenbank löschen
-    await axios.delete(`/trainerMannschaftDel/${person.t_id}/${id.value}`);
-  }
-}
-
-async function spielerDel(person) {
-  // console.log(store.getAktivenUser);
-
-  // Trainer lokal löschen
-  spieler.value = spieler.value.filter((spieler) => spieler.s_id != person.s_id);
-
-  //Trainer aus der Datenbank löschen
-  await axios.delete(`/spielerMannschaftDel/${person.s_id}/${id.value}`);
-}
 
 async function getCode() {
   const result = await axios.get(`/getCode/${id.value}`);

@@ -15,7 +15,7 @@
         <a class="block hover:bg-gray-50">
           <div class="px-4 py-4 sm:px-6">
             <div class="flex items-center justify-between">
-              <p class="truncate text-sm font-medium text-indigo-600">{{ training.titel }}</p>
+              <p class="truncate text-sm font-medium text-lime-500">{{ training.titel }}</p>
             </div>
             <div class="mt-2 sm:flex sm:justify-between">
               <div class="sm:flex">

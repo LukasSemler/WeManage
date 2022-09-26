@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="bg-indigo-500 relative z-10">
+    <nav class="bg-lime-500 relative z-10">
       <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
         <div class="relative flex h-16 items-center" @click="router.go('-1')">
           <ArrowLeftIcon class="w-10 h-10 text-black"></ArrowLeftIcon>

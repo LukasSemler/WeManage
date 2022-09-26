@@ -5,7 +5,7 @@
   <br /><br />
   <h1 class="ml-5 text-xl font-bold">Nächsten Trainings</h1>
   <br />
-  <div class="overflow-hidden bg-white shadow sm:rounded-md mx-3 mb-3">
+  <div class="overflow-hidden bg-white sm:rounded-md mx-3 mb-3 ">
     <ul role="list" class="divide-y divide-gray-200">
       <li
         v-for="training in trainings"
@@ -15,7 +15,7 @@
         <a class="block hover:bg-gray-50">
           <div class="px-4 py-4 sm:px-6">
             <div class="flex items-center justify-between">
-              <p class="truncate text-sm font-medium text-indigo-600">{{ training.titel }}</p>
+              <p class="truncate text-sm font-medium text-lime-500">{{ training.titel }}</p>
             </div>
             <div class="mt-2 sm:flex sm:justify-between">
               <div class="sm:flex">

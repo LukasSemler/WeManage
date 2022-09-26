@@ -95,7 +95,7 @@
                         class="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                       >
                         <span
-                          :class="`w-2.5 h-2.5 mr-4 rounded-full bg-[${team.farbe}] `"
+                          :class="`w-2.5 h-2.5 mr-4 rounded-full bg-lime-400 `"
                           aria-hidden="true"
                         />
                         <span class="truncate">{{ team.titel }}</span>
@@ -126,7 +126,7 @@
         <Menu as="div" class="relative inline-block px-3 text-left">
           <div>
             <MenuButton
-              class="group w-full rounded-md bg-gray-100 px-3.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+              class="group w-full rounded-md bg-gray-100 px-3.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-gray-100"
             >
               <span class="flex w-full items-center justify-between">
                 <span class="flex min-w-0 items-center justify-between space-x-3">
@@ -225,7 +225,7 @@
                 :key="team.id"
                 class="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
               >
-                <span :class="`w-2.5 h-2.5 mr-4 rounded-full bg-indigo-400`" aria-hidden="true" />
+                <span :class="`w-2.5 h-2.5 mr-4 rounded-full bg-lime-400`" aria-hidden="true" />
                 <span class="truncate">{{ team.titel }}</span>
               </a>
             </div>
@@ -241,7 +241,7 @@
       >
         <button
           type="button"
-          class="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"
+          class="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lime-500 lg:hidden"
           @click="sidebarOpen = true"
         >
           <span class="sr-only">Open sidebar</span>
@@ -258,7 +258,7 @@
             <Menu as="div" class="relative ml-3">
               <div>
                 <MenuButton
-                  class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                  class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
                 >
                   <span class="sr-only">Open user menu</span>
                   <img
