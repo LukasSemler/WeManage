@@ -10,7 +10,7 @@
       <button
         @click="router.push('/addTeam')"
         type="button"
-        class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        class="inline-flex items-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none 2"
       >
         Team
         <PlusIcon class="ml-2 -mr-1 h-5 w-5" aria-hidden="true" />
@@ -24,7 +24,7 @@
         :key="project.id"
         class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
       >
-        <div :class="`flex flex-1 flex-col p-16 rounded-t-lg bg-indigo-400`"></div>
+        <div :class="`flex flex-1 flex-col p-16 rounded-t-lg bg-lime-400`"></div>
         <div class="flex flex-1 flex-col pb-4">
           <h3 class="mt-6 text-sm font-medium text-gray-900">{{ project.titel }}</h3>
           <dl class="mt-1 flex flex-grow flex-col justify-between">
