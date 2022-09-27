@@ -98,15 +98,36 @@
           <div class="divide-y divide-gray-200 lg:col-span-12 flex flex-col justify-center">
             <!-- Profile section -->
 
-            <div class="overflow-hidden bg-white shadow sm:rounded-lg col-span-full mx-3 my-3">
-              <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">Trainings Info Trainer</h3>
-                <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                  Hier siehst du alle Informationen zu diesem Training
-                </p>
+            <div
+              class="overflow-hidden bg-white shadow sm:rounded-lg col-span-full mx-3 my-3"
+              v-if="!showEdit"
+            >
+              <div class="sm:flex sm:items-center">
+                <div class="sm:flex-auto p-4">
+                  <h1 class="text-xl font-semibold text-gray-900">Trainings Info</h1>
+                  <p class="mt-2 text-sm text-gray-700">
+                    Hier siehst du alle Informationen zu diesem Training
+                  </p>
+                </div>
+                <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none p-4">
+                  <button
+                    @click="showEdit = true"
+                    type="button"
+                    class="inline-flex items-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none"
+                  >
+                    <Cog6ToothIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                    Bearbeiten
+                  </button>
+                </div>
               </div>
               <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
                 <dl class="sm:divide-y sm:divide-gray-200">
+                  <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Titel</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      {{ training.titel }}
+                    </dd>
+                  </div>
                   <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Datum</dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -138,6 +159,106 @@
                     </dd>
                   </div>
                 </dl>
+              </div>
+            </div>
+            <!-- -------------------------------------------- -->
+            <div
+              class="overflow-hidden bg-white shadow sm:rounded-lg col-span-full mx-3 my-3"
+              v-else
+            >
+              <div class="sm:flex sm:items-center">
+                <div class="sm:flex-auto p-4">
+                  <h1 class="text-xl font-semibold text-gray-900">Trainings Info</h1>
+                  <p class="mt-2 text-sm text-gray-700">
+                    Hier siehst du alle Informationen zu diesem Training
+                  </p>
+                </div>
+                <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none p-4">
+                  <button
+                    @click="showEdit = false"
+                    type="button"
+                    class="inline-flex items-center rounded-md border border-transparent bg-gray-400 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-500 focus:outline-none"
+                  >
+                    Cancle
+                  </button>
+                </div>
+              </div>
+              <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                  <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Titel</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      <div class="mt-1">
+                        <input
+                          type="text"
+                          name="titel"
+                          id="titel"
+                          v-model="state.titel"
+                          class="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-500 focus:ring-lime-500 sm:text-sm"
+                        />
+                      </div>
+                    </dd>
+                  </div>
+                  <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Datum</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      <div class="mt-1">
+                        <Datepicker
+                          id="date"
+                          v-model="state.datum"
+                          :format-locale="de"
+                        ></Datepicker>
+                      </div>
+                    </dd>
+                  </div>
+                  <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Treffpunkt:</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      <div class="mt-1">
+                        <Datepicker v-model="state.treffpunkt" timePicker model-type="timestamp" />
+                      </div>
+                    </dd>
+                  </div>
+                  <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Start:</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      <div class="mt-1">
+                        <Datepicker v-model="state.start" timePicker model-type="timestamp" />
+                      </div>
+                    </dd>
+                  </div>
+                  <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Ende:</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      <div class="mt-1">
+                        <Datepicker v-model="state.ende" timePicker model-type="timestamp" />
+                      </div>
+                    </dd>
+                  </div>
+                  <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">Halle:</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      <div class="mt-1">
+                        <input
+                          type="text"
+                          name="halle"
+                          id="halle"
+                          v-model="state.halle"
+                          class="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-500 focus:ring-lime-500 sm:text-sm"
+                        />
+                      </div>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+              <div class="flex justify-end mx-6 my-4">
+                <button
+                  @click="changeTraining"
+                  type="button"
+                  class="inline-flex items-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none"
+                >
+                  Save
+                </button>
               </div>
             </div>
           </div>
@@ -233,13 +354,17 @@
       </div>
     </div>
   </div>
+  {{ training }}
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router';
-import { onMounted, ref, computed } from 'vue';
-import { XMarkIcon, ExclamationTriangleIcon } from '@heroicons/vue/20/solid';
+import { onMounted, ref, computed, reactive } from 'vue';
+import { XMarkIcon, ExclamationTriangleIcon, Cog6ToothIcon } from '@heroicons/vue/20/solid';
 import axios from 'axios';
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+import { de } from 'date-fns/locale';
 
 const router = useRouter();
 const id = router.currentRoute.value.params.id;
@@ -249,10 +374,46 @@ const spielerListe = ref([]);
 let warningMessage = ref(false);
 let error = ref(false);
 let darfAnwesenheitChecken = ref(false);
+let showEdit = ref(false);
+
+let state = reactive({
+  titel: '',
+  datum: null,
+  treffpunkt: null,
+  start: null,
+  ende: null,
+  halle: '',
+});
 
 onMounted(async () => {
   const { data } = await axios.get(`/getTrainingDetail/${id}`);
   training.value = data[0];
+
+  // State Variabeln für InputFeld befüllen
+  state.titel = training.value.titel;
+  state.datum = training.value.trainingdatum;
+  state.halle = training.value.wo;
+
+  // Time neu formatieren
+  let timeTreffpunkt = {
+    hours: training.value.trainingtreffpunkt.split(':')[0],
+    minutes: training.value.trainingtreffpunkt.split(':')[1],
+  };
+
+  let timeBeginn = {
+    hours: training.value.trainingbeginn.split(':')[0],
+    minutes: training.value.trainingbeginn.split(':')[1],
+  };
+
+  let timeEnde = {
+    hours: training.value.trainingende.split(':')[0],
+    minutes: training.value.trainingende.split(':')[1],
+  };
+
+  // Zeit variablen dem State zuweisen
+  state.treffpunkt = timeTreffpunkt;
+  state.start = timeBeginn;
+  state.ende = timeEnde;
 
   const { data: spieler } = await axios.get(`/getTrainingDetailSpieler/${id}`);
   spielerListe.value = spieler;
@@ -289,6 +450,8 @@ async function changeAnwesenheit(status, s_id) {
     console.log('Darf nicht ändern, das Training hat noch nd begonnen');
   }
 }
+
+async function changeTraining() {}
 
 const neuesDatum = computed(() => {
   let date = new Date(training.value.trainingdatum);
