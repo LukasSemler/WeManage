@@ -70,10 +70,36 @@ const changeAnwesenheitDB = async (kommt, training_id, s_id) => {
   return false;
 };
 
+const changeTrainingDB = async (
+  titel,
+  datum,
+  treffpunktBearbeitet,
+  beginnBearbeitet,
+  endeBearbeitet,
+  halle,
+  id,
+) => {
+  const { rows } = await query(
+    `UPDATE trainings
+SET titel              = $1,
+    trainingdatum      = $2,
+    trainingtreffpunkt = $3,
+    trainingbeginn     = $4,
+    trainingende       = $5,
+    wo                 = $6
+WHERE training_id = $7 returning *;`,
+    [titel, datum, treffpunktBearbeitet, beginnBearbeitet, endeBearbeitet, halle, id],
+  );
+
+  if (rows[0]) return rows;
+  return false;
+};
+
 export {
   addTrainingDB,
   getTrainingsDB,
   getTrainingDetailDB,
   getTrainingDetailSpielerDB,
   changeAnwesenheitDB,
+  changeTrainingDB,
 };

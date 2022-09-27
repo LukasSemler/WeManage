@@ -207,6 +207,7 @@
                           id="date"
                           v-model="state.datum"
                           :format-locale="de"
+                          :format="format"
                         ></Datepicker>
                       </div>
                     </dd>
@@ -266,7 +267,7 @@
       </div>
     </div>
 
-    <div class="mx-auto max-w-screen-xl px-4pb-6 sm:px-6 lg:px-10 lg:pb-16 mt-5">
+    <div class="max-w-screen-xl px-4pb-6 sm:px-6 lg:px-10 lg:pb-16 mt-5 mx-auto">
       <div>
         <h3 class="text-xl font-bold leading-6 text-gray-900">Statistik zum Training</h3>
         <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
@@ -292,13 +293,13 @@
       </div>
     </div>
 
-    <div class="mx-auto max-w-screen-xl px-4pb-6 sm:px-6 lg:px-10 lg:pb-16 mt-5">
+    <div class="max-w-screen-xl px-4pb-6 sm:px-6 lg:px-10 lg:pb-16 mt-5 mx-auto">
       <h1 class="text-xl font-bold">Anwesenheit:</h1>
       <div class="mt-8 flex flex-col">
         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <table class="min-w-full divide-y divide-gray-300">
+              <table class="min-w-full divide-y divide-gray-300 mx-3">
                 <thead class="bg-gray-50">
                   <tr>
                     <th
@@ -354,7 +355,7 @@
       </div>
     </div>
   </div>
-  {{ training }}
+  {{ state }}
 </template>
 
 <script setup>
@@ -451,7 +452,13 @@ async function changeAnwesenheit(status, s_id) {
   }
 }
 
-async function changeTraining() {}
+async function changeTraining() {
+  try {
+    await axios.patch(`/changeTraining/${id}`, { state });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 const neuesDatum = computed(() => {
   let date = new Date(training.value.trainingdatum);
@@ -495,4 +502,12 @@ let computedNicht = computed(() => {
 
   return anzahl;
 });
+
+const format = (date) => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  return `${day}.${month}.${year}`;
+};
 </script>
