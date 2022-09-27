@@ -57,14 +57,22 @@
       <div>
         <h3 class="text-xl font-bold leading-6 text-gray-900">Statistik zum Training</h3>
         <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-          <div
-            v-for="item in stats"
-            :key="item.name"
-            class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6"
-          >
-            <dt class="truncate text-sm font-medium text-gray-500">{{ item.name }}</dt>
+          <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+            <dt class="truncate text-sm font-medium text-gray-500">Anzahl an Spielern</dt>
             <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-              {{ item.stat }}
+              {{ computedAnzahl }}
+            </dd>
+          </div>
+          <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+            <dt class="truncate text-sm font-medium text-gray-500">Anzahl an Spielern (%)</dt>
+            <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
+              {{ computedPerc }}%
+            </dd>
+          </div>
+          <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+            <dt class="truncate text-sm font-medium text-gray-500">Fehlende Spieler</dt>
+            <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
+              {{ computedNicht }}
             </dd>
           </div>
         </dl>
@@ -162,9 +170,35 @@ const neuesDatum = computed(() => {
   return `${weekdayText}, ${weekday}. ${monthL} ${year}`;
 });
 
-const stats = [
-  { name: 'Anzahl an Spielern', stat: '20' },
-  { name: 'Anzahl an Spielern (%)', stat: '90%' },
-  { name: 'Fehlende Spieler', stat: '2' },
-];
+//Anzahl der Spieler berrechnen
+let computedAnzahl = computed(() => {
+  let anzahl = 0;
+  spielerListe.value.forEach((spieler) => {
+    if (spieler.kommt) anzahl += 1;
+  });
+
+  return anzahl;
+});
+
+//Anzahl der Spieler berrechnen
+let computedPerc = computed(() => {
+  let anzahl = 0;
+  let prozent;
+  
+  spielerListe.value.forEach((spieler) => {
+    if (spieler.kommt) anzahl += 1;
+  });
+
+  return (prozent = (anzahl / spielerListe.value.length) * 100);
+});
+
+//Anzahl der Spieler berrechnen
+let computedNicht = computed(() => {
+  let anzahl = 0;
+  spielerListe.value.forEach((spieler) => {
+    if (!spieler.kommt) anzahl += 1;
+  });
+
+  return anzahl;
+});
 </script>
