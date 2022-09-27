@@ -1,4 +1,96 @@
 <template>
+  <div
+    aria-live="assertive"
+    class="z-40 pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
+      <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
+      <transition
+        enter-active-class="transform ease-out duration-300 transition"
+        enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+        enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+        leave-active-class="transition ease-in duration-100"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="warningMessage"
+          class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+        >
+          <div class="p-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <ExclamationTriangleIcon class="h-6 w-6 text-orange-500" aria-hidden="true" />
+              </div>
+              <div class="ml-3 w-0 flex-1 pt-0.5">
+                <p class="text-sm font-medium text-gray-900">Achtung</p>
+                <p class="mt-1 text-sm text-gray-500">
+                  Du kannst die Anwesenheit nicht ändern, das Training hat noch nicht begonnen.
+                </p>
+              </div>
+              <div class="ml-4 flex flex-shrink-0">
+                <button
+                  type="button"
+                  @click="warningMessage = false"
+                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                  <span class="sr-only">Close</span>
+                  <XMarkIcon class="h-5 w-5" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </div>
+  </div>
+
+  <div
+    aria-live="assertive"
+    class="z-40 pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
+      <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
+      <transition
+        enter-active-class="transform ease-out duration-300 transition"
+        enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+        enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+        leave-active-class="transition ease-in duration-100"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="error"
+          class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+        >
+          <div class="p-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <XMarkIcon class="h-6 w-6 text-red-600" aria-hidden="true" />
+              </div>
+              <div class="ml-3 w-0 flex-1 pt-0.5">
+                <p class="text-sm font-medium text-gray-900">Fehler</p>
+                <p class="mt-1 text-sm text-gray-500">
+                  Es gab leider einen Fehler beim ändern der Anwesenheit.
+                </p>
+              </div>
+              <div class="ml-4 flex flex-shrink-0">
+                <button
+                  type="button"
+                  @click="error = false"
+                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                  <span class="sr-only">Close</span>
+                  <XMarkIcon class="h-5 w-5" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </div>
+  </div>
+
   <div>
     <div class="mx-auto max-w-screen-xl px-4 pb-6 sm:px-6 lg:px-8 lg:pb-16 mt-5">
       <div class="overflow-hidden rounded-lg bg-white">
@@ -120,13 +212,15 @@
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <span
+                        @click="changeAnwesenheit(false, spieler.s_id)"
                         v-if="spieler.kommt"
-                        class="inline-flex rounded-full bg-green-500 px-2 text-xs font-semibold leading-5 text-white"
+                        class="cursor-pointer inline-flex rounded-full bg-green-500 px-2 text-xs font-semibold leading-5 text-white"
                         >Ja</span
                       >
                       <span
                         v-else
-                        class="inline-flex rounded-full bg-red-600 px-2 text-xs font-semibold leading-5 text-white"
+                        @click="changeAnwesenheit(true, spieler.s_id)"
+                        class="cursor-pointer inline-flex rounded-full bg-red-600 px-2 text-xs font-semibold leading-5 text-white"
                         >Nein</span
                       >
                     </td>
@@ -144,6 +238,7 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { onMounted, ref, computed } from 'vue';
+import { XMarkIcon, ExclamationTriangleIcon } from '@heroicons/vue/20/solid';
 import axios from 'axios';
 
 const router = useRouter();
@@ -151,13 +246,49 @@ const id = router.currentRoute.value.params.id;
 const training = ref({});
 const spielerListe = ref([]);
 
+let warningMessage = ref(false);
+let error = ref(false);
+let darfAnwesenheitChecken = ref(false);
+
 onMounted(async () => {
   const { data } = await axios.get(`/getTrainingDetail/${id}`);
   training.value = data[0];
 
   const { data: spieler } = await axios.get(`/getTrainingDetailSpieler/${id}`);
   spielerListe.value = spieler;
+
+  // Datum erstellen um die Uhrzeit zu bekommen
+  const date = new Date();
+  let uhrzeit = `${date.getHours()}:${date.getMinutes()}`;
+  // let uhrzeit = `18:30`;
+
+  // Schauen ob der Trainer die Anwesenheit überprüfen darf
+  if (uhrzeit > training.value.trainingbeginn && uhrzeit < training.value.trainingende)
+    darfAnwesenheitChecken.value = true;
+  else darfAnwesenheitChecken.value = false;
 });
+
+async function changeAnwesenheit(status, s_id) {
+  if (darfAnwesenheitChecken.value) {
+    // Anwesenheit lokal ändenrn
+    spielerListe.value.forEach((spieler) => {
+      if (spieler.s_id == s_id) spieler.kommt = status;
+    });
+
+    // Anwesenhheit in der DB ändern
+    try {
+      await axios.patch(`changeAnwesenheit/${id}/${s_id}`, { kommt: status });
+    } catch (error) {
+      error.value = true;
+      setTimeout(() => (error.value = false), 3000);
+      console.log(error);
+    }
+  } else {
+    warningMessage.value = true;
+    setTimeout(() => (warningMessage.value = false), 3000);
+    console.log('Darf nicht ändern, das Training hat noch nd begonnen');
+  }
+}
 
 const neuesDatum = computed(() => {
   let date = new Date(training.value.trainingdatum);
@@ -184,7 +315,7 @@ let computedAnzahl = computed(() => {
 let computedPerc = computed(() => {
   let anzahl = 0;
   let prozent;
-  
+
   spielerListe.value.forEach((spieler) => {
     if (spieler.kommt) anzahl += 1;
   });

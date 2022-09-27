@@ -3,6 +3,7 @@ import {
   getTrainingsDB,
   getTrainingDetailDB,
   getTrainingDetailSpielerDB,
+  changeAnwesenheitDB,
 } from '../models/trainingDB.js';
 
 const addTraining = async (req, res) => {
@@ -64,4 +65,20 @@ const getTrainingDetailSpieler = async (req, res) => {
   return res.status(500).send('Fehler beim Trainings holen');
 };
 
-export { addTraining, getTrainings, getTrainingDetail, getTrainingDetailSpieler };
+const changeAnwesenheit = async (req, res) => {
+  const { training_id, s_id } = req.params;
+  const { kommt } = req.body;
+
+  const result = await changeAnwesenheitDB(kommt, training_id, s_id);
+
+  if (result) return res.status(200).json(result);
+  return res.status(500).send('Fehler beim Anwesenheit ändern');
+};
+
+export {
+  addTraining,
+  getTrainings,
+  getTrainingDetail,
+  getTrainingDetailSpieler,
+  changeAnwesenheit,
+};

@@ -60,4 +60,20 @@ WHERE training_id = $1`,
   return false;
 };
 
-export { addTrainingDB, getTrainingsDB, getTrainingDetailDB, getTrainingDetailSpielerDB };
+const changeAnwesenheitDB = async (kommt, training_id, s_id) => {
+  const { rows } = await query(
+    'UPDATE spielerbesuchttraining SET kommt = $1 where fk_training_id = $2 and fk_s_id = $3 returning *;',
+    [kommt, training_id, s_id],
+  );
+
+  if (rows[0]) return rows;
+  return false;
+};
+
+export {
+  addTrainingDB,
+  getTrainingsDB,
+  getTrainingDetailDB,
+  getTrainingDetailSpielerDB,
+  changeAnwesenheitDB,
+};

@@ -19,6 +19,7 @@ import {
   getTrainings,
   getTrainingDetail,
   getTrainingDetailSpieler,
+  changeAnwesenheit,
 } from '../controllers/training.js';
 
 const router = express.Router();
@@ -56,7 +57,7 @@ router.get('/getTrainings/:id', asyncHandler(getTrainings));
 router.get('/getTrainingDetail/:id', asyncHandler(getTrainingDetail));
 router.get('/getTrainingDetailSpieler/:id', asyncHandler(getTrainingDetailSpieler));
 
-
 router.patch('/changeSpielerKommt/:id', asyncHandler(changeSpielerKommt));
+router.patch('/changeAnwesenheit/:training_id/:s_id', asyncHandler(changeAnwesenheit));
 
 export default router;
