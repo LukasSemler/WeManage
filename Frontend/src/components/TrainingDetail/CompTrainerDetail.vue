@@ -14,6 +14,50 @@
         leave-to-class="opacity-0"
       >
         <div
+          v-if="success"
+          class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+        >
+          <div class="p-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <CheckIcon class="h-6 w-6 text-green-500" aria-hidden="true" />
+              </div>
+              <div class="ml-3 w-0 flex-1 pt-0.5">
+                <p class="text-sm font-medium text-gray-900">Success</p>
+                <p class="mt-1 text-sm text-gray-500">Du hast das Training erfolgreich geändert.</p>
+              </div>
+              <div class="ml-4 flex flex-shrink-0">
+                <button
+                  type="button"
+                  @click="success = false"
+                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                  <span class="sr-only">Close</span>
+                  <XMarkIcon class="h-5 w-5" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </div>
+  </div>
+
+  <div
+    aria-live="assertive"
+    class="z-40 pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
+      <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
+      <transition
+        enter-active-class="transform ease-out duration-300 transition"
+        enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+        enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+        leave-active-class="transition ease-in duration-100"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
           v-if="warningMessage"
           class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
         >
@@ -355,13 +399,17 @@
       </div>
     </div>
   </div>
-  {{ state }}
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router';
 import { onMounted, ref, computed, reactive } from 'vue';
-import { XMarkIcon, ExclamationTriangleIcon, Cog6ToothIcon } from '@heroicons/vue/20/solid';
+import {
+  XMarkIcon,
+  ExclamationTriangleIcon,
+  Cog6ToothIcon,
+  CheckIcon,
+} from '@heroicons/vue/20/solid';
 import axios from 'axios';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
@@ -374,6 +422,7 @@ const spielerListe = ref([]);
 
 let warningMessage = ref(false);
 let error = ref(false);
+let success = ref(false);
 let darfAnwesenheitChecken = ref(false);
 let showEdit = ref(false);
 
@@ -454,7 +503,17 @@ async function changeAnwesenheit(status, s_id) {
 
 async function changeTraining() {
   try {
+    const datumNeu = new Date(state.datum);
+    datumNeu.setHours(12);
+    state.datum = datumNeu;
+
+    console.log(state);
+
     await axios.patch(`/changeTraining/${id}`, { state });
+    success.value = true;
+    showEdit.value = false;
+
+    setTimeout(() => (success.value = false), 3000);
   } catch (error) {
     console.log(error);
   }
@@ -490,7 +549,7 @@ let computedPerc = computed(() => {
     if (spieler.kommt) anzahl += 1;
   });
 
-  return (prozent = (anzahl / spielerListe.value.length) * 100);
+  return Math.floor((prozent = (anzahl / spielerListe.value.length) * 100));
 });
 
 //Anzahl der Spieler berrechnen
