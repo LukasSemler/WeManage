@@ -45,6 +45,7 @@ const props = defineProps({
 
 .vuecal__event {
   background-color: rgba(132, 204, 22, 75);
+  border: 1px solid black;
   color: black;
   box-sizing: border-box;
   padding: 5px;

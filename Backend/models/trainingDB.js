@@ -1,6 +1,6 @@
 import { query, pool } from '../db/index.js';
 
-const addTrainingDB = async (
+const addTrainingDBWH = async (
   titel,
   datum,
   treffpunktBearbeitet,
@@ -17,6 +17,30 @@ const addTrainingDB = async (
     beginnBearbeitet,
     endeBearbeitet,
     endDatum,
+    halle,
+    m_id,
+  ]);
+
+  if (rows[0]) return true;
+
+  return false;
+};
+
+const addTrainingDB = async (
+  titel,
+  datum,
+  treffpunktBearbeitet,
+  beginnBearbeitet,
+  endeBearbeitet,
+  halle,
+  m_id,
+) => {
+  const { rows } = await query('SELECT * from einmaltraininginsert($1, $2, $3, $4, $5, $6, $7)', [
+    titel,
+    datum,
+    treffpunktBearbeitet,
+    beginnBearbeitet,
+    endeBearbeitet,
     halle,
     m_id,
   ]);
@@ -95,11 +119,23 @@ WHERE training_id = $7 returning *;`,
   return false;
 };
 
+const deleteTrainingDB = async (id) => {
+  try {
+    await query('SELECT * FROM trainingdelete($1);', [id]);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
 export {
-  addTrainingDB,
+  addTrainingDBWH,
   getTrainingsDB,
   getTrainingDetailDB,
   getTrainingDetailSpielerDB,
   changeAnwesenheitDB,
   changeTrainingDB,
+  addTrainingDB,
+  deleteTrainingDB,
 };
