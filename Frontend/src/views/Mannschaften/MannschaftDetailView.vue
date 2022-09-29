@@ -56,7 +56,7 @@
                 <nav class="px-2">
                   <div class="space-y-1">
                     <a
-                      @click="router.push(item.path)"
+                      @click="changeSite(item.path)"
                       v-for="item in navigation"
                       :key="item.name"
                       :class="[
@@ -143,7 +143,7 @@
             <a
               v-for="item of navigation"
               :key="item.name"
-              @click="router.push(item.path)"
+              @click="changeSite(item.path)"
               :class="[
                 item.current
                   ? 'bg-gray-200 text-gray-900'
@@ -255,6 +255,11 @@ onMounted(async () => {
 
   store.setMannschaften(data);
 });
+
+function changeSite(path) {
+  router.push(path);
+  sidebarOpen.value = false;
+}
 
 const id = ref(router.currentRoute.value.params.id);
 </script>

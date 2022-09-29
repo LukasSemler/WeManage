@@ -58,7 +58,7 @@
                     <a
                       v-for="item in navigation"
                       :key="item.name"
-                      @click="router.push(item.path)"
+                      @click="changeSite(item.path)"
                       :class="[
                         item.current
                           ? 'bg-gray-100 text-gray-900'
@@ -194,7 +194,7 @@
             <a
               v-for="item of navigation"
               :key="item.name"
-              @click="router.push(item.path)"
+              @click="changeSite(item.path)"
               :class="[
                 item.current
                   ? 'bg-gray-200 text-gray-900'
@@ -367,6 +367,11 @@ onMounted(async () => {
 function logout() {
   store.deleteAktivenUser();
   router.push('/');
+}
+
+function changeSite(to) {
+  router.push(to);
+  sidebarOpen.value = false;
 }
 
 const id = ref(router.currentRoute.value.params.id);

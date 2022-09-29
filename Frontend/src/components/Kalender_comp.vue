@@ -1,10 +1,5 @@
 <template>
-  <vue-cal
-    style="height: 500px"
-    class="vuecal--blue-theme"
-    :time-from="10 * 60"
-    :events="termine"
-  ></vue-cal>
+  <vue-cal style="height: 500px" class="vuecal" :time-from="10 * 60" :events="termine"></vue-cal>
 </template>
 
 <script setup>
@@ -20,26 +15,28 @@ const props = defineProps({
 /* Green-theme. */
 .vuecal__menu,
 .vuecal__cell-events-count {
-  background-color: #6771fc;
+  background-color: #84cc15;
+  color: black;
 }
 .vuecal__title-bar {
-  background-color: #c1c1c1;
+  background-color: #4f4f4f;
+  color: white;
 }
 .vuecal__cell--today,
 .vuecal__cell--current {
-  background-color: rgba(240, 240, 255, 0.4);
+  background-color: rgba(132, 204, 22, 0.4);
 }
 .vuecal:not(.vuecal--day-view) .vuecal__cell--selected {
   background-color: rgba(235, 255, 245, 0.4);
 }
 .vuecal__cell--selected:before {
-  border-color: rgba(66, 185, 131, 0.5);
+  border-color: #84cc15;
 }
 
 /* Cells and buttons get highlighted when an event is dragged over it. */
 .vuecal__cell--highlighted:not(.vuecal__cell--has-splits),
 .vuecal__cell-split--highlighted {
-  background-color: rgba(195, 255, 225, 0.5);
+  background-color: #84cc15;
 }
 .vuecal__arrow.vuecal__arrow--highlighted,
 .vuecal__view-btn.vuecal__view-btn--highlighted {
@@ -48,6 +45,7 @@ const props = defineProps({
 
 .vuecal__event {
   background-color: rgba(132, 204, 22, 75);
+  color: black;
   box-sizing: border-box;
   padding: 5px;
 }

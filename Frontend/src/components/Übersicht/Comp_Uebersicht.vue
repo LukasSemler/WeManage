@@ -50,7 +50,10 @@
     >
       <ul role="list" class="divide-y divide-gray-200">
         <li v-for="training in trainings" :key="training.training_id">
-          <div class="block hover:bg-gray-50">
+          <div
+            class="block hover:bg-gray-50"
+            @click="$router.push(`/training/${training.training_id}`)"
+          >
             <div class="px-4 py-4 sm:px-6">
               <div class="flex items-center justify-between">
                 <p class="truncate text-sm font-medium text-lime-500">{{ training.titel }}</p>
