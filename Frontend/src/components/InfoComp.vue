@@ -36,7 +36,7 @@
           <div v-for="feature in features" :key="feature.name">
             <dt>
               <div
-                class="flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white"
+                class="flex h-12 w-12 items-center justify-center rounded-md bg-lime-500 text-white"
               >
                 <component :is="feature.icon" class="h-6 w-6" aria-hidden="true" />
               </div>

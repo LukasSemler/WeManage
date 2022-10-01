@@ -33,7 +33,7 @@
                 <button
                   type="button"
                   @click="duplicateError = false"
-                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
                 >
                   <span class="sr-only">Close</span>
                   <XMarkIcon class="h-5 w-5" aria-hidden="true" />
@@ -81,7 +81,7 @@
                 <button
                   type="button"
                   @click="error = false"
-                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
                 >
                   <span class="sr-only">Close</span>
                   <XMarkIcon class="h-5 w-5" aria-hidden="true" />
@@ -98,7 +98,7 @@
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <img
         class="mx-auto h-12 w-auto"
-        src="../assets/icons/placeholder_icon.png"
+        src="../../assets/icons/placeholder_icon.png"
         alt="Electronic City"
       />
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Register</h2>
@@ -121,7 +121,7 @@
                       id="first-name"
                       name="first-name"
                       autocomplete="given-name"
-                      class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
                     />
 
                     <p
@@ -145,7 +145,7 @@
                       id="last-name"
                       name="last-name"
                       autocomplete="family-name"
-                      class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
                     />
 
                     <p
@@ -166,7 +166,7 @@
                       type="email"
                       name="email"
                       id="email"
-                      class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
                     />
 
                     <p
@@ -189,7 +189,7 @@
                       type="password"
                       name="password"
                       id="password"
-                      class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
                     />
 
                     <p
@@ -212,7 +212,7 @@
                       type="password"
                       name="c_password"
                       id="c_password"
-                      class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
                     />
 
                     <p
@@ -243,7 +243,7 @@
                       <div
                         :class="[
                           checked ? 'border-transparent' : 'border-gray-300',
-                          active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
+                          active ? 'border-lime-500 ring-2 ring-lime-500' : '',
                           'relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none',
                         ]"
                       >
@@ -262,13 +262,13 @@
                           </span>
                         </span>
                         <CheckCircleIcon
-                          :class="[!checked ? 'invisible' : '', 'h-5 w-5 text-indigo-600']"
+                          :class="[!checked ? 'invisible' : '', 'h-5 w-5 text-lime-500']"
                           aria-hidden="true"
                         />
                         <span
                           :class="[
                             active ? 'border' : 'border-2',
-                            checked ? 'border-indigo-500' : 'border-transparent',
+                            checked ? 'border-lime-500' : 'border-transparent',
                             'pointer-events-none absolute -inset-px rounded-lg',
                           ]"
                           aria-hidden="true"
@@ -325,7 +325,7 @@
             <div class="text-sm">
               <a
                 @click="router.push('/login')"
-                class="font-medium text-indigo-600 hover:text-indigo-500 underline"
+                class="font-medium text-lime-500 hover:text-lime-600 underline"
               >
                 Zu Login
               </a>
@@ -335,13 +335,13 @@
           <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
             <button
               @click="router.push('/')"
-              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
             >
               Abbrechen
             </button>
             <button
               @click="register"
-              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-500 hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
             >
               Register
             </button>
@@ -393,15 +393,15 @@ const spieler_trainer = [
 ];
 
 const avatare = [
-  { name: 'Avatar1', path: '/Avatare/Avatar1.png', selectedColor: 'ring-indigo-500' },
-  { name: 'Avatar2', path: '/Avatare/Avatar2.png', selectedColor: 'ring-indigo-500' },
-  { name: 'Avatar3', path: '/Avatare/Avatar3.png', selectedColor: 'ring-indigo-500' },
-  { name: 'Avatar4', path: '/Avatare/Avatar4.png', selectedColor: 'ring-indigo-500' },
-  { name: 'Avatar5', path: '/Avatare/Avatar5.png', selectedColor: 'ring-indigo-500' },
-  { name: 'Avatar6', path: '/Avatare/Avatar6.png', selectedColor: 'ring-indigo-500' },
-  { name: 'Avatar7', path: '/Avatare/Avatar7.png', selectedColor: 'ring-indigo-500' },
-  { name: 'Avatar8', path: '/Avatare/Avatar8.png', selectedColor: 'ring-indigo-500' },
-  { name: 'Avatar9', path: '/Avatare/Avatar9.png', selectedColor: 'ring-indigo-500' },
+  { name: 'Avatar1', path: '/Avatare/Avatar1.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar2', path: '/Avatare/Avatar2.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar3', path: '/Avatare/Avatar3.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar4', path: '/Avatare/Avatar4.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar5', path: '/Avatare/Avatar5.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar6', path: '/Avatare/Avatar6.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar7', path: '/Avatare/Avatar7.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar8', path: '/Avatare/Avatar8.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar9', path: '/Avatare/Avatar9.png', selectedColor: 'ring-lime-500' },
 ];
 
 const selectedAvatar = ref(avatare[0]);

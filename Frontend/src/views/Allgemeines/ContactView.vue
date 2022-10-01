@@ -157,7 +157,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-3">
               <!-- Contact information -->
               <div
-                class="relative overflow-hidden py-10 px-6 bg-gradient-to-b from-indigo-500 to-indigo-600 sm:px-10 xl:p-12"
+                class="relative overflow-hidden py-10 px-6 bg-gradient-to-b from-lime-500 to-lime-600 sm:px-10 xl:p-12"
               >
                 <!-- Decorative angle backgrounds -->
                 <div class="absolute inset-0 pointer-events-none sm:hidden" aria-hidden="true">
@@ -344,7 +344,7 @@
                         name="first-name"
                         id="first-name"
                         autocomplete="given-name"
-                        class="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-warm-gray-300 rounded-md"
+                        class="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-lime-500 focus:border-lime-500 border-warm-gray-300 rounded-md"
                       />
 
                       <p
@@ -367,7 +367,7 @@
                         name="last-name"
                         id="last-name"
                         autocomplete="family-name"
-                        class="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-warm-gray-300 rounded-md"
+                        class="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-lime-500 focus:border-lime-500 border-warm-gray-300 rounded-md"
                       />
                       <p
                         v-if="v$.nachname.$invalid"
@@ -389,7 +389,7 @@
                         name="email"
                         type="email"
                         autocomplete="email"
-                        class="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-warm-gray-300 rounded-md"
+                        class="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-lime-500 focus:border-lime-500 border-warm-gray-300 rounded-md"
                       />
                       <p
                         v-if="v$.emailAddr.$invalid"
@@ -414,7 +414,7 @@
                         name="phone"
                         id="phone"
                         autocomplete="tel"
-                        class="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-warm-gray-300 rounded-md"
+                        class="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-lime-500 focus:border-lime-500 border-warm-gray-300 rounded-md"
                         aria-describedby="phone-optional"
                       />
                       <span v-if="v$.telNr.$invalid">
@@ -432,7 +432,7 @@
                         type="text"
                         name="subject"
                         id="subject"
-                        class="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-warm-gray-300 rounded-md"
+                        class="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-lime-500 focus:border-lime-500 border-warm-gray-300 rounded-md"
                       />
                       <p
                         v-if="v$.betreff.$invalid"
@@ -458,7 +458,7 @@
                         id="message"
                         name="message"
                         rows="4"
-                        class="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border border-warm-gray-300 rounded-md"
+                        class="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-lime-500 focus:border-lime-500 border border-warm-gray-300 rounded-md"
                         aria-describedby="message-max"
                       />
                       <p
@@ -475,14 +475,14 @@
                       v-if="!checkError"
                       :disabled="checkError"
                       @click="submitForm"
-                      class="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-auto"
+                      class="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-lime-500 hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 sm:w-auto"
                     >
                       Submit
                     </button>
                     <button
                       v-else
                       :disabled="checkError"
-                      class="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-auto"
+                      class="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 sm:w-auto"
                     >
                       Submit
                     </button>

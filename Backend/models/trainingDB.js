@@ -52,7 +52,7 @@ const addTrainingDB = async (
 
 const getTrainingsDB = async (id) => {
   const { rows } = await query(
-    'SELECT * from trainings WHERE trainingdatum >= CURRENT_DATE and fk_m_id = $1 order by trainingdatum ASC LIMIT 5;',
+    'SELECT * from trainings WHERE trainingdatum >= CURRENT_DATE and fk_m_id = $1 order by trainingdatum ASC LIMIT 10;',
     [id],
   );
 

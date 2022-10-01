@@ -18,7 +18,7 @@ from news n
          JOIN mannschaft m on m.m_id = n.m_id
          JOIN trainer_mannschaft tm on m.m_id = tm.m_id
          JOIN trainer t on t.t_id = tm.t_id
-WHERE n.t_id = t.t_id AND m.m_id = $1; `,
+WHERE n.t_id = t.t_id AND m.m_id = $1 ORDER BY n.dateTime ASC; `,
     [id],
   );
 

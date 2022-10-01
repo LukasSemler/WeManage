@@ -213,6 +213,8 @@ onMounted(async () => {
   const { data } = await axios.get(`/getTrainingDetail/${id}`);
   training.value = data[0];
 
+  console.log(training.value);
+
   const { data: spieler } = await axios.get(`/getTrainingDetailSpieler/${id}`);
   spielerListe.value = spieler;
 
@@ -224,11 +226,14 @@ onMounted(async () => {
 
   // Datum erstellen um die Uhrzeit zu bekommen
   const date = new Date();
+  const datumTraining = new Date(training.value.trainingdatum);
   // let uhrzeit = `18:00`;
   let uhrzeit = `${date.getHours()}:${date.getMinutes()}`;
 
-  // Schauen ob der Trainer die Anwesenheit überprüfen darf
-  if (uhrzeit < training.value.trainingbeginn) darfÄndern.value = true;
+  if (date == datumTraining) {
+    if (uhrzeit < training.value.trainingbeginn) darfÄndern.value = true;
+    else darfÄndern.value = false;
+  } else if (date < datumTraining) darfÄndern.value = true;
   else darfÄndern.value = false;
 });
 

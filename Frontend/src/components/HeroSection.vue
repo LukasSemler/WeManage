@@ -53,7 +53,7 @@
           <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
             <span class="block xl:inline">Managen Sie Ihr Team</span>
             {{ ' ' }}
-            <span class="block text-indigo-600 xl:inline">PERFEKT</span>
+            <span class="block text-lime-500 xl:inline">PERFEKT</span>
           </h1>
           <p
             class="mx-auto mt-3 max-w-md text-base text-gray-500 sm:text-lg md:mt-5 md:max-w-3xl md:text-xl"
@@ -65,7 +65,7 @@
             <div class="rounded-md shadow">
               <a
                 @click="router.push('/register')"
-                class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
+                class="flex w-full items-center justify-center rounded-md border border-transparent bg-lime-500 px-8 py-3 text-base font-medium text-white hover:bg-lime-600 md:py-4 md:px-10 md:text-lg"
                 >Get started</a
               >
             </div>
