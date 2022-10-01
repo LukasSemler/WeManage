@@ -223,6 +223,7 @@
               <a
                 v-for="team in store.getTeams"
                 :key="team.id"
+                @click="router.push(`/detailMannschaft/${team.m_id}`)"
                 class="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
               >
                 <span :class="`w-2.5 h-2.5 mr-4 rounded-full bg-lime-400`" aria-hidden="true" />
@@ -282,7 +283,6 @@
                   <div class="py-1">
                     <MenuItem v-slot="{ active }">
                       <a
-                        href="#"
                         :class="[
                           active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                           'block px-4 py-2 text-sm',

@@ -81,7 +81,7 @@ import NavbarComp from '../../components/NavbarComp.vue';
 
 const people = [
   {
-    name: 'Leslie Alexander',
+    name: 'Lukas Semler',
     role: 'Co-Founder / CEO',
     imageUrl:
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
@@ -90,7 +90,7 @@ const people = [
     linkedinUrl: '#',
   },
   {
-    name: 'Leslie Alexander',
+    name: 'Benjamin Stauf',
     role: 'Co-Founder / CEO',
     imageUrl:
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
