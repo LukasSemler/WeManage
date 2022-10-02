@@ -257,20 +257,20 @@
                   </svg>
                 </div>
                 <h3 class="text-lg font-medium text-white">Contact information</h3>
-                <p class="mt-6 text-base text-indigo-50 max-w-3xl">
+                <p class="mt-6 text-base text-lime-50 max-w-3xl">
                   Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst
                   amet. Sapien tortor lacus arcu.
                 </p>
                 <dl class="mt-8 space-y-6">
                   <dt><span class="sr-only">Phone number</span></dt>
-                  <dd class="flex text-base text-indigo-50">
-                    <PhoneIcon class="flex-shrink-0 w-6 h-6 text-indigo-200" aria-hidden="true" />
+                  <dd class="flex text-base text-lime-50">
+                    <PhoneIcon class="flex-shrink-0 w-6 h-6 text-lime-200" aria-hidden="true" />
                     <span class="ml-3">+1 (555) 123-4567</span>
                   </dd>
                   <dt><span class="sr-only">Email</span></dt>
-                  <dd class="flex text-base text-indigo-50">
+                  <dd class="flex text-base text-lime-50">
                     <EnvelopeIcon
-                      class="flex-shrink-0 w-6 h-6 text-indigo-200"
+                      class="flex-shrink-0 w-6 h-6 text-lime-200"
                       aria-hidden="true"
                     />
                     <span class="ml-3">support@workcation.com</span>
@@ -278,7 +278,7 @@
                 </dl>
                 <ul role="list" class="mt-8 flex space-x-12">
                   <li>
-                    <a class="text-indigo-200 hover:text-indigo-100" href="#">
+                    <a class="text-lime-200 hover:text-lime-100" href="#">
                       <span class="sr-only">Facebook</span>
                       <svg
                         class="w-7 h-7"
@@ -295,7 +295,7 @@
                     </a>
                   </li>
                   <li>
-                    <a class="text-indigo-200 hover:text-indigo-100" href="#">
+                    <a class="text-lime-200 hover:text-lime-100" href="#">
                       <span class="sr-only">GitHub</span>
                       <svg
                         class="w-7 h-7"
@@ -312,7 +312,7 @@
                     </a>
                   </li>
                   <li>
-                    <a class="text-indigo-200 hover:text-indigo-100" href="#">
+                    <a class="text-lime-200 hover:text-lime-100" href="#">
                       <span class="sr-only">Twitter</span>
                       <svg
                         class="w-7 h-7"

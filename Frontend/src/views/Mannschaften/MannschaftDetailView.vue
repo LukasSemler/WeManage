@@ -201,6 +201,7 @@ import {
   CalendarDaysIcon,
   ArrowLeftIcon,
   ChartPieIcon,
+  Cog6ToothIcon,
 } from '@heroicons/vue/24/outline';
 
 import { RouterView, useRouter } from 'vue-router';
@@ -220,6 +221,7 @@ const navigation = [
     current: false,
     path: `/detailMannschaft/${router.currentRoute.value.params.id}`,
     params: true,
+    onlyTrainer: true,
   },
   {
     name: 'Ankündigungen',
@@ -227,24 +229,35 @@ const navigation = [
     current: false,
     path: `/detailMannschaft/${router.currentRoute.value.params.id}/ankuendigungen`,
     params: true,
+    onlyTrainer: true,
   },
   {
     name: 'Trainings',
     icon: CalendarDaysIcon,
     current: false,
     path: `/detailMannschaft/${router.currentRoute.value.params.id}/trainings`,
+    onlyTrainer: true,
   },
   {
     name: 'Mitglieder',
     icon: UserGroupIcon,
     current: false,
     path: `/detailMannschaft/${router.currentRoute.value.params.id}/mitglieder`,
+    onlyTrainer: true,
   },
   {
     name: 'Statistik',
     icon: ChartPieIcon,
     current: false,
     path: `/detailMannschaft/${router.currentRoute.value.params.id}/statistik`,
+    onlyTrainer: true,
+  },
+  {
+    name: 'Settings',
+    icon: Cog6ToothIcon,
+    current: false,
+    path: `/detailMannschaft/${router.currentRoute.value.params.id}/settings`,
+    onlyTrainer: true,
   },
 ];
 

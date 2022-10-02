@@ -8,6 +8,7 @@ import Uebersicht from '../views/Mannschaften/Subview/Uebersicht.vue';
 import Ankuendigungen from '../views/Mannschaften/Subview/ankuendigungen.vue';
 import Trainings from '../views/Mannschaften/Subview/trainings.vue';
 import Mitglieder from '../views/Mannschaften/Subview/Mitglieder.vue';
+import Settings from '../views/Mannschaften/Subview/Settings.vue';
 
 //! Allgemeines:
 import LandingPageView from '../views/Allgemeines/LandingPageView.vue';
@@ -154,6 +155,7 @@ const router = createRouter({
         { path: 'trainings', component: Trainings },
         { path: 'mitglieder', component: Mitglieder },
         { path: 'statistik', component: UnderConstruction },
+        { path: 'settings', component: Settings },
       ],
     },
     {

@@ -5,7 +5,7 @@
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button -->
           <DisclosureButton
-            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lime-500"
           >
             <span class="sr-only">Open main menu</span>
             <Bars3Icon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
@@ -26,7 +26,7 @@
             />
           </div>
           <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-            <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
+            <!-- Current: "border-lime-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
             <a
               @click="router.push('/')"
               class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium hover:border-gray-300 hover:text-gray-700"
@@ -49,14 +49,14 @@
         >
           <button
             type="button"
-            class="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            class="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
           ></button>
 
           <!-- Profile dropdown -->
           <Menu v-if="store.getAktivenUser" as="div" class="relative ml-3">
             <div>
               <MenuButton
-                class="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                class="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
               >
                 <span class="sr-only">Open user menu</span>
                 <img
@@ -107,7 +107,7 @@
             v-else
             @click="router.push('/login')"
             type="button"
-            class="inline-flex items-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            class="inline-flex items-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
           >
             Anmelden
           </button>
@@ -117,11 +117,11 @@
 
     <DisclosurePanel class="sm:hidden">
       <div class="space-y-1 pt-2 pb-4">
-        <!-- Current: "bg-indigo-50 border-indigo-500 text-lime-600", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
+        <!-- Current: "bg-lime-50 border-lime-500 text-lime-600", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
         <DisclosureButton
           as="a"
           @click="router.push('/')"
-          class="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-lime-600"
+          class="block border-l-4 border-lime-500 bg-lime-50 py-2 pl-3 pr-4 text-base font-medium text-lime-600"
           >Home</DisclosureButton
         >
         <DisclosureButton
@@ -160,7 +160,7 @@ const router = useRouter();
 
 function toSoftware() {
   if (store.isTrainer) router.push('/homeTrainer');
-  // else router.push()
+  else router.push('/homeSpieler');
 }
 
 function logout() {

@@ -229,10 +229,7 @@
                 :key="team.id"
                 class="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
               >
-                <span
-                  :class="`w-2.5 h-2.5 mr-4 rounded-full bg-[${team.farbe}]`"
-                  aria-hidden="true"
-                />
+                <span :class="`w-2.5 h-2.5 mr-4 rounded-full bg-lime-500`" aria-hidden="true" />
                 <span class="truncate">{{ team.titel }}</span>
               </a>
             </div>
@@ -265,7 +262,7 @@
                   <span class="sr-only">Open user menu</span>
                   <img
                     class="h-8 w-8 rounded-full"
-                    src="../../assets/icons/Avatar_platzhalter.png"
+                    :src="store.getAktivenUser.data.avatarpath"
                     alt=""
                   />
                 </MenuButton>

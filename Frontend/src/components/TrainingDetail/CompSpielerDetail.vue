@@ -32,7 +32,7 @@
                 <button
                   type="button"
                   @click="warningMessage = false"
-                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
                 >
                   <span class="sr-only">Close</span>
                   <XMarkIcon class="h-5 w-5" aria-hidden="true" />
@@ -78,7 +78,7 @@
                 <button
                   type="button"
                   @click="error = false"
-                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
                 >
                   <span class="sr-only">Close</span>
                   <XMarkIcon class="h-5 w-5" aria-hidden="true" />
