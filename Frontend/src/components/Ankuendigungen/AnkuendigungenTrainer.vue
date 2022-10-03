@@ -360,11 +360,13 @@ let message = ref('');
 
 let nachrichten = ref([]);
 
-onMounted(async () => {
+try {
   const { data } = await axios.get(`/getNews/${id.value}`);
   console.log(data);
   nachrichten.value = data;
-});
+} catch (error) {
+  console.log(error);
+}
 
 async function posten(e) {
   e.preventDefault();

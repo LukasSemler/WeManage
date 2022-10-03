@@ -6,12 +6,12 @@
           <img class="h-10 w-10 rounded-full" :src="news.avatarpath" alt="" />
         </div>
         <div class="min-w-0 flex-1">
-          <p class="text-sm font-medium text-gray-900">
+          <div class="text-sm font-medium text-gray-900">
             <p class="hover:underline">{{ news.vorname }} {{ news.nachname }}</p>
-          </p>
-          <p class="text-sm text-gray-500">
-            <p  class="hover:underline">{{ news.datetime }}</p>
-          </p>
+          </div>
+          <div class="text-sm text-gray-500">
+            <p class="hover:underline">{{ news.datetime }}</p>
+          </div>
         </div>
       </div>
       <div class="bg-gray-100 px-5 mt-4 py-5 rounded-md shadow-md lg:mr-16 w-auto">
@@ -41,7 +41,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 
 import axios from 'axios';
 
@@ -50,9 +50,11 @@ const id = ref(router.currentRoute.value.params.id);
 
 let nachrichten = ref([]);
 
-onMounted(async () => {
+try {
   const { data } = await axios.get(`/getNews/${id.value}`);
   console.log(data);
   nachrichten.value = data;
-});
+} catch (error) {
+  console.log(error);
+}
 </script>

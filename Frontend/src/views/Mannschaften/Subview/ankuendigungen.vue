@@ -19,13 +19,21 @@
     </div>
   </div>
 
-  <AnkuendigungenTrainer
-    v-if="store.getAktivenUser.type == 'Trainer'"
-    :add="open"
-    @sidebar="closeSideBar"
-  ></AnkuendigungenTrainer>
+  <Suspense>
+    <AnkuendigungenTrainer
+      v-if="store.getAktivenUser.type == 'Trainer'"
+      :add="open"
+      @sidebar="closeSideBar"
+    ></AnkuendigungenTrainer>
 
-  <AnkuendigungSpieler v-else></AnkuendigungSpieler>
+    <AnkuendigungSpieler v-else></AnkuendigungSpieler>
+
+    <template #fallback>
+      <div>
+        <h1 class="text-center text-xl font-bold mt-5">Loading ...</h1>
+      </div>
+    </template>
+  </Suspense>
 </template>
 
 <script setup>
