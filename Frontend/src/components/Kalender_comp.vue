@@ -1,14 +1,28 @@
 <template>
-  <vue-cal style="height: 500px" class="vuecal" :time-from="10 * 60" :events="termine"></vue-cal>
+  <vue-cal
+    style="height: 500px"
+    class="vuecal"
+    :time-from="10 * 60"
+    :events="termine"
+    :on-event-click="onEventClick"
+  ></vue-cal>
 </template>
 
 <script setup>
 import VueCal from 'vue-cal';
 import 'vue-cal/dist/vuecal.css';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
   termine: Array,
 });
+
+const router = useRouter();
+
+function onEventClick(event, e) {
+  console.log(event);
+  router.push(`/training/${event.t_id}`);
+}
 </script>
 
 <style>

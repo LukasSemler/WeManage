@@ -83,7 +83,7 @@ try {
       training.trainingende
     }`;
 
-    return { title: training.titel, start: beginn, end };
+    return { title: training.titel, start: beginn, end, t_id: training.training_id };
   });
 
   console.log(trainingKalender.value);

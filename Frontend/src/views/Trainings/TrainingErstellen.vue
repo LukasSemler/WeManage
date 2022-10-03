@@ -314,14 +314,14 @@ const format = (date) => {
 async function trainingErstellen(e) {
   e.preventDefault();
   try {
-    // await axios.post('/addTraining', { state, m_id: id });
+    await axios.post('/addTraining', { state, m_id: id });
     console.log(state);
 
     success.value = true;
     clearFields();
     setTimeout(() => {
       success.value = false;
-      // router.go(-1);
+      router.go(-1);
     }, 3000);
   } catch (error) {
     error.value = true;
