@@ -23,6 +23,7 @@ import {
   changeAnwesenheit,
   changeTraining,
   deleteTraining,
+  getAllTrainings,
 } from '../controllers/training.js';
 
 const router = express.Router();
@@ -67,4 +68,6 @@ router.patch('/changeTraining/:id', asyncHandler(changeTraining));
 router.delete('/delTraining/:id', asyncHandler(deleteTraining));
 
 router.post('/sJoinTeam', asyncHandler(sJoinTeam));
+
+router.get('/getAllTrainings/:id', asyncHandler(getAllTrainings));
 export default router;

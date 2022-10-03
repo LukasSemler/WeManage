@@ -129,6 +129,32 @@ const deleteTrainingDB = async (id) => {
   }
 };
 
+const getAllTrainingsDB = async (id) => {
+  const { rows } = await query(
+    `SELECT t.t_id,
+       t.vorname,
+       t.nachname,
+       trainings.titel,
+
+       trainings.training_id,
+       trainings.trainingdatum,
+       trainings.trainingtreffpunkt,
+       trainings.trainingbeginn,
+       trainings.trainingende,
+       trainings.wo
+FROM trainings
+         JOIN mannschaft m on m.m_id = trainings.fk_m_id
+         JOIN trainer_mannschaft tm on m.m_id = tm.m_id
+         JOIN trainer t on t.t_id = tm.t_id
+WHERE t.t_id = $1
+ORDER BY trainingdatum ASC;`,
+    [id],
+  );
+
+  if (rows[0]) return rows;
+  return false;
+};
+
 export {
   addTrainingDBWH,
   getTrainingsDB,
@@ -138,4 +164,5 @@ export {
   changeTrainingDB,
   addTrainingDB,
   deleteTrainingDB,
+  getAllTrainingsDB,
 };
