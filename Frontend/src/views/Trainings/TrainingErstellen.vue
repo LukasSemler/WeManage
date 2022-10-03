@@ -177,7 +177,6 @@
                   model-type="yyyy-MM-dd"
                 ></Datepicker>
               </div>
-              {{ state.datum }}
               <div class="col-span-12 sm:col-span-2">
                 <label for="last-name" class="block text-sm font-medium text-gray-700"
                   >Treffpunkt</label
@@ -315,13 +314,14 @@ const format = (date) => {
 async function trainingErstellen(e) {
   e.preventDefault();
   try {
-    await axios.post('/addTraining', { state, m_id: id });
+    // await axios.post('/addTraining', { state, m_id: id });
+    console.log(state);
 
     success.value = true;
     clearFields();
     setTimeout(() => {
       success.value = false;
-      router.go(-1);
+      // router.go(-1);
     }, 3000);
   } catch (error) {
     error.value = true;

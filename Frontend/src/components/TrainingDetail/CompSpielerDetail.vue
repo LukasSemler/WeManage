@@ -121,19 +121,19 @@
                 <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">Treffpunkt:</dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {{ training.trainingtreffpunkt }}
+                    {{ TrainingsTreffpunkt }}
                   </dd>
                 </div>
                 <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">Start:</dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {{ training.trainingbeginn }}
+                    {{ TrainingsBeginn }}
                   </dd>
                 </div>
                 <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                   <dt class="text-sm font-medium text-gray-500">Ende:</dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {{ training.trainingende }}
+                    {{ TrainingsEnde }}
                   </dd>
                 </div>
                 <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
@@ -209,9 +209,25 @@ let darfÄndern = ref(false);
 let warningMessage = ref(false);
 let error = ref(false);
 
+//Training-Zeiten
+let TrainingsTreffpunkt = ref('00:00 Uhr');
+let TrainingsBeginn = ref('00:00 Uhr');
+let TrainingsEnde = ref('00:00 Uhr');
+
 onMounted(async () => {
   const { data } = await axios.get(`/getTrainingDetail/${id}`);
   training.value = data[0];
+
+  TrainingsTreffpunkt.value = `${training.value.trainingtreffpunkt.split(':')[0]}:${
+    training.value.trainingtreffpunkt.split(':')[1]
+  } Uhr`;
+
+  TrainingsBeginn.value = `${training.value.trainingbeginn.split(':')[0]}:${
+    training.value.trainingbeginn.split(':')[1]
+  } Uhr`;
+  TrainingsEnde.value = `${training.value.trainingende.split(':')[0]}:${
+    training.value.trainingende.split(':')[1]
+  } Uhr`;
 
   console.log(training.value);
 
@@ -225,23 +241,29 @@ onMounted(async () => {
   kommt.value = aktiverSpieler.value.kommt;
 
   // Datum erstellen um die Uhrzeit zu bekommen
-  let date = new Date();
-  let datumTraining = new Date(training.value.trainingdatum).toDateString();
-  // datumTraining = `${datumTraining.getDate()} ${datumTraining.getMonth() + 1} ${datumTraining.getFullYear()}`
-  // let uhrzeit = `18:00`;
-  let uhrzeit = `${date.getHours()}:${date.getMinutes()}`;
-  date = new Date().toDateString();
+  let datumJetzt = new Date();
+  let datumTraining = new Date(
+    training.value.trainingdatum.split('-')[0],
+    training.value.trainingdatum.split('-')[1] - 1,
+    Number(training.value.trainingdatum.split('-')[2].substring(0, 2)) + 1,
 
-  console.log(date, datumTraining);
-  if (date == datumTraining) {
-    console.log('selbes Datum');
-    if (uhrzeit < training.value.trainingbeginn) darfÄndern.value = true;
-    else darfÄndern.value = false;
-  } else if (date < datumTraining) {
-    console.log('Früher');
+    training.value.trainingtreffpunkt.split(':')[0],
+    training.value.trainingtreffpunkt.split(':')[1],
+    training.value.trainingtreffpunkt.split(':')[2],
+  );
+
+  console.log(
+    `Jetzt: ${datumJetzt.toDateString()} ${datumJetzt.getHours()}:${datumJetzt.getMinutes()}`,
+  );
+  console.log(
+    `Training: ${datumTraining.toDateString()} ${datumTraining.getHours()}:${datumTraining.getMinutes()}`,
+  );
+
+  if (datumJetzt < datumTraining) {
+    console.log('Ändern ok');
     darfÄndern.value = true;
   } else {
-    console.log('später');
+    console.log('Ändern nicht ok');
     darfÄndern.value = false;
   }
 });
@@ -281,3 +303,4 @@ async function changeKommt() {
   }
 }
 </script>
+
