@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 import ChangeTeam from '../views/MannschaftChange.vue';
 
@@ -53,7 +53,7 @@ import UnderConstruction from '../views/UnderConstruction.vue';
 import { PiniaStore } from '../Store/Store.js';
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
