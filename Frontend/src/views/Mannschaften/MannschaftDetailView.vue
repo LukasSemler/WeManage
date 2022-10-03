@@ -262,8 +262,10 @@ const navigation = [
 ];
 
 onMounted(async () => {
-  const { data } = await axios.get(`/mannschaftenTrainer/${store.getAktivenUser.data.t_id}`);
-  store.setMannschaften(data);
+  if (store.getAktivenUser.type == 'Trainer') {
+    const { data } = await axios.get(`/mannschaftenTrainer/${store.getAktivenUser.data.t_id}`);
+    store.setMannschaften(data);
+  }
 });
 
 function changeSite(path) {
