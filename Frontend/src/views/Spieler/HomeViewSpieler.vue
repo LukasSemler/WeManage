@@ -349,7 +349,7 @@ const sidebarOpen = ref(false);
 const navigation = [
   { name: 'Home', icon: HomeIcon, current: false, path: '/homeSpieler' },
   { name: 'My teams', icon: Bars4Icon, current: false, path: '/homeSpieler/teams' },
-  { name: 'Settings', icon: Cog6ToothIcon, current: false, path: '/homeSpieler/settings' },
+  // { name: 'Settings', icon: Cog6ToothIcon, current: false, path: '/homeSpieler/settings' },
 ];
 
 onMounted(async () => {

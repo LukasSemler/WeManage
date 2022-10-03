@@ -354,7 +354,7 @@ const sidebarOpen = ref(false);
 const navigation = [
   { name: 'Home', icon: HomeIcon, current: false, path: '/homeTrainer' },
   { name: 'My teams', icon: Bars4Icon, current: false, path: '/homeTrainer/teams' },
-  { name: 'Settings', icon: Cog6ToothIcon, current: false, path: '/homeTrainer/settings' },
+  // { name: 'Settings', icon: Cog6ToothIcon, current: false, path: '/homeTrainer/settings' },
 ];
 
 onMounted(async () => {

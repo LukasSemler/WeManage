@@ -17,7 +17,15 @@
       </button>
     </div>
   </div>
-  <TrainerTrainings></TrainerTrainings>
+  <Suspense>
+    <TrainerTrainings></TrainerTrainings>
+
+    <template #fallback>
+      <div>
+        <h1 class="text-center text-xl font-bold mt-5">Loading...</h1>
+      </div>
+    </template>
+  </Suspense>
 </template>
 
 <script setup>

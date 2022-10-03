@@ -49,7 +49,12 @@ const router = useRouter();
 let nachrichten = ref([]);
 const id = ref(router.currentRoute.value.params.id);
 
-const { data } = await axios.get(`/getNews/${id.value}`);
-nachrichten.value = data;
-if (nachrichten.value.length > 2) nachrichten.value.length = 2;
+try {
+  const { data } = await axios.get(`/getNews/${id.value}`);
+  nachrichten.value = data;
+  console.log(nachrichten.value.length);
+  if (nachrichten.value.length > 2) nachrichten.value.length = 2;
+} catch (error) {
+  console.log(error);
+}
 </script>

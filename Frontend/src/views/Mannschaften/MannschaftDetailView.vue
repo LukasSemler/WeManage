@@ -126,7 +126,7 @@
         <div class="mt-6 mb-3 px-3 flex-row">
           <div class="space-y-1">
             <div
-              @click="router.push('/homeSpieler/teams')"
+              @click="pushHome"
               class="text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
             >
               <ArrowLeftIcon class="h-10 w-10"></ArrowLeftIcon>
@@ -271,6 +271,11 @@ onMounted(async () => {
 function changeSite(path) {
   router.push(path);
   sidebarOpen.value = false;
+}
+
+function pushHome() {
+  if (store.getAktivenUser.type == 'Trainer') router.push('/homeTrainer');
+  else router.push('/homeSpieler');
 }
 
 const id = ref(router.currentRoute.value.params.id);

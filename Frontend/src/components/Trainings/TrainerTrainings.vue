@@ -5,7 +5,7 @@
   <br /><br />
   <h1 class="ml-5 text-xl font-bold">Nächsten Trainings</h1>
   <br />
-  <div class="overflow-hidden bg-white sm:rounded-md mx-3 mb-3 ">
+  <div class="overflow-hidden bg-white sm:rounded-md mx-3 mb-3" v-if="trainings.length > 0">
     <ul role="list" class="divide-y divide-gray-200">
       <li
         v-for="training in trainings"
@@ -49,11 +49,15 @@
       </li>
     </ul>
   </div>
+
+  <div v-else>
+    <h1 class="text-center text-xl font-bold mt-5">Es wurden noch keine Trainings erstellt</h1>
+  </div>
 </template>
 
 <script setup>
 import Kalender_comp from '../Kalender_comp.vue';
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 
@@ -62,8 +66,9 @@ import { CalendarIcon, MapPinIcon, ArrowRightIcon } from '@heroicons/vue/20/soli
 const router = useRouter();
 let trainings = ref([]);
 let trainingKalender = ref([]);
+const id = router.currentRoute.value.params.id;
 
-onMounted(async () => {
+try {
   const { data: training } = await axios.get(`/getTrainings/${id}`);
   trainings.value = training;
 
@@ -82,7 +87,7 @@ onMounted(async () => {
   });
 
   console.log(trainingKalender.value);
-});
-
-const id = router.currentRoute.value.params.id;
+} catch (error) {
+  console.log(error);
+}
 </script>
