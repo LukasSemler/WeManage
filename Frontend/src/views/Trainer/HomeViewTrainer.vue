@@ -214,7 +214,7 @@
               {{ item.name }}
             </a>
           </div>
-          <div class="mt-8">
+          <div class="mt-8" v-if="store.teams.length > 0">
             <!-- Secondary navigation -->
             <h3 class="px-3 text-sm font-medium text-gray-500" id="desktop-teams-headline">
               Teams
@@ -230,6 +230,10 @@
                 <span class="truncate">{{ team.titel }}</span>
               </a>
             </div>
+          </div>
+
+          <div class="" v-else>
+            <h1 class="text-center my-5 text-gray-500">Keine Teams vorhanden</h1>
           </div>
         </nav>
       </div>
@@ -354,14 +358,13 @@ const navigation = [
 ];
 
 onMounted(async () => {
-  console.log(store.getAktivenUser);
-  const { data } = await axios.post('/mannschaftenTrainer', {
-    t_id: store.getAktivenUser.data.t_id,
-  });
-
-  console.log(data);
-
-  store.setMannschaften(data);
+  try {
+    const { data } = await axios.get(`/mannschaftenTrainer/${store.getAktivenUser.data.t_id}`);
+    console.log(data);
+    store.setMannschaften(data);
+  } catch (error) {
+    console.log('Es sind noch keine Mannschaften vorhanden');
+  }
 });
 
 function logout() {

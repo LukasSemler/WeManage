@@ -16,7 +16,7 @@
   </div>
 
   <!-- Pinned projects -->
-  <div class="mt-6 px-4 sm:px-6 lg:px-8">
+  <div class="mt-6 px-4 sm:px-6 lg:px-8" v-if="store.getTeams.length > 0">
     <h2 class="text-sm font-bold text-gray-900">Meine Mannschaften:</h2>
     <ul
       role="list"
@@ -44,6 +44,17 @@
       </li>
     </ul>
     <div v-else><h1>Du bist in keinen Teams</h1></div>
+  </div>
+
+  <div class="mx-3 my-3" v-else>
+    <div
+      @click="router.push('/addTeam')"
+      class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+    >
+      <span class="mt-2 block text-sm font-medium text-gray-900"
+        >Du bist noch keinem Team beigetreten</span
+      >
+    </div>
   </div>
 
   <!-- Kalender -->

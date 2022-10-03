@@ -31,7 +31,7 @@ router.post('/register', asyncHandler(register));
 router.post('/login', asyncHandler(login));
 
 // Team
-router.post('/mannschaftenTrainer', asyncHandler(mannschaftenTrainer));
+router.get('/mannschaftenTrainer/:id', asyncHandler(mannschaftenTrainer));
 router.post('/addTeam', asyncHandler(addTeam));
 
 router.get('/getAllSpieler', asyncHandler(getAllSpieler));

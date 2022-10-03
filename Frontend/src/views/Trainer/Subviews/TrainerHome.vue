@@ -19,7 +19,7 @@
   </div>
 
   <!-- Pinned projects -->
-  <div class="mt-6 px-4 sm:px-6 lg:px-8">
+  <div class="mt-6 px-4 sm:px-6 lg:px-8" v-if="store.teams.length > 0">
     <h2 class="text-sm font-medium text-gray-900">Meine Mannschaften</h2>
     <ul role="list" class="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
       <li
@@ -42,6 +42,17 @@
         </div>
       </li>
     </ul>
+  </div>
+
+  <div class="mx-3 my-3" v-else>
+    <div
+      @click="router.push('/addTeam')"
+      class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+    >
+      <span class="mt-2 block text-sm font-medium text-gray-900"
+        >Du hast noch kein Team erstellt</span
+      >
+    </div>
   </div>
 
   <!-- Kalender -->

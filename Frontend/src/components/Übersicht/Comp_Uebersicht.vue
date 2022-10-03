@@ -27,18 +27,19 @@
           </p>
         </div>
       </div>
+      <p
+        class="text-center text-gray-500 underline cursor-pointer"
+        @click="
+          router.push(`/detailMannschaft/${router.currentRoute.value.params.id}/ankuendigungen`)
+        "
+      >
+        mehr anzeigen
+      </p>
     </div>
     <div v-else>
       <p class="text-center">Keine Nachrichten vorhanden</p>
     </div>
-    <p
-      class="text-center text-gray-500 underline cursor-pointer"
-      @click="
-        router.push(`/detailMannschaft/${router.currentRoute.value.params.id}/ankuendigungen`)
-      "
-    >
-      mehr anzeigen
-    </p>
+
     <br />
     <hr />
     <br />
