@@ -10,6 +10,7 @@ import {
   deleteSpielerMannschaftDel,
   mannschaftenSpieler,
   getCode,
+  sJoinTeam,
 } from '../controllers/mannschaft.js';
 import { getAllSpieler, getSpieler, changeSpielerKommt } from '../controllers/spieler.js';
 import { getAllTrainer, getTrainer } from '../controllers/trainer.js';
@@ -65,4 +66,5 @@ router.patch('/changeAnwesenheit/:training_id/:s_id', asyncHandler(changeAnwesen
 router.patch('/changeTraining/:id', asyncHandler(changeTraining));
 router.delete('/delTraining/:id', asyncHandler(deleteTraining));
 
+router.post('/sJoinTeam', asyncHandler(sJoinTeam));
 export default router;

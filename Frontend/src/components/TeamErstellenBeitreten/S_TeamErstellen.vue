@@ -46,18 +46,18 @@
     <div class="pt-5">
       <div class="flex justify-end">
         <button
-          @click="router.push('/homeTrainer')"
+          @click="router.push('/homeSpieler')"
           type="button"
           class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
         >
           Cancel
         </button>
         <button
-          @click="makeTeam"
+          @click="joinTeam"
           type="submit"
           class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-lime-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none"
         >
-          Add
+          Beitreten
         </button>
       </div>
     </div>
@@ -80,48 +80,31 @@ const store = PiniaStore();
 // Inputs
 let state = reactive({
   titel: '',
-  beschreibung: '',
-  farbe: '#A629E6',
-  zugangscode: makeid(6),
 });
 
 const rules = computed(() => {
   return {
     titel: { required },
-    farbe: { required },
-    zugangscode: { required },
   };
 });
 
 const validator = useValidate(rules, state);
 
-async function makeTeam(e) {
+async function joinTeam(e) {
   e.preventDefault();
 
   if (validator.value.$silentErrors.length == 0) {
     try {
       // Daten an den Server schicken
-      const result = await axios.post('/addTeam', {
-        titel: state.titel,
-        beschreibung: state.beschreibung,
-        farbe: state.farbe,
-        zugangscode: state.zugangscode,
-        t_id: store.getAktivenUser.data.t_id,
+      const result = await axios.post('/sJoinTeam', {
+        zugangscode: state.titel,
+        s_id: store.getAktivenUser.data.s_id,
       });
-      console.log(result);
 
       // Ergebnis auswerten
       if (result.status == 200) router.push('/homeTrainer');
     } catch (error) {
       console.log(error.message);
-      // if (error.message.includes('400')) {
-      //   duplicateError.value = true;
-      //   setTimeout(() => (duplicateError.value = false), 3000);
-      // }
-      // if (error.message.includes('500')) {
-      //   error.value = true;
-      //   setTimeout(() => (error.value = false), 3000);
-      // }
     }
   } else {
     console.log('fehler');

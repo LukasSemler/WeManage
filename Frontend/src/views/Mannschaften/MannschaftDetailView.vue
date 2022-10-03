@@ -262,10 +262,7 @@ const navigation = [
 ];
 
 onMounted(async () => {
-  const { data } = await axios.post('/mannschaftenTrainer', {
-    t_id: store.getAktivenUser.data.t_id,
-  });
-
+  const { data } = await axios.get(`/mannschaftenTrainer/${store.getAktivenUser.data.t_id}`);
   store.setMannschaften(data);
 });
 

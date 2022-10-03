@@ -145,6 +145,20 @@ const getCodeDB = async (id) => {
   return false;
 };
 
+const sJoinTeamDB = async (code, s_id) => {
+  const { rows: zcode } = await query('SELECT * from mannschaft where zugangscode = $1;', [code]);
+  if (!zcode[0]) return false;
+
+  const { rows } = await query(
+    'INSERT INTO spieler_mannschaft (s_id, m_id) VALUES ($1, $2) returning *;',
+    [s_id, zcode[0].m_id],
+  );
+
+  if (!rows[0]) return false;
+
+  return true;
+};
+
 export {
   addTeamDB,
   mannschaftenTrainerDB,
@@ -154,4 +168,5 @@ export {
   deleteSpielerMannschaftDB,
   mannschaftenSpielerDB,
   getCodeDB,
+  sJoinTeamDB,
 };

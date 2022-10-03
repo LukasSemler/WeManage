@@ -597,6 +597,7 @@ async function changeTraining() {
     showEdit.value = false;
 
     setTimeout(() => (success.value = false), 3000);
+    window.location.reload();
   } catch (error) {
     console.log(error);
   }

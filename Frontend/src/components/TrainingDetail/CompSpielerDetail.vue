@@ -225,16 +225,25 @@ onMounted(async () => {
   kommt.value = aktiverSpieler.value.kommt;
 
   // Datum erstellen um die Uhrzeit zu bekommen
-  const date = new Date();
-  const datumTraining = new Date(training.value.trainingdatum);
+  let date = new Date();
+  let datumTraining = new Date(training.value.trainingdatum).toDateString();
+  // datumTraining = `${datumTraining.getDate()} ${datumTraining.getMonth() + 1} ${datumTraining.getFullYear()}`
   // let uhrzeit = `18:00`;
   let uhrzeit = `${date.getHours()}:${date.getMinutes()}`;
+  date = new Date().toDateString();
 
+  console.log(date, datumTraining);
   if (date == datumTraining) {
+    console.log('selbes Datum');
     if (uhrzeit < training.value.trainingbeginn) darfÄndern.value = true;
     else darfÄndern.value = false;
-  } else if (date < datumTraining) darfÄndern.value = true;
-  else darfÄndern.value = false;
+  } else if (date < datumTraining) {
+    console.log('Früher');
+    darfÄndern.value = true;
+  } else {
+    console.log('später');
+    darfÄndern.value = false;
+  }
 });
 
 const neuesDatum = computed(() => {
