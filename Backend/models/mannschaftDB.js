@@ -154,6 +154,8 @@ const sJoinTeamDB = async (code, s_id) => {
     [s_id, zcode[0].m_id],
   );
 
+  await query('SELECT * FROM spielerinsert($1, $2)', [s_id, zcode[0].m_id]);
+
   if (!rows[0]) return false;
 
   return true;

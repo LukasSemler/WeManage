@@ -61,11 +61,13 @@
   </div>
 
   <!-- Kalender -->
-  <div class="px-2 pt-5"><Kalender_comp></Kalender_comp></div>
+  <div class="px-2 pt-5"><Kalender_comp :events="trainingKalender"></Kalender_comp></div>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router';
+import { onMounted, ref } from 'vue';
+import axios from 'axios';
 
 // Kalender impotieren
 import Kalender_comp from '../../../components/Kalender_comp.vue';
@@ -75,4 +77,25 @@ import { PiniaStore } from '../../../Store/Store';
 
 const store = PiniaStore();
 const router = useRouter();
+let trainingKalender = ref([]);
+
+onMounted(async () => {
+  const { data: trainings } = await axios.get(
+    `/getAllTrainingsSpieler/${store.getAktivenUser.data.s_id}`,
+  );
+
+  trainingKalender.value = trainings.map((training) => {
+    let date = new Date(training.trainingdatum);
+
+    let beginn = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${
+      training.trainingbeginn
+    }`;
+
+    let end = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${
+      training.trainingende
+    }`;
+
+    return { title: training.titel, start: beginn, end, t_id: training.training_id };
+  });
+});
 </script>

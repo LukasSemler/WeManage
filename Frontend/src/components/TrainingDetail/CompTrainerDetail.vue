@@ -390,88 +390,94 @@
       </div>
     </div>
 
-    <div class="max-w-screen-xl px-4pb-6 sm:px-6 lg:px-10 lg:pb-16 mt-5 mx-auto">
-      <div>
-        <h3 class="text-xl font-bold leading-6 text-gray-900">Statistik zum Training</h3>
-        <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-          <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt class="truncate text-sm font-medium text-gray-500">Anzahl an Spielern</dt>
-            <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-              {{ computedAnzahl }}
-            </dd>
-          </div>
-          <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt class="truncate text-sm font-medium text-gray-500">Anzahl an Spielern (%)</dt>
-            <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-              {{ computedPerc }}%
-            </dd>
-          </div>
-          <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-            <dt class="truncate text-sm font-medium text-gray-500">Fehlende Spieler</dt>
-            <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-              {{ computedNicht }}
-            </dd>
-          </div>
-        </dl>
+    <div class="mx-5">
+      <div class="max-w-screen-xl px-4pb-6 sm:px-6 lg:px-10 lg:pb-16 mt-5 mx-auto">
+        <div>
+          <h3 class="text-xl font-bold leading-6 text-gray-900">Statistik zum Training</h3>
+          <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+              <dt class="truncate text-sm font-medium text-gray-500">Anzahl an Spielern</dt>
+              <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
+                {{ computedAnzahl }}
+              </dd>
+            </div>
+            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+              <dt class="truncate text-sm font-medium text-gray-500">Anzahl an Spielern (%)</dt>
+              <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
+                {{ computedPerc }}%
+              </dd>
+            </div>
+            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+              <dt class="truncate text-sm font-medium text-gray-500">Fehlende Spieler</dt>
+              <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
+                {{ computedNicht }}
+              </dd>
+            </div>
+          </dl>
+        </div>
       </div>
     </div>
 
-    <div class="max-w-screen-xl px-4pb-6 sm:px-6 lg:px-10 lg:pb-16 mt-5 mx-auto">
-      <h1 class="text-xl font-bold">Anwesenheit:</h1>
-      <div class="mt-8 flex flex-col">
-        <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <table class="min-w-full divide-y divide-gray-300 mx-3">
-                <thead class="bg-gray-50">
-                  <tr>
-                    <th
-                      scope="col"
-                      class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                    >
-                      Name
-                    </th>
+    <br />
 
-                    <th
-                      scope="col"
-                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Kommt
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-200 bg-white">
-                  <tr v-for="(spieler, i) of spielerListe" :key="i">
-                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                      <div class="flex items-center">
-                        <div class="h-10 w-10 flex-shrink-0">
-                          <img class="h-10 w-10 rounded-full" :src="spieler.avatarpath" alt="" />
-                        </div>
-                        <div class="ml-4">
-                          <div class="font-medium text-gray-900">
-                            {{ spieler.vorname }} {{ spieler.nachname }}
+    <div class="mx-5">
+      <div class="max-w-screen-xl px-4pb-6 sm:px-6 lg:px-10 lg:pb-16 mt-5 mx-auto">
+        <h1 class="text-xl font-bold">Anwesenheit:</h1>
+        <div class="mt-8 flex flex-col">
+          <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+              <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-300 mx-3">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th
+                        scope="col"
+                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                      >
+                        Name
+                      </th>
+
+                      <th
+                        scope="col"
+                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Kommt
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-200 bg-white">
+                    <tr v-for="(spieler, i) of spielerListe" :key="i">
+                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                        <div class="flex items-center">
+                          <div class="h-10 w-10 flex-shrink-0">
+                            <img class="h-10 w-10 rounded-full" :src="spieler.avatarpath" alt="" />
                           </div>
-                          <div class="text-gray-500">{{ spieler.email }}</div>
+                          <div class="ml-4">
+                            <div class="font-medium text-gray-900">
+                              {{ spieler.vorname }} {{ spieler.nachname }}
+                            </div>
+                            <div class="text-gray-500">{{ spieler.email }}</div>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      <span
-                        @click="changeAnwesenheit(false, spieler.s_id)"
-                        v-if="spieler.kommt"
-                        class="cursor-pointer inline-flex rounded-full bg-green-500 px-2 text-xs font-semibold leading-5 text-white"
-                        >Ja</span
-                      >
-                      <span
-                        v-else
-                        @click="changeAnwesenheit(true, spieler.s_id)"
-                        class="cursor-pointer inline-flex rounded-full bg-red-600 px-2 text-xs font-semibold leading-5 text-white"
-                        >Nein</span
-                      >
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        <span
+                          @click="changeAnwesenheit(false, spieler.s_id)"
+                          v-if="spieler.kommt"
+                          class="cursor-pointer inline-flex rounded-full bg-green-500 px-2 text-xs font-semibold leading-5 text-white"
+                          >Ja</span
+                        >
+                        <span
+                          v-else
+                          @click="changeAnwesenheit(true, spieler.s_id)"
+                          class="cursor-pointer inline-flex rounded-full bg-red-600 px-2 text-xs font-semibold leading-5 text-white"
+                          >Nein</span
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

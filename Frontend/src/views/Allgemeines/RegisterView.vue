@@ -312,7 +312,7 @@
                         '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none w-14 h-14',
                       ]"
                     >
-                      <img :src="avatar.path" :alt="avatar.name" class="h-14 w-14 object-contain " />
+                      <img :src="avatar.path" :alt="avatar.name" class="h-14 w-14 object-contain" />
                     </div>
                   </RadioGroupOption>
                 </div>
@@ -341,7 +341,7 @@
             </button>
             <button
               @click="register"
-              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-500 hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
+              class="my-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-500 hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
             >
               Register
             </button>

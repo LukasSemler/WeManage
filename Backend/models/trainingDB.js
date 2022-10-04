@@ -155,6 +155,32 @@ ORDER BY trainingdatum ASC;`,
   return false;
 };
 
+const getAllTrainingsSpielerDB = async (id) => {
+  const { rows } = await query(
+    `SELECT s.s_id,
+       s.vorname,
+       s.nachname,
+       trainings.titel,
+
+       trainings.training_id,
+       trainings.trainingdatum,
+       trainings.trainingtreffpunkt,
+       trainings.trainingbeginn,
+       trainings.trainingende,
+       trainings.wo
+FROM trainings
+         JOIN mannschaft m on m.m_id = trainings.fk_m_id
+         JOIN spieler_mannschaft sm on m.m_id = sm.m_id
+         JOIN spieler s on s.s_id = sm.s_id
+WHERE s.s_id = $1
+ORDER BY trainingdatum ASC;`,
+    [id],
+  );
+
+  if (rows[0]) return rows;
+  return false;
+};
+
 export {
   addTrainingDBWH,
   getTrainingsDB,
@@ -165,4 +191,5 @@ export {
   addTrainingDB,
   deleteTrainingDB,
   getAllTrainingsDB,
+  getAllTrainingsSpielerDB,
 };

@@ -8,6 +8,7 @@ import {
   changeTrainingDB,
   deleteTrainingDB,
   getAllTrainingsDB,
+  getAllTrainingsSpielerDB,
 } from '../models/trainingDB.js';
 
 const addTraining = async (req, res) => {
@@ -137,6 +138,15 @@ const getAllTrainings = async (req, res) => {
   return res.status(500).send('Fehler beim Holen');
 };
 
+const getAllTrainingsSpieler = async (req, res) => {
+  const { id } = req.params;
+
+  const result = await getAllTrainingsSpielerDB(id);
+
+  if (result) return res.status(200).json(result);
+  return res.status(500).send('Fehler beim Holen');
+};
+
 export {
   addTraining,
   getTrainings,
@@ -146,4 +156,5 @@ export {
   changeTraining,
   deleteTraining,
   getAllTrainings,
+  getAllTrainingsSpieler,
 };
