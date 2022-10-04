@@ -47,6 +47,7 @@ export const PiniaStore = defineStore('weManage', {
       SaveState();
     },
     deleteAktivenUser() {
+      this.teams = [];
       this.aktiverUser = null;
       SaveState(true);
     },

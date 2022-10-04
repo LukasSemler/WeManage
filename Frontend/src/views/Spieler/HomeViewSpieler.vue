@@ -382,7 +382,6 @@ function changeSite(to) {
 
 function logout() {
   store.deleteAktivenUser();
-
   location.reload();
 }
 
