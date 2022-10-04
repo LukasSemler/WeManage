@@ -321,7 +321,6 @@ async function trainingErstellen(e) {
     clearFields();
     setTimeout(() => {
       success.value = false;
-      router.go(-1);
     }, 3000);
   } catch (error) {
     error.value = true;

@@ -24,6 +24,7 @@
     <ul role="list" class="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
       <li
         v-for="project in store.getTeams"
+         @click="router.push(`/detailMannschaft/${project.m_id}`)"
         :key="project.id"
         class="relative col-span-1 flex rounded-md shadow-sm"
       >
@@ -56,7 +57,7 @@
   </div>
 
   <!-- Kalender -->
-  <div class="p-8"><Kalender_comp :termine="trainingKalender"></Kalender_comp></div>
+  <div class="px-2 mt-5"><Kalender_comp :termine="trainingKalender"></Kalender_comp></div>
 </template>
 
 <script setup>

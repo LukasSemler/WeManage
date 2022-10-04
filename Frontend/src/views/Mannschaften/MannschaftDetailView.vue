@@ -52,6 +52,17 @@
                   alt="Your Company"
                 />
               </div>
+              <div class="mt-6 mb-3 px-3 flex-row">
+                <div class="space-y-1">
+                  <div
+                    @click="pushHome"
+                    class="text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                  >
+                    <ArrowLeftIcon class="h-10 w-10"></ArrowLeftIcon>
+                    <p class="text-2xl font-bold mx-2">Back</p>
+                  </div>
+                </div>
+              </div>
               <div class="mt-5 h-0 flex-1 overflow-y-auto">
                 <nav class="px-2">
                   <div class="space-y-1">
@@ -91,6 +102,7 @@
                     >
                       <a
                         v-for="team in store.getTeams"
+                        @click="router.push(`/detailMannschaft/${team.m_id}`)"
                         :key="team.t_id"
                         class="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                       >

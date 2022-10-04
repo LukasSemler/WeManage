@@ -2,6 +2,7 @@ import { postNewsDB, getNewsDB, delNewsDB } from '../models/newsDB.js';
 
 const postNews = async (req, res) => {
   const { titel, nachricht, dateTime, m_id, t_id } = req.body;
+  console.log(titel, nachricht, dateTime, m_id, t_id);
 
   const result = await postNewsDB(titel, nachricht, dateTime, m_id, t_id);
 

@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
 import routen from './routes/router.js';
+import compression from 'compression';
 
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 
@@ -13,6 +14,8 @@ dotenv.config();
 const dirname = path.resolve();
 
 const app = express();
+
+app.use(compression());
 
 app.use(cors());
 app.use(morgan('dev'));

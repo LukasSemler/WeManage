@@ -1,0 +1,1 @@
+import{a as c,c as s,e as a}from"./vendor.82e95389.js";var _=(t,e)=>{const o=t.__vccOpts||t;for(const[n,r]of e)o[n]=r;return o};const d={},l=a("h1",{class:"text-center text-4xl font-bold mt-12"},"Under Construction",-1),f=[l];function i(t,e){return c(),s("div",null,f)}var x=_(d,[["render",i]]);export{x as default};

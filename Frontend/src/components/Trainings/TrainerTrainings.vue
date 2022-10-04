@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-4 mt-4">
+  <div class="mx-2 mt-4">
     <Kalender_comp :termine="trainingKalender"></Kalender_comp>
   </div>
   <br /><br />

@@ -26,6 +26,7 @@
       <li
         v-for="project in store.getTeams"
         :key="project.id"
+         @click="router.push(`/detailMannschaft/${team.m_id}`)"
         class="relative col-span-1 flex rounded-md shadow-sm"
       >
         <div

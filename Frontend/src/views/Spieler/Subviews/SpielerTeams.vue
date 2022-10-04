@@ -12,6 +12,7 @@
     <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       <li
         v-for="team in store.getTeams"
+         @click="router.push(`/detailMannschaft/${team.m_id}`)"
         :key="team.id"
         class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
       >

@@ -92,6 +92,7 @@
                       <a
                         v-for="team in store.getTeams"
                         :key="team.t_id"
+                        @click="router.push(`/detailMannschaft/${team.m_id}`)"
                         class="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                       >
                         <span
