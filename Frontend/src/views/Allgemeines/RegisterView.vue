@@ -309,10 +309,10 @@
                         avatar.selectedColor,
                         active && checked ? 'ring ring-offset-1' : '',
                         !active && checked ? 'ring-2' : '',
-                        '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none',
+                        '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none w-14 h-14',
                       ]"
                     >
-                      <img :src="avatar.path" :alt="avatar.name" class="h-14 w-14" />
+                      <img :src="avatar.path" :alt="avatar.name" class="h-14 w-14 object-contain " />
                     </div>
                   </RadioGroupOption>
                 </div>
@@ -335,7 +335,7 @@
           <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
             <button
               @click="router.push('/')"
-              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
+              class="my-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
             >
               Abbrechen
             </button>

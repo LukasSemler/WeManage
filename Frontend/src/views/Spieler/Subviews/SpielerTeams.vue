@@ -6,13 +6,23 @@
     <div class="min-w-0 flex-1">
       <h1 class="text-2xl font-bold leading-6 text-gray-900 sm:truncate">Teams</h1>
     </div>
+    <div class="mt-4 flex sm:mt-0 sm:ml-4">
+      <button
+        @click="router.push('/addTeam')"
+        type="button"
+        class="inline-flex items-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none 2"
+      >
+        Team
+        <PlusIcon class="ml-2 -mr-1 h-5 w-5" aria-hidden="true" />
+      </button>
+    </div>
     <div class="mt-4 flex sm:mt-0 sm:ml-4"></div>
   </div>
-  <div class="mt-6 px-4 sm:px-6 lg:px-8">
+  <div class="mt-6 px-4 sm:px-6 lg:px-8" v-if="store.getTeams.length > 0">
     <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       <li
         v-for="team in store.getTeams"
-         @click="router.push(`/detailMannschaft/${team.m_id}`)"
+        @click="router.push(`/detailMannschaft/${team.m_id}`)"
         :key="team.id"
         class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
       >
@@ -41,6 +51,11 @@
         </div>
       </li>
     </ul>
+  </div>
+  <div v-else>
+    <h1 class="text-center text-xl font-bold mt-5">
+      Du bist in noch keinem Team, trete jetzt einem bei
+    </h1>
   </div>
 </template>
 

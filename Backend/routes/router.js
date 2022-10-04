@@ -71,7 +71,4 @@ router.post('/sJoinTeam', asyncHandler(sJoinTeam));
 
 router.get('/getAllTrainings/:id', asyncHandler(getAllTrainings));
 
-router.get('*', (req, res, next) => {
-  res.redirect(`http://localhost:2410${req.path}`);
-});
 export default router;

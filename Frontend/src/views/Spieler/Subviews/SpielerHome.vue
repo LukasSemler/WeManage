@@ -6,13 +6,15 @@
     <div class="min-w-0 flex-1">
       <h1 class="text-2xl font-bold leading-6 text-gray-900 sm:truncate">Home</h1>
     </div>
-    <button
-      @click="router.push('/addTeam')"
-      type="button"
-      class="inline-flex items-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
-    >
-      Team beitreten
-    </button>
+    <div class="mt-4 flex sm:mt-0 sm:ml-4">
+      <button
+        @click="router.push('/addTeam')"
+        type="button"
+        class="inline-flex items-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
+      >
+        Team beitreten
+      </button>
+    </div>
   </div>
 
   <!-- Pinned projects -->
@@ -26,7 +28,7 @@
       <li
         v-for="project in store.getTeams"
         :key="project.id"
-         @click="router.push(`/detailMannschaft/${team.m_id}`)"
+        @click="router.push(`/detailMannschaft/${project.m_id}`)"
         class="relative col-span-1 flex rounded-md shadow-sm"
       >
         <div
@@ -59,7 +61,7 @@
   </div>
 
   <!-- Kalender -->
-  <div class="p-8"><Kalender_comp></Kalender_comp></div>
+  <div class="px-2 pt-5"><Kalender_comp></Kalender_comp></div>
 </template>
 
 <script setup>

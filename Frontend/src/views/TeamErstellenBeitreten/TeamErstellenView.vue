@@ -3,7 +3,7 @@
     <div>
       <nav class="sm:hidden" aria-label="Back">
         <a
-          @click="router.push('/homeTrainer')"
+          @click="goHome"
           class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
         >
           <ChevronLeftIcon
@@ -116,5 +116,10 @@ function makeid(length) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
+}
+
+function goHome() {
+  if (store.getAktivenUser.type == 'Trainer') router.push('/homeTrainer');
+  else router.push('/homeSpieler');
 }
 </script>

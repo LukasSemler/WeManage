@@ -102,7 +102,7 @@ async function joinTeam(e) {
       });
 
       // Ergebnis auswerten
-      if (result.status == 200) router.push('/homeTrainer');
+      if (result.status == 200) router.push('/homeSpieler');
     } catch (error) {
       console.log(error.message);
     }

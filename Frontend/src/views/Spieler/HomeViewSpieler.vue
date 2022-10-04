@@ -48,7 +48,7 @@
               <div class="flex flex-shrink-0 items-center px-4">
                 <img
                   class="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=purple&shade=500"
+                  src="../../assets/icons/placeholder_icon.png"
                   alt="Your Company"
                 />
               </div>
@@ -58,7 +58,7 @@
                     <a
                       v-for="item in navigation"
                       :key="item.name"
-                      :href="item.href"
+                      @click="changeSite(item.path)"
                       :class="[
                         item.current
                           ? 'bg-gray-100 text-gray-900'
@@ -77,7 +77,7 @@
                         ]"
                         aria-hidden="true"
                       />
-                      {{ item.titel }}
+                      {{ item.name }}
                     </a>
                   </div>
                   <div class="mt-8">
@@ -131,7 +131,7 @@
         <Menu as="div" class="relative inline-block px-3 text-left">
           <div>
             <MenuButton
-              class="group w-full rounded-md bg-gray-100 px-3.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+              class="group w-full rounded-md bg-gray-100 px-3.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-gray-100"
             >
               <span class="flex w-full items-center justify-between">
                 <span class="flex min-w-0 items-center justify-between space-x-3">
@@ -199,7 +199,7 @@
             <a
               v-for="item of navigation"
               :key="item.name"
-              @click="router.push(item.path)"
+              @click="changeSite(item.path)"
               :class="[
                 item.current
                   ? 'bg-gray-200 text-gray-900'
@@ -219,7 +219,7 @@
               {{ item.name }}
             </a>
           </div>
-          <div class="mt-8">
+          <div class="mt-8" v-if="store.teams.length > 0">
             <!-- Secondary navigation -->
             <h3 class="px-3 text-sm font-medium text-gray-500" id="desktop-teams-headline">
               Teams
@@ -231,10 +231,14 @@
                 @click="router.push(`/detailMannschaft/${team.m_id}`)"
                 class="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
               >
-                <span :class="`w-2.5 h-2.5 mr-4 rounded-full bg-lime-500`" aria-hidden="true" />
+                <span :class="`w-2.5 h-2.5 mr-4 rounded-full bg-lime-400`" aria-hidden="true" />
                 <span class="truncate">{{ team.titel }}</span>
               </a>
             </div>
+          </div>
+
+          <div class="" v-else>
+            <h1 class="text-center my-5 text-gray-500">Keine Teams vorhanden</h1>
           </div>
         </nav>
       </div>
@@ -247,19 +251,24 @@
       >
         <button
           type="button"
-          class="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"
+          class="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lime-500 lg:hidden"
           @click="sidebarOpen = true"
         >
           <span class="sr-only">Open sidebar</span>
           <Bars3CenterLeftIcon class="h-6 w-6" aria-hidden="true" />
         </button>
         <div class="flex flex-1 justify-between px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-1">
+            <div class="flex w-full md:ml-0">
+              <div class="relative w-full text-gray-400 focus-within:text-gray-600"></div>
+            </div>
+          </div>
           <div class="flex items-center">
             <!-- Profile dropdown -->
             <Menu as="div" class="relative ml-3">
               <div>
                 <MenuButton
-                  class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                  class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2"
                 >
                   <span class="sr-only">Open user menu</span>
                   <img
@@ -283,7 +292,6 @@
                   <div class="py-1">
                     <MenuItem v-slot="{ active }">
                       <a
-                        href="#"
                         :class="[
                           active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                           'block px-4 py-2 text-sm',
@@ -366,6 +374,11 @@ onMounted(async () => {
     console.log(error);
   }
 });
+
+function changeSite(to) {
+  router.push(to);
+  sidebarOpen.value = false;
+}
 
 function logout() {
   store.deleteAktivenUser();
