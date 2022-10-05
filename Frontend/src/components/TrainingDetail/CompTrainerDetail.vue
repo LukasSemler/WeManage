@@ -497,10 +497,13 @@ import {
   TrashIcon,
 } from '@heroicons/vue/20/solid';
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
+import { PiniaStore } from '../../Store/Store';
 import axios from 'axios';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { de } from 'date-fns/locale';
+
+const store = PiniaStore();
 const router = useRouter();
 const id = router.currentRoute.value.params.id;
 const training = ref({});
@@ -519,41 +522,60 @@ let state = reactive({
   ende: null,
   halle: '',
 });
+
+//Training-Zeiten
+let TrainingsTreffpunkt = ref('00:00 Uhr');
+let TrainingsBeginn = ref('00:00 Uhr');
+let TrainingsEnde = ref('00:00 Uhr');
+
 onMounted(async () => {
   const { data } = await axios.get(`/getTrainingDetail/${id}`);
   training.value = data[0];
-  // State Variabeln für InputFeld befüllen
-  state.titel = training.value.titel;
-  state.datum = training.value.trainingdatum;
-  state.halle = training.value.wo;
-  // Time neu formatieren
-  let timeTreffpunkt = {
-    hours: training.value.trainingtreffpunkt.split(':')[0],
-    minutes: training.value.trainingtreffpunkt.split(':')[1],
-  };
-  let timeBeginn = {
-    hours: training.value.trainingbeginn.split(':')[0],
-    minutes: training.value.trainingbeginn.split(':')[1],
-  };
-  let timeEnde = {
-    hours: training.value.trainingende.split(':')[0],
-    minutes: training.value.trainingende.split(':')[1],
-  };
-  // Zeit variablen dem State zuweisen
-  state.treffpunkt = timeTreffpunkt;
-  state.start = timeBeginn;
-  state.ende = timeEnde;
+
+  TrainingsTreffpunkt.value = `${training.value.trainingtreffpunkt.split(':')[0]}:${
+    training.value.trainingtreffpunkt.split(':')[1]
+  } Uhr`;
+
+  TrainingsBeginn.value = `${training.value.trainingbeginn.split(':')[0]}:${
+    training.value.trainingbeginn.split(':')[1]
+  } Uhr`;
+  TrainingsEnde.value = `${training.value.trainingende.split(':')[0]}:${
+    training.value.trainingende.split(':')[1]
+  } Uhr`;
+
+  console.log(training.value);
+
   const { data: spieler } = await axios.get(`/getTrainingDetailSpieler/${id}`);
   spielerListe.value = spieler;
+
   // Datum erstellen um die Uhrzeit zu bekommen
-  const date = new Date();
-  let uhrzeit = `${date.getHours()}:${date.getMinutes()}`;
-  // let uhrzeit = `18:30`;
-  // Schauen ob der Trainer die Anwesenheit überprüfen darf
-  if (uhrzeit > training.value.trainingbeginn && uhrzeit < training.value.trainingende)
+  let datumJetzt = new Date();
+  let datumTraining = new Date(
+    training.value.trainingdatum.split('-')[0],
+    training.value.trainingdatum.split('-')[1] - 1,
+    Number(training.value.trainingdatum.split('-')[2].substring(0, 2)) + 1,
+
+    training.value.trainingtreffpunkt.split(':')[0],
+    training.value.trainingtreffpunkt.split(':')[1],
+    training.value.trainingtreffpunkt.split(':')[2],
+  );
+
+  console.log(
+    `Jetzt: ${datumJetzt.toDateString()} ${datumJetzt.getHours()}:${datumJetzt.getMinutes()}`,
+  );
+  console.log(
+    `Training: ${datumTraining.toDateString()} ${datumTraining.getHours()}:${datumTraining.getMinutes()}`,
+  );
+
+  if (datumJetzt > datumTraining) {
+    console.log('Ändern ok');
     darfAnwesenheitChecken.value = true;
-  else darfAnwesenheitChecken.value = false;
+  } else {
+    console.log('Ändern nicht ok');
+    darfAnwesenheitChecken.value = false;
+  }
 });
+
 async function changeAnwesenheit(status, s_id) {
   if (darfAnwesenheitChecken.value) {
     // Anwesenheit lokal ändenrn
@@ -574,6 +596,7 @@ async function changeAnwesenheit(status, s_id) {
     console.log('Darf nicht ändern, das Training hat noch nd begonnen');
   }
 }
+
 async function changeTraining() {
   try {
     const datumNeu = new Date(state.datum);

@@ -112,7 +112,7 @@ const router = createRouter({
         { path: 'teams', component: () => import('../views/Spieler/Subviews/SpielerTeams.vue') },
         {
           path: 'settings',
-          componen: () => import('../views/Spieler/Subviews/SpielerSettings.vue'),
+          component: () => import('../views/Spieler/Subviews/SpielerSettings.vue'),
         },
       ],
       beforeEnter: (to, from, next) => {

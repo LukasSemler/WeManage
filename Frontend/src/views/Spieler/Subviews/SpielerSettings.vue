@@ -6,166 +6,232 @@
     <h1 class="text-2xl font-bold leading-6 text-gray-900 my-1">Settings</h1>
   </div>
 
-  <form class="divide-y divide-gray-200 lg:col-span-9" action="#" method="POST">
+  <div class="px-4 py-4 sm:px-6 lg:px-8">
+    <h1 class="text-xl font-bold leading-6 text-gray-900 my-1">Settings:</h1>
+    <p class="font-bold leading-6 text-gray-900 my-1">Hier kannst du deinen Account bearbeiten.</p>
+  </div>
+  <br />
+  <form class="divide-y divide-gray-200 lg:col-span-9 flex justify-center">
     <!-- Profile section -->
-    <div class="py-6 px-4 sm:p-6 lg:pb-8">
+    <div class="m-5 w-1/2">
       <div>
-        <h2 class="text-lg font-medium leading-6 text-gray-900">Profile</h2>
-        <p class="mt-1 text-sm text-gray-500">
-          This information will be displayed publicly so be careful what you share.
-        </p>
-      </div>
-
-      <div class="mt-6 flex flex-col lg:flex-row">
-        <div class="flex-grow space-y-6">
+        <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
           <div>
-            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-            <div class="mt-1 flex rounded-md shadow-sm">
-              <span
-                class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm"
-                >workcation.com/</span
-              >
-              <input
-                type="text"
-                name="username"
-                id="username"
-                autocomplete="username"
-                class="block w-full min-w-0 flex-grow rounded-none rounded-r-md border-gray-300 focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                :value="user.handle"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label for="about" class="block text-sm font-medium text-gray-700">About</label>
+            <label for="first-name" class="block text-sm font-medium text-gray-700">Vorname</label>
             <div class="mt-1">
-              <textarea
-                id="about"
-                name="about"
-                rows="3"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-              />
-            </div>
-            <p class="mt-2 text-sm text-gray-500">
-              Brief description for your profile. URLs are hyperlinked.
-            </p>
-          </div>
-        </div>
-
-        <div class="mt-6 flex-grow lg:mt-0 lg:ml-6 lg:flex-shrink-0 lg:flex-grow-0">
-          <p class="text-sm font-medium text-gray-700" aria-hidden="true">Photo</p>
-          <div class="mt-1 lg:hidden">
-            <div class="flex items-center">
-              <div
-                class="inline-block h-12 w-12 flex-shrink-0 overflow-hidden rounded-full"
-                aria-hidden="true"
-              >
-                <img class="h-full w-full rounded-full" :src="user.imageUrl" alt="" />
-              </div>
-              <div class="ml-5 rounded-md shadow-sm">
-                <div
-                  class="group relative flex items-center justify-center rounded-md border border-gray-300 py-2 px-3 focus-within:ring-2 focus-within:ring-sky-500 focus-within:ring-offset-2 hover:bg-gray-50"
-                >
-                  <label
-                    for="mobile-user-photo"
-                    class="pointer-events-none relative text-sm font-medium leading-4 text-gray-700"
-                  >
-                    <span>Change</span>
-                    <span class="sr-only"> user photo</span>
-                  </label>
-                  <input
-                    id="mobile-user-photo"
-                    name="user-photo"
-                    type="file"
-                    class="absolute h-full w-full cursor-pointer rounded-md border-gray-300 opacity-0"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="relative hidden overflow-hidden rounded-full lg:block">
-            <img class="relative h-40 w-40 rounded-full" :src="user.imageUrl" alt="" />
-            <label
-              for="desktop-user-photo"
-              class="absolute inset-0 flex h-full w-full items-center justify-center bg-black bg-opacity-75 text-sm font-medium text-white opacity-0 focus-within:opacity-100 hover:opacity-100"
-            >
-              <span>Change</span>
-              <span class="sr-only"> user photo</span>
               <input
-                type="file"
-                id="desktop-user-photo"
-                name="user-photo"
-                class="absolute inset-0 h-full w-full cursor-pointer rounded-md border-gray-300 opacity-0"
+                v-model="state.vorname"
+                type="text"
+                id="first-name"
+                name="first-name"
+                autocomplete="given-name"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
               />
-            </label>
+
+              <p
+                v-if="validator.vorname.$invalid"
+                class="mt-2 text-sm text-red-600"
+                id="email-error"
+              >
+                {{ validator.vorname.$silentErrors[0].$message }}
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <label for="last-name" class="block text-sm font-medium text-gray-700">Nachname</label>
+            <div class="mt-1">
+              <input
+                v-model="state.nachname"
+                type="text"
+                id="last-name"
+                name="last-name"
+                autocomplete="family-name"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
+              />
+
+              <p
+                v-if="validator.nachname.$invalid"
+                class="mt-2 text-sm text-red-600"
+                id="email-error"
+              >
+                {{ validator.nachname.$silentErrors[0].$message }}
+              </p>
+            </div>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="company" class="block text-sm font-medium text-gray-700">Email</label>
+            <div class="mt-1">
+              <input
+                v-model="state.email"
+                type="email"
+                name="email"
+                id="email"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
+              />
+
+              <p v-if="validator.email.$invalid" class="mt-2 text-sm text-red-600" id="email-error">
+                {{ validator.email.$silentErrors[0].$message }}
+              </p>
+            </div>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <div class="mt-1">
+              <input
+                v-model="state.password"
+                type="password"
+                name="password"
+                id="password"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
+              />
+
+              <p
+                v-if="validator.password.$invalid"
+                class="mt-2 text-sm text-red-600"
+                id="email-error"
+              >
+                {{ validator.password.$silentErrors[0].$message }}
+              </p>
+            </div>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="phone" class="block text-sm font-medium text-gray-700"
+              >Confirm Password</label
+            >
+            <div class="mt-1">
+              <input
+                v-model="state.c_password"
+                type="password"
+                name="c_password"
+                id="c_password"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
+              />
+
+              <p
+                v-if="validator.c_password.$invalid"
+                class="mt-2 text-sm text-red-600"
+                id="email-error"
+              >
+                {{ validator.c_password.$silentErrors[0].$message }}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="mt-6 grid grid-cols-12 gap-6">
-        <div class="col-span-12 sm:col-span-6">
-          <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
-          <input
-            type="text"
-            name="first-name"
-            id="first-name"
-            autocomplete="given-name"
-            class="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
-          />
-        </div>
-
-        <div class="col-span-12 sm:col-span-6">
-          <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
-          <input
-            type="text"
-            name="last-name"
-            id="last-name"
-            autocomplete="family-name"
-            class="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
-          />
-        </div>
-
-        <div class="col-span-12">
-          <label for="url" class="block text-sm font-medium text-gray-700">URL</label>
-          <input
-            type="text"
-            name="url"
-            id="url"
-            class="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
-          />
-        </div>
-
-        <div class="col-span-12 sm:col-span-6">
-          <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
-          <input
-            type="text"
-            name="company"
-            id="company"
-            autocomplete="organization"
-            class="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
-          />
-        </div>
+        <br />
+        <RadioGroup v-model="selectedAvatar">
+          <RadioGroupLabel class="text-base font-medium text-gray-900"
+            >Wählen Sie einen Avatar</RadioGroupLabel
+          >
+          <div class="mt-4 flex items-center space-x-3">
+            <RadioGroupOption
+              as="template"
+              v-for="avatar in avatare"
+              :key="avatar.name"
+              :value="avatar"
+              v-slot="{ active, checked }"
+            >
+              <div
+                :class="[
+                  avatar.selectedColor,
+                  active && checked ? 'ring ring-offset-1' : '',
+                  !active && checked ? 'ring-2' : '',
+                  '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none w-14 h-14',
+                ]"
+              >
+                <img :src="avatar.path" :alt="avatar.name" class="h-14 w-14 object-contain" />
+              </div>
+            </RadioGroupOption>
+          </div>
+        </RadioGroup>
       </div>
     </div>
   </form>
+  <hr />
+  <div class="flex justify-center">
+    <button
+      @click="changeAccount"
+      class="my-4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-500 hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
+    >
+      ändern
+    </button>
+  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-// Store impotieren
-import { PiniaStore } from '../../../Store/Store';
-
 import { useRouter } from 'vue-router';
+import { PiniaStore } from '../../../Store/Store';
+import { reactive, ref, computed, onMounted } from 'vue';
 
-const store = PiniaStore();
+// Imports für Tailwind
+import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue';
+
+// Imports für vuelidate
+import useValidate from '@vuelidate/core';
+import { required, email, minLength, sameAs } from '@vuelidate/validators';
+
+import axios from 'axios';
+
 const router = useRouter();
 
-const user = {
-  name: 'Debbie Lewis',
-  handle: 'deblewis',
-  email: 'debbielewis@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80',
-};
+// Variablen für die Error Messages
+let duplicateError = ref(false);
+const store = PiniaStore();
+const selectedAvatar = ref('');
+let icon = null;
+// Variablen for input erstellen
+const state = reactive({
+  vorname: store.getAktivenUser.data.vorname,
+  nachname: store.getAktivenUser.data.nachname,
+  email: store.getAktivenUser.data.email,
+  password: 'xxxxxxxx',
+  c_password: 'xxxxxxxx',
+});
+
+onMounted(() => {
+  icon = avatare.find((elem) => elem.path == store.getAktivenUser.data.avatarpath);
+
+  selectedAvatar.value = icon;
+  console.log(icon);
+});
+
+const avatare = [
+  { name: 'Avatar1', path: '/Avatare/Avatar1.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar2', path: '/Avatare/Avatar2.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar3', path: '/Avatare/Avatar3.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar4', path: '/Avatare/Avatar4.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar5', path: '/Avatare/Avatar5.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar6', path: '/Avatare/Avatar6.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar7', path: '/Avatare/Avatar7.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar8', path: '/Avatare/Avatar8.png', selectedColor: 'ring-lime-500' },
+  { name: 'Avatar9', path: '/Avatare/Avatar9.png', selectedColor: 'ring-lime-500' },
+];
+
+// Rules for vuelidate
+const rules = computed(() => {
+  return {
+    vorname: { required },
+    nachname: { required },
+    email: { required, email },
+    password: { required, minLength: minLength(6) },
+    c_password: { required, minLength: minLength(6), sameAs: sameAs(state.password) },
+  };
+});
+
+const validator = useValidate(rules, state);
+
+async function changeAccount(e) {
+  e.preventDefault();
+
+  if (validator.value.$silentErrors.length == 0) {
+    try {
+      //! TODO change User
+    } catch (error) {}
+  } else {
+    console.log('fehler');
+  }
+}
 </script>
