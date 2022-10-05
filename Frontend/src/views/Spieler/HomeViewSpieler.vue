@@ -343,6 +343,7 @@ import {
   Cog6ToothIcon,
   HomeIcon,
   XMarkIcon,
+  HeartIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronUpDownIcon } from '@heroicons/vue/20/solid';
 
@@ -360,6 +361,7 @@ const navigation = [
   { name: 'Home', icon: HomeIcon, current: false, path: '/homeSpieler' },
   { name: 'My teams', icon: Bars4Icon, current: false, path: '/homeSpieler/teams' },
   { name: 'Settings', icon: Cog6ToothIcon, current: false, path: '/homeSpieler/settings' },
+  { name: 'Gesundheit', icon: HeartIcon, current: false, path: '/homeSpieler/gesundheit' },
 ];
 
 onMounted(async () => {
