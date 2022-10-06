@@ -1,6 +1,12 @@
 <template>
   <!-- Spieler suchen anzeigen -->
-  <TransitionRoot :show="openSpielerSearch" as="template" @after-leave="query = ''" appear v-if="store.getAktivenUser.type == 'Trainer'">
+  <TransitionRoot
+    :show="openSpielerSearch"
+    as="template"
+    @after-leave="query = ''"
+    appear
+    v-if="store.getAktivenUser.type == 'Trainer'"
+  >
     <Dialog as="div" class="relative z-10" @close="openSpielerSearch = false">
       <TransitionChild
         as="template"
@@ -135,6 +141,7 @@
                     {{ person.role }}
                   </td>
                   <td
+                    v-if="store.getAktivenUser.type == 'Trainer'"
                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
                   >
                     <button

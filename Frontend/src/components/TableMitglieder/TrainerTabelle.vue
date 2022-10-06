@@ -142,6 +142,7 @@
                     {{ person.role }}
                   </td>
                   <td
+                    v-if="store.getAktivenUser == 'Trainer'"
                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
                   >
                     <button
