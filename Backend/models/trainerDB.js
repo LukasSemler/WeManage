@@ -20,4 +20,10 @@ from Trainer t
   if (rows[0]) return rows;
   else return false;
 };
-export { getAllTrainerDB, getTrainerDB };
+
+const getTraininerByIdDB = async (id) => {
+  const { rows } = await query('SELECT * from trainer WHERE t_id = $1', [id]);
+  if (rows[0]) return rows[0];
+  return null;
+};
+export { getAllTrainerDB, getTrainerDB, getTraininerByIdDB };

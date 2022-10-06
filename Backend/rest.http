@@ -32,3 +32,16 @@ Content-Type: application/json
 GET http://localhost:2410/getAllSpieler
 
 #######
+
+
+PATCH http://localhost:2410/changeSpielerData
+Content-Type: application/json
+
+{
+  "spieler_id": 22,
+  "vorname": "Max",
+  "nachname": "Mustermann",
+  "email": "max.mustermann@gmail.com",
+  "passwort": "123456",
+  "avatare": "/Avatare/Avatar9.png"
+}

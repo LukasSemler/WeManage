@@ -138,7 +138,7 @@
                   <img
                     class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
                     :src="store.getAktivenUser.data.avatarpath"
-                    alt=""
+                    alt="Avatar"
                   />
                   <span class="flex min-w-0 flex-1 flex-col">
                     <span class="truncate text-sm font-medium text-gray-900"

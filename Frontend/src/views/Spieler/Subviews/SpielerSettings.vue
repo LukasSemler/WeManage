@@ -1,4 +1,58 @@
 <template>
+  <!--Change-Notification-->
+  <div
+    aria-live="assertive"
+    class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
+      <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
+      <transition
+        enter-active-class="transform ease-out duration-300 transition"
+        enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+        enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+        leave-active-class="transition ease-in duration-100"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="showChangeNotification"
+          class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+        >
+          <div class="p-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <CheckCircleIcon
+                  v-if="ChangeNotificationError"
+                  class="h-6 w-6 text-green-400"
+                  aria-hidden="true"
+                />
+                <XCircleIcon
+                  v-else="ChangeNotificationError"
+                  class="h-6 w-6 text-red-400"
+                  aria-hidden="true"
+                />
+              </div>
+              <div class="ml-3 w-0 flex-1 pt-0.5">
+                <p class="text-sm font-medium text-gray-900">{{ ChangeNotificationText[0] }}</p>
+                <p class="mt-1 text-sm text-gray-500">{{ ChangeNotificationText[1] }}</p>
+              </div>
+              <div class="ml-4 flex flex-shrink-0">
+                <button
+                  type="button"
+                  @click="showChangeNotification = false"
+                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2"
+                >
+                  <span class="sr-only">Close</span>
+                  <XMarkIcon class="h-5 w-5" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </div>
+  </div>
+
   <!-- Page title & actions -->
   <div
     class="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
@@ -168,11 +222,14 @@ import { reactive, ref, computed, onMounted } from 'vue';
 
 // Imports für Tailwind
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue';
+import { CheckCircleIcon, XCircleIcon } from '@heroicons/vue/24/outline';
+import { XMarkIcon } from '@heroicons/vue/20/solid';
 
 // Imports für vuelidate
 import useValidate from '@vuelidate/core';
 import { required, email, minLength, sameAs } from '@vuelidate/validators';
 
+//Axios
 import axios from 'axios';
 
 const router = useRouter();
@@ -182,6 +239,11 @@ let duplicateError = ref(false);
 const store = PiniaStore();
 const selectedAvatar = ref('');
 let icon = null;
+
+let showChangeNotification = ref(false);
+let ChangeNotificationText = ref(['Test', 'Test']);
+let ChangeNotificationError = ref(true);
+
 // Variablen for input erstellen
 const state = reactive({
   vorname: store.getAktivenUser.data.vorname,
@@ -195,7 +257,6 @@ onMounted(() => {
   icon = avatare.find((elem) => elem.path == store.getAktivenUser.data.avatarpath);
 
   selectedAvatar.value = icon;
-  console.log(icon);
 });
 
 const avatare = [
@@ -228,10 +289,42 @@ async function changeAccount(e) {
 
   if (validator.value.$silentErrors.length == 0) {
     try {
-      //! TODO change User
-    } catch (error) {}
+      //Neue Userdaten in DB eintragen
+      let result = await axios.patch('/changeSpielerData', {
+        id: store.getAktivenUser.data.s_id,
+        vorname: state.vorname,
+        nachname: state.nachname,
+        email: state.email,
+        passwort: state.password,
+        avatare: selectedAvatar.value.path,
+      });
+      //Userfeedback
+      if (result.status === 200) {
+        //Account aktualisieren
+        store.setAktivenUser({ data: result.data, type: store.getAktivenUser.type });
+
+        //Feedbackmeldung anpassen
+        ChangeNotificationText.value = [
+          'Erfolgreich',
+          'Das Ändern deiner Userdaten war ein Erfolg!',
+        ];
+        ChangeNotificationError.value = true;
+      } else {
+        //Feedbackmeldung anpassen
+        ChangeNotificationText.value = ['Fehler', 'Fehler beim Ändern deiner Userdaten!'];
+        ChangeNotificationError.value = true;
+      }
+      //Feedbackmeldung anzeigen
+      showChangeNotification.value = true;
+    } catch (error) {
+      ChangeNotificationText.value = ['Fehler', 'Fehler beim Ändern deiner Userdaten!'];
+      ChangeNotificationError.value = true;
+      showChangeNotification.value = true;
+    }
   } else {
-    console.log('fehler');
+    ChangeNotificationText.value = ['Fehler', 'Unbekannter Fehler ist aufgetreten!'];
+    ChangeNotificationError.value = true;
+    showChangeNotification.value = true;
   }
 }
 </script>

@@ -340,8 +340,16 @@
               Abbrechen
             </button>
             <button
+              v-if="!checkError"
               @click="register"
               class="my-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-500 hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
+            >
+              Register
+            </button>
+            <button
+              :disabled="checkError"
+              v-else
+              class="my-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-800 focus:outline-none"
             >
               Register
             </button>
@@ -464,4 +472,8 @@ async function register(e) {
     console.log('fehler');
   }
 }
+
+const checkError = computed(() => {
+  return validator.value.$invalid == true ? true : false;
+});
 </script>

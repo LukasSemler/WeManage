@@ -1,4 +1,10 @@
-import { getAllSpielerDB, getSpielerDB, changeSpielerKommtDB } from '../models/spielerDB.js';
+import {
+  getAllSpielerDB,
+  getSpielerDB,
+  changeSpielerKommtDB,
+  changeSpielerSettingsDB,
+  getSpielerByIdDB,
+} from '../models/spielerDB.js';
 
 const getAllSpieler = async (req, res) => {
   const result = await getAllSpielerDB();
@@ -32,4 +38,20 @@ const changeSpielerKommt = async (req, res) => {
   return res.status(500).send('Fehler beim Kommt ändern');
 };
 
-export { getAllSpieler, getSpieler, changeSpielerKommt };
+const changeSpielerSettings = async (req, res) => {
+  const neueUserDaten = req.body;
+
+  console.log(neueUserDaten);
+
+  //Spielerdaten ändern
+  const result = await changeSpielerSettingsDB(neueUserDaten);
+  if (!result) return res.status(400).send('Fehler beim Spielerdaten senden');
+
+  //Neuen returnieren
+  const neuerSpielerResult = await getSpielerByIdDB(neueUserDaten.id);
+
+  if (neuerSpielerResult) return res.status(200).json(neuerSpielerResult);
+  return res.status(400).send('Fehler beim Spielerdaten senden');
+};
+
+export { getAllSpieler, getSpieler, changeSpielerKommt, changeSpielerSettings };

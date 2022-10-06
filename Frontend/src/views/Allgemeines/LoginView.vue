@@ -1,4 +1,51 @@
 <template>
+  <!-- Global notification live region, render this permanently at the end of the document -->
+  <div
+    aria-live="assertive"
+    class="z-40 pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+  >
+    <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
+      <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
+      <transition
+        enter-active-class="transform ease-out duration-300 transition"
+        enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+        enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+        leave-active-class="transition ease-in duration-100"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="errorLogin"
+          class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+        >
+          <div class="p-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <XMarkIcon class="h-6 w-6 text-red-600" aria-hidden="true" />
+              </div>
+              <div class="ml-3 w-0 flex-1 pt-0.5">
+                <p class="text-sm font-medium text-gray-900">Fehler</p>
+                <p class="mt-1 text-sm text-gray-500">
+                  Beim Anmelden ist leider ein Fehler aufgetreten. Bitte probiere es erneut.
+                </p>
+              </div>
+              <div class="ml-4 flex flex-shrink-0">
+                <button
+                  type="button"
+                  @click="errorLogin = false"
+                  class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                  <span class="sr-only">Close</span>
+                  <XMarkIcon class="h-5 w-5" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </div>
+  </div>
+
   <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <img
@@ -83,8 +130,17 @@
               Abbrechen
             </button>
             <button
+              type="submit"
+              v-if="!checkError"
               @click="login"
               class="my-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-500 hover:bg-lime-600 focus:outline-none"
+            >
+              Login
+            </button>
+            <button
+              :disabled="checkError"
+              v-else
+              class="my-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-800 focus:outline-none"
             >
               Login
             </button>
@@ -100,6 +156,7 @@ import { ref, computed, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { PiniaStore } from '../../Store/Store';
 import axios from 'axios';
+import { XMarkIcon } from '@heroicons/vue/20/solid';
 
 // Vuelidate import
 import useValidate from '@vuelidate/core';
@@ -107,6 +164,8 @@ import { required, email } from '@vuelidate/validators';
 
 const store = PiniaStore();
 const router = useRouter();
+
+let errorLogin = ref(false);
 
 // Inputs
 let state = reactive({
@@ -134,7 +193,6 @@ async function login(e) {
         password: state.password,
       });
       console.log(result);
-      // Ergebnis auswerten
 
       // Person im Store setzen
       store.setAktivenUser(result.data);
@@ -147,18 +205,17 @@ async function login(e) {
         router.push('/homeSpieler');
       }
     } catch (error) {
-      console.log(error.message);
-      // if (error.message.includes('400')) {
-      //   duplicateError.value = true;
-      //   setTimeout(() => (duplicateError.value = false), 3000);
-      // }
-      // if (error.message.includes('500')) {
-      //   error.value = true;
-      //   setTimeout(() => (error.value = false), 3000);
-      // }
+      console.log('catch');
+      errorLogin.value = true;
+      console.log(errorLogin.value);
+      setTimeout(() => (errorLogin.value = false), 3000);
     }
   } else {
     console.log('fehler');
   }
 }
+
+const checkError = computed(() => {
+  return validator.value.$invalid == true ? true : false;
+});
 </script>
