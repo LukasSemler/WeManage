@@ -69,7 +69,7 @@
                 <dt class="text-left text-sm font-medium text-gray-500">Sonstige Beschwerden</dt>
                 <dd
                   class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"
-                  v-if="person.sonstige.length > 0"
+                  v-if="person.sonstige"
                 >
                   {{ person.sonstige }}
                 </dd>

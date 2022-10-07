@@ -21,8 +21,15 @@ const registerDBSpieler = async (vorname, nachname, email, password, type, avata
     );
 
     if (spieler[0]) {
-      await client.query('COMMIT');
-      return spieler[0];
+      const { rows: health } = await client.query(
+        'INSERT INTO spieler_health ("fkSpieler") VALUES ($1) returning *',
+        [spieler[0].s_id],
+      );
+
+      if (health[0]) {
+        await client.query('COMMIT');
+        return spieler[0];
+      }
     }
 
     return false;

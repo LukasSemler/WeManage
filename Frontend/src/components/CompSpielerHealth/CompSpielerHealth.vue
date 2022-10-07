@@ -413,7 +413,6 @@ let fehler = ref(false);
 try {
   const { data } = await axios.get(`/spielerHealth/${store.getAktivenUser.data.s_id}`);
   let obj = data[0];
-  console.log(data);
 
   // Loop through the object and find the objects with the same id
   for (let i = 0; i < sterne.length; i++) {
@@ -450,7 +449,5 @@ async function saveStatus(e) {
     fehler.value = true;
     setTimeout(() => (fehler.value = false), 3000);
   }
-
-  console.log(data);
 }
 </script>
