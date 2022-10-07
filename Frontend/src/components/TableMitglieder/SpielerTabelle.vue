@@ -123,7 +123,7 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200 bg-white">
-                <tr v-for="person in spieler" :key="person.email">
+                <tr v-for="person in spieler" :key="person.email" @click="showHealthStatus(person)">
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                     <div class="flex items-center">
                       <div class="h-10 w-10 flex-shrink-0">
@@ -264,5 +264,9 @@ async function spielerDel(person) {
 
   //Trainer aus der Datenbank löschen
   await axios.delete(`/spielerMannschaftDel/${person.s_id}/${id.value}`);
+}
+
+async function showHealthStatus(spieler) {
+  router.push(`/spielerHealth/${spieler.s_id}`);
 }
 </script>

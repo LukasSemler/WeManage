@@ -192,6 +192,12 @@ const router = createRouter({
       component: () => import('../views/Trainings/TrainingErstellen.vue'),
       params: true,
     },
+    {
+      path: '/spielerHealth/:id',
+      name: 'Spieler Health Anzeigen',
+      component: () => import('../views/SpielerHealth/SpielerHealth.vue'),
+      params: true,
+    },
 
     { path: '/:pathmatch(.*)*', name: 'not-found', component: NotFoundView },
   ],

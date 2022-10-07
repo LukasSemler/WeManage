@@ -4,6 +4,8 @@ import {
   changeSpielerKommtDB,
   changeSpielerSettingsDB,
   getSpielerByIdDB,
+  getSpielerHealthDB,
+  changeSpielerHealthDB,
 } from '../models/spielerDB.js';
 
 const getAllSpieler = async (req, res) => {
@@ -54,4 +56,31 @@ const changeSpielerSettings = async (req, res) => {
   return res.status(400).send('Fehler beim Spielerdaten senden');
 };
 
-export { getAllSpieler, getSpieler, changeSpielerKommt, changeSpielerSettings };
+const getSpielerHealth = async (req, res) => {
+  const { id } = req.params;
+
+  //Get health from another File
+  const result = await getSpielerHealthDB(id);
+
+  if (result) return res.status(200).json(result);
+  return res.status(400).send('Fehler beim Spielerdaten senden');
+};
+
+const patchSpielerHealth = async (req, res) => {
+  const { id } = req.params;
+  const { allg, ausdauer, kraft, sonstige } = req.body;
+
+  const result = await changeSpielerHealthDB(id, allg, ausdauer, kraft, sonstige);
+
+  if (result) return res.status(200).json(result);
+  return res.status(400).send('Fehler beim Spielerdaten ändern');
+};
+
+export {
+  getAllSpieler,
+  getSpieler,
+  changeSpielerKommt,
+  changeSpielerSettings,
+  getSpielerHealth,
+  patchSpielerHealth,
+};

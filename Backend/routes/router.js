@@ -17,6 +17,8 @@ import {
   getSpieler,
   changeSpielerKommt,
   changeSpielerSettings,
+  getSpielerHealth,
+  patchSpielerHealth,
 } from '../controllers/spieler.js';
 import { getAllTrainer, getTrainer } from '../controllers/trainer.js';
 import { postNews, getNews, delNews } from '../controllers/news.js';
@@ -79,5 +81,8 @@ router.post('/sJoinTeam', asyncHandler(sJoinTeam));
 
 router.get('/getAllTrainings/:id', asyncHandler(getAllTrainings));
 router.get('/getAllTrainingsSpieler/:id', asyncHandler(getAllTrainingsSpieler));
+
+router.get('/spielerHealth/:id', asyncHandler(getSpielerHealth));
+router.patch('/spielerHealth/:id', asyncHandler(patchSpielerHealth));
 
 export default router;
