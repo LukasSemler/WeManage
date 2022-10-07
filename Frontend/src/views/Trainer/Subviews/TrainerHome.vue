@@ -21,7 +21,10 @@
   <!-- Pinned projects -->
   <div class="mt-6 px-4 sm:px-6 lg:px-8" v-if="store.teams.length > 0">
     <h2 class="text-sm font-medium text-gray-900">Meine Mannschaften</h2>
-    <ul role="list" class="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
+    <ul
+      role="list"
+      class="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4 cursor-pointer"
+    >
       <li
         v-for="project in store.getTeams"
         @click="router.push(`/detailMannschaft/${project.m_id}`)"

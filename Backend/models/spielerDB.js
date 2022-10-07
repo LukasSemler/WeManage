@@ -99,8 +99,23 @@ const changeSpielerHealthDB = async (id, allg, ausdauer, kraft, sonstige) => {
     console.log(error);
     throw error;
   }
+};
 
-  return true;
+const getTrainerSpielerHealthDB = async (id) => {
+  // Get Health from Database
+  const { rows } = await query(
+    `SELECT m.titel, s.vorname, s.nachname, s.avatarpath, sh.allgemein, sh.kraft, sh.ausdauer, sh.sonstige
+from spieler_health sh
+         JOIN spieler s on s.s_id = sh."fkSpieler"
+         JOIN spieler_mannschaft sm on s.s_id = sm.s_id
+         JOIN mannschaft m on m.m_id = sm.m_id WHERE m.m_id = $1`,
+    [id],
+  );
+
+  console.log(rows);
+
+  if (rows[0]) return rows;
+  else return false;
 };
 
 export {
@@ -111,4 +126,5 @@ export {
   getSpielerByIdDB,
   getSpielerHealthDB,
   changeSpielerHealthDB,
+  getTrainerSpielerHealthDB,
 };

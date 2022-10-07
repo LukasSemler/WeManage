@@ -65,10 +65,38 @@
               </div>
               <div class="mt-5 h-0 flex-1 overflow-y-auto">
                 <nav class="px-2">
-                  <div class="space-y-1">
+                  <!-- Navigation Trainer -->
+                  <div class="space-y-1" v-if="store.getAktivenUser.type == 'Trainer'">
                     <a
                       @click="changeSite(item.path)"
-                      v-for="item in navigation"
+                      v-for="item in navigationTrainer"
+                      :key="item.name"
+                      :class="[
+                        item.current
+                          ? 'bg-gray-100 text-gray-900'
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                        'group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md',
+                      ]"
+                      :aria-current="item.current ? 'page' : undefined"
+                    >
+                      <component
+                        :is="item.icon"
+                        :class="[
+                          item.current
+                            ? 'text-gray-500'
+                            : 'text-gray-400 group-hover:text-gray-500',
+                          'mr-3 flex-shrink-0 h-6 w-6',
+                        ]"
+                        aria-hidden="true"
+                      />
+                      {{ item.name }}
+                    </a>
+                  </div>
+                  <!-- Navigation Spieler -->
+                  <div class="space-y-1" v-else>
+                    <a
+                      @click="changeSite(item.path)"
+                      v-for="item in navigationSpieler"
                       :key="item.name"
                       :class="[
                         item.current
@@ -149,11 +177,39 @@
 
         <hr />
 
-        <!-- Navigation -->
-        <nav class="mt-6 px-3">
+        <!-- Navigation Trainer-->
+        <nav class="mt-6 px-3" v-if="store.getAktivenUser.type == 'Trainer'">
           <div class="space-y-1">
             <a
-              v-for="item of navigation"
+              v-for="item of navigationTrainer"
+              :key="item.name"
+              @click="changeSite(item.path)"
+              :class="[
+                item.current
+                  ? 'bg-gray-200 text-gray-900'
+                  : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
+                'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
+              ]"
+              :aria-current="item.current ? 'page' : undefined"
+            >
+              <component
+                :is="item.icon"
+                :class="[
+                  item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                  'mr-3 flex-shrink-0 h-6 w-6',
+                ]"
+                aria-hidden="true"
+              />
+              {{ item.name }}
+            </a>
+          </div>
+        </nav>
+
+        <!-- Navigation Spieler -->
+        <nav class="mt-6 px-3" v-else>
+          <div class="space-y-1">
+            <a
+              v-for="item of navigationSpieler"
               :key="item.name"
               @click="changeSite(item.path)"
               :class="[
@@ -214,6 +270,7 @@ import {
   ArrowLeftIcon,
   ChartPieIcon,
   Cog6ToothIcon,
+  HeartIcon,
 } from '@heroicons/vue/24/outline';
 
 import { RouterView, useRouter } from 'vue-router';
@@ -226,14 +283,14 @@ const router = useRouter();
 
 const sidebarOpen = ref(false);
 
-const navigation = [
+const navigationTrainer = [
   {
     name: 'Übersicht',
     icon: HomeIcon,
     current: false,
     path: `/detailMannschaft/${router.currentRoute.value.params.id}`,
     params: true,
-    onlyTrainer: true,
+    onlyTrainer: false,
   },
   {
     name: 'Ankündigungen',
@@ -241,21 +298,21 @@ const navigation = [
     current: false,
     path: `/detailMannschaft/${router.currentRoute.value.params.id}/ankuendigungen`,
     params: true,
-    onlyTrainer: true,
+    onlyTrainer: false,
   },
   {
     name: 'Trainings',
     icon: CalendarDaysIcon,
     current: false,
     path: `/detailMannschaft/${router.currentRoute.value.params.id}/trainings`,
-    onlyTrainer: true,
+    onlyTrainer: false,
   },
   {
     name: 'Mitglieder',
     icon: UserGroupIcon,
     current: false,
     path: `/detailMannschaft/${router.currentRoute.value.params.id}/mitglieder`,
-    onlyTrainer: true,
+    onlyTrainer: false,
   },
   {
     name: 'Statistik',
@@ -270,6 +327,45 @@ const navigation = [
     current: false,
     path: `/detailMannschaft/${router.currentRoute.value.params.id}/settings`,
     onlyTrainer: true,
+  },
+  {
+    name: 'Health',
+    icon: HeartIcon,
+    current: false,
+    path: `/detailMannschaft/${router.currentRoute.value.params.id}/health`,
+    onlyTrainer: true,
+  },
+];
+const navigationSpieler = [
+  {
+    name: 'Übersicht',
+    icon: HomeIcon,
+    current: false,
+    path: `/detailMannschaft/${router.currentRoute.value.params.id}`,
+    params: true,
+    onlyTrainer: false,
+  },
+  {
+    name: 'Ankündigungen',
+    icon: BellIcon,
+    current: false,
+    path: `/detailMannschaft/${router.currentRoute.value.params.id}/ankuendigungen`,
+    params: true,
+    onlyTrainer: false,
+  },
+  {
+    name: 'Trainings',
+    icon: CalendarDaysIcon,
+    current: false,
+    path: `/detailMannschaft/${router.currentRoute.value.params.id}/trainings`,
+    onlyTrainer: false,
+  },
+  {
+    name: 'Mitglieder',
+    icon: UserGroupIcon,
+    current: false,
+    path: `/detailMannschaft/${router.currentRoute.value.params.id}/mitglieder`,
+    onlyTrainer: false,
   },
 ];
 

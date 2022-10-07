@@ -137,7 +137,7 @@
                     >
                       <ListboxOption
                         as="template"
-                        v-for="person in people"
+                        v-for="person in sterne"
                         :key="person.id"
                         :value="person"
                         v-slot="{ active, selectedAllg }"
@@ -218,7 +218,7 @@
                     >
                       <ListboxOption
                         as="template"
-                        v-for="person in people"
+                        v-for="person in sterne"
                         :key="person.id"
                         :value="person"
                         v-slot="{ active, selectedAusdauer }"
@@ -300,7 +300,7 @@
                     >
                       <ListboxOption
                         as="template"
-                        v-for="person in people"
+                        v-for="person in sterne"
                         :key="person.id"
                         :value="person"
                         v-slot="{ active, selectedKraft }"
@@ -395,7 +395,7 @@ import { XMarkIcon } from '@heroicons/vue/20/solid';
 
 const store = PiniaStore();
 
-const people = [
+const sterne = [
   { id: 1, rating: 5 },
   { id: 2, rating: 4 },
   { id: 3, rating: 3 },
@@ -403,9 +403,9 @@ const people = [
   { id: 5, rating: 1 },
 ];
 
-let selectedAllg = ref(people[0]);
-let selectedAusdauer = ref(people[0]);
-let selectedKraft = ref(people[0]);
+let selectedAllg = ref(sterne[0]);
+let selectedAusdauer = ref(sterne[0]);
+let selectedKraft = ref(sterne[0]);
 let sonstigeBeschwerden = ref('');
 let show = ref(false);
 let fehler = ref(false);
@@ -416,15 +416,15 @@ try {
   console.log(data);
 
   // Loop through the object and find the objects with the same id
-  for (let i = 0; i < people.length; i++) {
-    if (people[i].rating === obj.allgemein) {
-      selectedAllg.value = people[i];
+  for (let i = 0; i < sterne.length; i++) {
+    if (sterne[i].rating === obj.allgemein) {
+      selectedAllg.value = sterne[i];
     }
-    if (people[i].rating === obj.ausdauer) {
-      selectedAusdauer.value = people[i];
+    if (sterne[i].rating === obj.ausdauer) {
+      selectedAusdauer.value = sterne[i];
     }
-    if (people[i].rating === obj.kraft) {
-      selectedKraft.value = people[i];
+    if (sterne[i].rating === obj.kraft) {
+      selectedKraft.value = sterne[i];
     }
   }
   // Textbox befüllen

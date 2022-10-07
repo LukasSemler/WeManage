@@ -29,7 +29,7 @@
         v-for="project in store.getTeams"
         :key="project.id"
         @click="router.push(`/detailMannschaft/${project.m_id}`)"
-        class="relative col-span-1 flex rounded-md shadow-sm"
+        class="relative col-span-1 flex rounded-md shadow-sm cursor-pointer"
       >
         <div
           :class="`flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md  bg-lime-500`"

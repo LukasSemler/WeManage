@@ -157,12 +157,6 @@ const router = createRouter({
       component: () => import('../views/Mannschaften/MannschaftDetailView.vue'),
       params: true,
       children: [
-        // { path: '', component: Uebersicht },
-        // { path: 'ankuendigungen', component: Ankuendigungen },
-        // { path: 'trainings', component: Trainings },
-        // { path: 'mitglieder', component: Mitglieder },
-        // { path: 'statistik', component: UnderConstruction },
-        // { path: 'settings', component: Settings },
         { path: '', component: () => import('../views/Mannschaften/Subview/Uebersicht.vue') },
         {
           path: 'ankuendigungen',
@@ -177,6 +171,7 @@ const router = createRouter({
           component: () => import('../views/Mannschaften/Subview/Mitglieder.vue'),
         },
         { path: 'statistik', component: () => import('../views/UnderConstruction.vue') },
+        { path: 'health', component: () => import('../views/Mannschaften/Subview/health.vue') },
         { path: 'settings', component: () => import('../views/UnderConstruction.vue') },
       ],
     },
