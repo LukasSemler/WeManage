@@ -149,8 +149,17 @@ const sJoinTeamDB = async (code, s_id) => {
   const { rows: zcode } = await query('SELECT * from mannschaft where zugangscode = $1;', [code]);
   if (!zcode[0]) return false;
 
-  const { rows } = await query('SELECT * FROM spielerinsert($1, $2)', [s_id, zcode[0].m_id]);
+  console.log(zcode[0]);
 
+  //Schaue ob der Spieler schon in der Mannschaft ist
+  const { rows: vorhanden } = await query(
+    'SELECT * from spieler_mannschaft where s_id = $1 and m_id = $2;',
+    [s_id, zcode[0].m_id],
+  );
+
+  if (vorhanden[0]) return false;
+
+  const { rows } = await query('SELECT * FROM spielerinsert($1, $2)', [s_id, zcode[0].m_id]);
   console.log(rows);
 
   return true;
