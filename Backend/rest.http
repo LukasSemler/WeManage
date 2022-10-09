@@ -45,3 +45,7 @@ Content-Type: application/json
   "passwort": "123456",
   "avatare": "/Avatare/Avatar9.png"
 }
+
+
+############# Alle Spieler von einer Mannschaft bekommen
+GET http://localhost:2410/getSpieler/15

@@ -48,7 +48,6 @@ const addTeam = async (req, res) => {
 };
 
 const mannschaftenTrainer = async (req, res) => {
-  console.log(req.body);
   const { id } = req.params;
   const result = await mannschaftenTrainerDB(id);
 

@@ -32,7 +32,7 @@
           <dl class="mt-1 flex flex-grow flex-col justify-between">
             <dt class="sr-only">Title</dt>
             <!-- <dd class="text-sm text-gray-500">{{ team.farbe }}</dd> -->
-            <dd class="text-sm text-gray-500">12 Spieler</dd>
+            <dd class="text-sm text-gray-500">{{ team.spieleranzahl }} Spieler</dd>
           </dl>
         </div>
 
@@ -67,6 +67,7 @@ import { PiniaStore } from '../../../Store/Store';
 
 import { useRouter } from 'vue-router';
 import { onMounted } from 'vue';
+import axios from 'axios';
 
 const store = PiniaStore();
 const router = useRouter();
@@ -74,4 +75,5 @@ const router = useRouter();
 onMounted(() => {
   console.log(store.getTeams);
 });
+
 </script>

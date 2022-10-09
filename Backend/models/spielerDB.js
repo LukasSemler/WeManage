@@ -118,6 +118,7 @@ from spieler_health sh
   else return false;
 };
 
+
 export {
   getAllSpielerDB,
   getSpielerDB,

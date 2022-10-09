@@ -37,10 +37,11 @@ const addTeamDB = async (titel, beschreibung, farbe, t_id) => {
 
 const mannschaftenTrainerDB = async (t_id) => {
   const { rows } = await query(
-    `SELECT m.m_id, beschreibung, farbe, zugangscode, titel
+    `SELECT m.m_id, beschreibung, farbe, zugangscode, titel,
+    (SELECT COUNT(spma.s_id) FROM spieler_mannschaft spma WHERE spma.m_id = tm.m_id ) as spieleranzahl
 from mannschaft m
-         JOIN trainer_mannschaft tm on m.m_id = tm.m_id
-         JOIN trainer t on t.t_id = tm.t_id WHERE t.t_id = $1`,
+      JOIN trainer_mannschaft tm on m.m_id = tm.m_id
+      JOIN trainer t on t.t_id = tm.t_id WHERE t.t_id = $1`,
     [t_id],
   );
 
@@ -127,7 +128,12 @@ const deleteSpielerMannschaftDB = async (m_id, s_id) => {
 
 const mannschaftenSpielerDB = async (s_id) => {
   const { rows } = await query(
-    'SELECT m.* FROM mannschaft m JOIN spieler_mannschaft sm on m.m_id = sm.m_id WHERE sm.s_id = $1',
+    `SELECT
+    m.*,
+    (SELECT COUNT(spma.s_id) FROM spieler_mannschaft spma  WHERE spma.m_id = m.m_id) AS spielerAnzahl
+FROM mannschaft m
+JOIN spieler_mannschaft sm on m.m_id = sm.m_id
+WHERE sm.s_id = $1`,
     [s_id],
   );
 

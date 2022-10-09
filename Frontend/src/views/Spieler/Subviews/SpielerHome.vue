@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <!-- Pinned projects -->
+  <!-- Pinned teams -->
   <div class="mt-6 px-4 sm:px-6 lg:px-8" v-if="store.getTeams.length > 0">
     <h2 class="text-sm font-bold text-gray-900">Meine Mannschaften:</h2>
     <ul
@@ -26,22 +26,22 @@
       v-if="store.teams.length > 0"
     >
       <li
-        v-for="project in store.getTeams"
-        :key="project.id"
-        @click="router.push(`/detailMannschaft/${project.m_id}`)"
+        v-for="team in store.getTeams"
+        :key="team.id"
+        @click="router.push(`/detailMannschaft/${team.m_id}`)"
         class="relative col-span-1 flex rounded-md shadow-sm cursor-pointer"
       >
         <div
           :class="`flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md  bg-lime-500`"
         >
-          {{ project.farbe }}
+          {{ team.farbe }}
         </div>
         <div
           class="flex flex-1 items-center justify-between truncate rounded-r-md border-t border-r border-b border-gray-200 bg-white"
         >
           <div class="flex-1 truncate px-4 py-2 text-sm">
-            <a class="font-medium text-gray-900 hover:text-gray-600">{{ project.titel }}</a>
-            <p class="text-gray-500">12 Spieler</p>
+            <a class="font-medium text-gray-900 hover:text-gray-600">{{ team.titel }}</a>
+            <p class="text-gray-500">{{team.spieleranzahl}} Spieler</p>
           </div>
         </div>
       </li>
