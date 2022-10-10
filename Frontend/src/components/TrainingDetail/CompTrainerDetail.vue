@@ -553,8 +553,8 @@ onMounted(async () => {
   let datumTraining = new Date(
     training.value.trainingdatum.split('-')[0],
     training.value.trainingdatum.split('-')[1] - 1,
-    // Number(training.value.trainingdatum.split('-')[2].substring(0, 2)),
-    Number(training.value.trainingdatum.split('-')[2].substring(0, 2)) + 1,
+    Number(training.value.trainingdatum.split('-')[2].substring(0, 2)),
+    // Number(training.value.trainingdatum.split('-')[2].substring(0, 2)) + 1,
 
     training.value.trainingtreffpunkt.split(':')[0],
     training.value.trainingtreffpunkt.split(':')[1],
