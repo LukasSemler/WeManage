@@ -60,26 +60,22 @@
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-        <form class="space-y-6" action="#" method="POST">
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">
-              Email address
-            </label>
-            <div class="mt-1">
-              <input
-                v-model="state.email"
-                id="email"
-                name="email"
-                type="email"
-                autocomplete="email"
-                required=""
-                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
-              />
+        <form class="space-y-6" @submit.prevent="login">
+          <label for="email" class="block text-sm font-medium text-gray-700"> Email address </label>
+          <div class="mt-1">
+            <input
+              v-model="state.email"
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required=""
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-lime-500 focus:border-lime-500 sm:text-sm"
+            />
 
-              <p v-if="validator.email.$invalid" class="mt-2 text-sm text-red-600" id="email-error">
-                {{ validator.email.$silentErrors[0].$message }}
-              </p>
-            </div>
+            <p v-if="validator.email.$invalid" class="mt-2 text-sm text-red-600" id="email-error">
+              {{ validator.email.$silentErrors[0].$message }}
+            </p>
           </div>
 
           <div>
@@ -124,25 +120,21 @@
 
           <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
             <button
+              type="submit"
+              :class="
+                !checkError
+                  ? 'my-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-500 hover:bg-lime-600 focus:outline-none'
+                  : 'my-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-800 focus:outline-none'
+              "
+              value="Login"
+            >
+              Login
+            </button>
+            <button
               @click="router.push('/')"
               class="my-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none"
             >
               Abbrechen
-            </button>
-            <button
-              type="submit"
-              v-if="!checkError"
-              @click="login"
-              class="my-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-500 hover:bg-lime-600 focus:outline-none"
-            >
-              Login
-            </button>
-            <button
-              :disabled="checkError"
-              v-else
-              class="my-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime-800 focus:outline-none"
-            >
-              Login
             </button>
           </div>
         </form>
