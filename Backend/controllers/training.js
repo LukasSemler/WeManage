@@ -82,8 +82,10 @@ const getTrainingDetailSpieler = async (req, res) => {
 };
 
 const changeAnwesenheit = async (req, res) => {
-  const { training_id, s_id } = req.params;
+  const { training_id, s_id, begründung } = req.params;
   const { kommt } = req.body;
+
+  
 
   const result = await changeAnwesenheitDB(kommt, training_id, s_id);
 

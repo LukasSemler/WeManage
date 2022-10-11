@@ -32,7 +32,10 @@
         class="relative col-span-1 flex rounded-md shadow-sm cursor-pointer"
       >
         <div
-          :class="`flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md  bg-lime-500`"
+          :class="[
+            'text-lime-500 flex-shrink-0 flex items-center justify-center w-16  text-sm font-medium rounded-l-md',
+            `bg-[${team.farbe}]`,
+          ]"
         >
           {{ team.farbe }}
         </div>
@@ -41,7 +44,7 @@
         >
           <div class="flex-1 truncate px-4 py-2 text-sm">
             <a class="font-medium text-gray-900 hover:text-gray-600">{{ team.titel }}</a>
-            <p class="text-gray-500">{{team.spieleranzahl}} Spieler</p>
+            <p class="text-gray-500">{{ team.spieleranzahl }} Spieler</p>
           </div>
         </div>
       </li>

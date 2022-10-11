@@ -71,7 +71,7 @@ const getTrainingDetailDB = async (id) => {
 
 const getTrainingDetailSpielerDB = async (id) => {
   const { rows } = await query(
-    `SELECT s2.s_id, s2.vorname, s2.nachname, s2.email, s2.avatarpath, s.kommt, titel, training_id
+    `SELECT s2.s_id, s2.vorname, s2.nachname, s2.email, s2.avatarpath, s.kommt, s.abwesenheitsgrund, titel, training_id
 from trainings
          JOIN spielerbesuchttraining s on trainings.training_id = s.fk_training_id
          JOIN spieler s2 on s2.s_id = s.fk_s_id

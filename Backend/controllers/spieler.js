@@ -29,13 +29,13 @@ const getSpieler = async (req, res) => {
 
 const changeSpielerKommt = async (req, res) => {
   let { id } = req.params;
-  let { kommt, train_id } = req.body;
+  let { kommt, train_id, begründung } = req.body;
 
   kommt = Boolean(kommt);
   train_id = Number(train_id);
   id = Number(id);
   console.log(kommt);
-  const result = await changeSpielerKommtDB(id, kommt, train_id);
+  const result = await changeSpielerKommtDB(id, kommt, train_id, begründung);
 
   if (result) return res.status(200).json(result);
   return res.status(500).send('Fehler beim Kommt ändern');

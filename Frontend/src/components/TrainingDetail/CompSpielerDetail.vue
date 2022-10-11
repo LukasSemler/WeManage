@@ -1,4 +1,85 @@
 <template>
+  <TransitionRoot as="template" :show="fehlen">
+    <Dialog as="div" class="relative z-10" @close="fehlen = true">
+      <TransitionChild
+        as="template"
+        enter="ease-out duration-300"
+        enter-from="opacity-0"
+        enter-to="opacity-100"
+        leave="ease-in duration-200"
+        leave-from="opacity-100"
+        leave-to="opacity-0"
+      >
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+      </TransitionChild>
+
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div
+          class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+        >
+          <TransitionChild
+            as="template"
+            enter="ease-out duration-300"
+            enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            enter-to="opacity-100 translate-y-0 sm:scale-100"
+            leave="ease-in duration-200"
+            leave-from="opacity-100 translate-y-0 sm:scale-100"
+            leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+          >
+            <DialogPanel
+              class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+            >
+              <div>
+                <div class="mt-3 text-center sm:mt-5">
+                  <DialogTitle as="h2" class="text-2xl font-medium leading-6 text-gray-900"
+                    >Bitte gib eine Begründung ein</DialogTitle
+                  >
+                  <div class="mt-2">
+                    <p>Gib bitte an, warum du nicht zum Training kommen kannst.</p>
+                    <br />
+
+                    <div>
+                      <label
+                        for="begründung"
+                        class="text-left block text-sm font-medium text-gray-700"
+                        >Begründung</label
+                      >
+                      <div class="mt-1">
+                        <textarea
+                          v-model="state.begründung"
+                          type="begründung"
+                          name="begründung"
+                          id="begründung"
+                          class="block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-500 focus:ring-lime-500 sm:text-sm"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
+                <button
+                @click="reason"
+                  type="button"
+                  class="inline-flex w-full justify-center rounded-md border border-transparent bg-lime-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm"
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm"
+                  @click="fehlen = false"
+                >
+                  Cancel
+                </button>
+              </div>
+            </DialogPanel>
+          </TransitionChild>
+        </div>
+      </div>
+    </Dialog>
+  </TransitionRoot>
+
   <div
     aria-live="assertive"
     class="z-40 pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
@@ -192,9 +273,11 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref, computed, reactive } from 'vue';
 import axios from 'axios';
 import { XMarkIcon, CheckIcon, ExclamationTriangleIcon } from '@heroicons/vue/20/solid';
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
+
 import { PiniaStore } from '../../Store/Store';
 
 const router = useRouter();
@@ -205,6 +288,11 @@ const spielerListe = ref([]);
 let kommt = ref(true);
 let aktiverSpieler = ref({});
 let darfÄndern = ref(false);
+let fehlen = ref(false);
+
+let state = reactive({
+  begründung: '',
+});
 
 let warningMessage = ref(false);
 let error = ref(false);
@@ -282,25 +370,42 @@ const neuesDatum = computed(() => {
 
 async function changeKommt() {
   if (darfÄndern.value) {
-    if (kommt.value) kommt.value = false;
-    else kommt.value = true;
-
-    console.log(kommt.value);
-
-    try {
-      await axios.patch(`/changeSpielerKommt/${aktiverSpieler.value.s_id}`, {
-        kommt: kommt.value,
-        train_id: id,
-      });
-    } catch (error) {
-      error.value = true;
-      setTimeout(() => (error.value = false), 3000);
-      console.log(error);
+    if (kommt.value) {
+      fehlen.value = true;
+    } else {
+      kommt.value = true;
+      try {
+        await axios.patch(`/changeSpielerKommt/${aktiverSpieler.value.s_id}`, {
+          kommt: kommt.value,
+          train_id: id,
+        });
+      } catch (error) {
+        error.value = true;
+        setTimeout(() => (error.value = false), 3000);
+        console.log(error);
+      }
     }
   } else {
     warningMessage.value = true;
     setTimeout(() => (warningMessage.value = false), 3000);
     console.log('Darf nicht ändern, das Training hat schon begonnen');
+  }
+}
+
+async function reason() {
+  kommt.value = false;
+  fehlen.value = false;
+
+  try {
+    await axios.patch(`/changeSpielerKommt/${aktiverSpieler.value.s_id}`, {
+      kommt: kommt.value,
+      train_id: id,
+      begründung: state.begründung,
+    });
+  } catch (error) {
+    error.value = true;
+    setTimeout(() => (error.value = false), 3000);
+    console.log(error);
   }
 }
 </script>
