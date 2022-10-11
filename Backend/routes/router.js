@@ -11,6 +11,7 @@ import {
   mannschaftenSpieler,
   getCode,
   sJoinTeam,
+  tJoinTeam,
 } from '../controllers/mannschaft.js';
 import {
   getAllSpieler,
@@ -79,6 +80,7 @@ router.patch('/changeTraining/:id', asyncHandler(changeTraining));
 router.delete('/delTraining/:id', asyncHandler(deleteTraining));
 
 router.post('/sJoinTeam', asyncHandler(sJoinTeam));
+router.post('/tJoinTeam', asyncHandler(tJoinTeam));
 
 router.get('/getAllTrainings/:id', asyncHandler(getAllTrainings));
 router.get('/getAllTrainingsSpieler/:id', asyncHandler(getAllTrainingsSpieler));

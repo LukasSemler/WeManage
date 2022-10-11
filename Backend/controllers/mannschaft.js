@@ -9,6 +9,7 @@ import {
   deleteSpielerMannschaftDB,
   getCodeDB,
   sJoinTeamDB,
+  tJoinTeamDB,
 } from '../models/mannschaftDB.js';
 
 const validateAdd = validator({
@@ -126,6 +127,17 @@ const sJoinTeam = async (req, res) => {
   return res.status(404).send('Dieses Team gibt es nicht, oder es ist ein Fehler aufgetreten');
 };
 
+const tJoinTeam = async (req, res) => {
+  const { zugangscode, t_id } = req.body;
+
+  console.log(zugangscode, t_id);
+
+  const result = await tJoinTeamDB(zugangscode, t_id);
+
+  if (result) return res.status(200).send('Erfolgreich beigetreten');
+  return res.status(404).send('Dieses Team gibt es nicht, oder es ist ein Fehler aufgetreten');
+};
+
 export {
   addTeam,
   mannschaftenTrainer,
@@ -136,4 +148,5 @@ export {
   mannschaftenSpieler,
   getCode,
   sJoinTeam,
+  tJoinTeam,
 };

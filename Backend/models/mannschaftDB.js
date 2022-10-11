@@ -171,6 +171,28 @@ const sJoinTeamDB = async (code, s_id) => {
   return true;
 };
 
+const tJoinTeamDB = async (code, t_id) => {
+  const { rows: zcode } = await query('SELECT * from mannschaft where zugangscode = $1;', [code]);
+  if (!zcode[0]) return false;
+
+  console.log(zcode[0]);
+
+  //Schaue ob der Spieler schon in der Mannschaft ist
+  const { rows: vorhanden } = await query(
+    'SELECT * from trainer_mannschaft where t_id = $1 and m_id = $2;',
+    [t_id, zcode[0].m_id],
+  );
+
+  if (vorhanden[0]) return false;
+
+  await query('INSERT INTO trainer_mannschaft (t_id, m_id) VALUES ($1, $2);', [
+    t_id,
+    zcode[0].m_id,
+  ]);
+
+  return true;
+};
+
 export {
   addTeamDB,
   mannschaftenTrainerDB,
@@ -181,4 +203,5 @@ export {
   mannschaftenSpielerDB,
   getCodeDB,
   sJoinTeamDB,
+  tJoinTeamDB,
 };
