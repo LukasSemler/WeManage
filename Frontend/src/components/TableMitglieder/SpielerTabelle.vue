@@ -39,6 +39,7 @@
                   class="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-gray-400"
                   aria-hidden="true"
                 />
+
                 <ComboboxInput
                   class="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm"
                   placeholder="Search..."
@@ -123,7 +124,7 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200 bg-white">
-                <tr v-for="person in spieler" :key="person.email" @click="showHealthStatus(person)">
+                <tr v-for="person in spieler" :key="person.email">
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                     <div class="flex items-center">
                       <div class="h-10 w-10 flex-shrink-0">
@@ -264,9 +265,5 @@ async function spielerDel(person) {
 
   //Trainer aus der Datenbank löschen
   await axios.delete(`/spielerMannschaftDel/${person.s_id}/${id.value}`);
-}
-
-async function showHealthStatus(spieler) {
-  router.push(`/spielerHealth/${spieler.s_id}`);
 }
 </script>

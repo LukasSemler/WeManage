@@ -61,7 +61,7 @@
                 <button
                 @click="reason"
                   type="button"
-                  class="inline-flex w-full justify-center rounded-md border border-transparent bg-lime-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm"
+                  class="inline-flex w-full justify-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm"
                 >
                   Submit
                 </button>
@@ -322,11 +322,15 @@ onMounted(async () => {
   const { data: spieler } = await axios.get(`/getTrainingDetailSpieler/${id}`);
   spielerListe.value = spieler;
 
+  console.log(spielerListe.value);
+
   aktiverSpieler.value = spielerListe.value.find(
     (spieler) => store.getAktivenUser.data.s_id == spieler.s_id,
   );
 
-  kommt.value = aktiverSpieler.value.kommt;
+  console.log(aktiverSpieler.value);
+
+  // kommt.value = aktiverSpieler.value.kommt;
 
   // Datum erstellen um die Uhrzeit zu bekommen
   let datumJetzt = new Date();

@@ -438,15 +438,15 @@
                       </th>
                       <th
                         scope="col"
-                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
-                        Abwesenheitsgrund
-                      </th>
-                      <th
-                        scope="col"
                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
                         Kommt
+                      </th>
+                      <th
+                        scope="col"
+                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                      >
+                        Abwesenheitsgrund
                       </th>
                     </tr>
                   </thead>
@@ -465,15 +465,7 @@
                           </div>
                         </div>
                       </td>
-                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                        <div class="flex items-center">
-                          <div class="ml-4">
-                            <div class="font-medium text-gray-900">
-                              {{ spieler.abwesenheitsgrund }}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
+
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         <span
                           @click="changeAnwesenheit(false, spieler.s_id)"
@@ -487,6 +479,15 @@
                           class="cursor-pointer inline-flex rounded-full bg-red-600 px-2 text-xs font-semibold leading-5 text-white"
                           >Nein</span
                         >
+                      </td>
+                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                        <div class="flex items-center">
+                          <div class="ml-4">
+                            <div class="font-medium text-gray-900">
+                              {{ spieler.abwesenheitsgrund }}
+                            </div>
+                          </div>
+                        </div>
                       </td>
                     </tr>
                   </tbody>

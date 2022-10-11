@@ -2,7 +2,7 @@
   <div class="px-4 sm:px-6 lg:px-8 mt-4">
     <div class="sm:flex sm:items-center">
       <div class="sm:flex-auto">
-        <h1 class="text-2xl font-semibold text-gray-900">Abwesendheiten</h1>
+        <h1 class="text-2xl font-semibold text-gray-900">Abwesenheiten</h1>
         <p class="mt-2 text-sm text-gray-700">All deine Abwesendheiten auf einem Blick.</p>
       </div>
     </div>
