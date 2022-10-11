@@ -7,6 +7,7 @@ import {
   getSpielerHealthDB,
   changeSpielerHealthDB,
   getTrainerSpielerHealthDB,
+  getSpielerAbwendheitenDB,
 } from '../models/spielerDB.js';
 
 const getAllSpieler = async (req, res) => {
@@ -84,7 +85,14 @@ const getTrainerSpielerHealth = async (req, res) => {
 
   if (result) return res.status(200).json(result);
   return res.status(400).send('Fehler beim Spielerdaten senden');
-}
+};
+
+const getSpielerAbwendheiten = async (req, res) => {
+  let result = await getSpielerAbwendheitenDB(req.params.s_id);
+
+  if (result) return res.status(200).json(result);
+  else return res.status(400).send('Spieler hat keine Abwesendheiten');
+};
 
 export {
   getAllSpieler,
@@ -94,4 +102,5 @@ export {
   getSpielerHealth,
   patchSpielerHealth,
   getTrainerSpielerHealth,
+  getSpielerAbwendheiten,
 };

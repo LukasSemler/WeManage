@@ -344,6 +344,7 @@ import {
   HomeIcon,
   XMarkIcon,
   HeartIcon,
+  UserMinusIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronUpDownIcon } from '@heroicons/vue/20/solid';
 
@@ -362,6 +363,12 @@ const navigation = [
   { name: 'My teams', icon: Bars4Icon, current: false, path: '/homeSpieler/teams' },
   { name: 'Settings', icon: Cog6ToothIcon, current: false, path: '/homeSpieler/settings' },
   { name: 'Gesundheit', icon: HeartIcon, current: false, path: '/homeSpieler/gesundheit' },
+  {
+    name: 'Abwesenheiten',
+    icon: UserMinusIcon,
+    current: false,
+    path: '/homeSpieler/abwesenheiten',
+  },
 ];
 
 onMounted(async () => {

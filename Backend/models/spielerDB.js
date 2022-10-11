@@ -118,6 +118,31 @@ from spieler_health sh
   else return false;
 };
 
+const getSpielerAbwendheitenDB = async (s_id) => {
+  const { rows } = await query(
+    `SELECT
+    t.titel as Training,
+    t.trainingdatum as Datum,
+    sbt.abwesenheitsgrund AS Grund,
+    m.titel as Team
+    FROM spielerbesuchttraining sbt
+    JOIN spieler s on s.s_id = sbt.fk_s_id
+    JOIN trainings t on t.training_id = sbt.fk_training_id
+    JOIN mannschaft m on m.m_id = t.fk_m_id
+
+    WHERE s.s_id = $1 AND sbt.kommt = false
+    GROUP BY sbt.abwesenheitsgrund, t.trainingdatum, t.titel, m.titel
+    HAVING t.trainingdatum < current_date
+    ORDER BY trainingdatum DESC;`,
+    [s_id],
+  );
+
+  console.log(rows);
+
+  if (rows[0]) return rows;
+  else return null;
+};
+
 export {
   getAllSpielerDB,
   getSpielerDB,
@@ -127,4 +152,5 @@ export {
   getSpielerHealthDB,
   changeSpielerHealthDB,
   getTrainerSpielerHealthDB,
+  getSpielerAbwendheitenDB,
 };

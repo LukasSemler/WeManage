@@ -118,6 +118,10 @@ const router = createRouter({
           path: 'gesundheit',
           component: () => import('../views/Spieler/Subviews/SpielerGesundheit.vue'),
         },
+        {
+          path: 'abwesenheiten',
+          component: () => import('../views/Spieler/Subviews/SpielerAbwesenheiten.vue'),
+        },
       ],
       beforeEnter: (to, from, next) => {
         const store = PiniaStore();
