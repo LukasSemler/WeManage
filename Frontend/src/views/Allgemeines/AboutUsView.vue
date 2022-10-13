@@ -82,7 +82,7 @@ const people = [
   {
     name: 'Lukas Semler',
     role: 'Co-Founder / CEO',
-    imageUrl: '/public/AboutUs/lukas_portrait.jpeg',
+    imageUrl: '/AboutUs/lukas_portrait.jpeg',
     bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
     twitterUrl: '#',
     linkedinUrl: '#',
@@ -90,7 +90,7 @@ const people = [
   {
     name: 'Benjamin Stauf',
     role: 'Co-Founder / CEO',
-    imageUrl: '/public/AboutUs/stauf_portrait.jpeg',
+    imageUrl: '/AboutUs/stauf_portrait.jpeg',
     bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
     twitterUrl: '#',
     linkedinUrl: '#',
