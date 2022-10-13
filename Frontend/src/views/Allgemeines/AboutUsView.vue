@@ -8,8 +8,7 @@
         <div class="space-y-5 sm:space-y-4">
           <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">About Us</h2>
           <p class="text-xl text-gray-500">
-            Nulla quam felis, enim faucibus proin velit, ornare id pretium. Augue ultrices sed arcu
-            condimentum vestibulum suspendisse. Volutpat eu faucibus vivamus eget bibendum cras.
+            Hier die beiden Webdeveloper, welche die Idee sowie die Realisierung durchgeführt haben.
           </p>
         </div>
         <div class="lg:col-span-2">
@@ -83,8 +82,7 @@ const people = [
   {
     name: 'Lukas Semler',
     role: 'Co-Founder / CEO',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+    imageUrl: '/public/AboutUs/lukas_portrait.jpeg',
     bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
     twitterUrl: '#',
     linkedinUrl: '#',
@@ -92,8 +90,7 @@ const people = [
   {
     name: 'Benjamin Stauf',
     role: 'Co-Founder / CEO',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+    imageUrl: '/public/AboutUs/stauf_portrait.jpeg',
     bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
     twitterUrl: '#',
     linkedinUrl: '#',

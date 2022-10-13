@@ -62,7 +62,7 @@
             commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
           </p>
           <div class="mx-auto mt-5 max-w-md sm:flex sm:justify-center md:mt-8">
-            <div class="rounded-md shadow">
+            <div class="rounded-md shadow hover:cursor-pointer">
               <a
                 @click="router.push('/register')"
                 class="flex w-full items-center justify-center rounded-md border border-transparent bg-lime-500 px-8 py-3 text-base font-medium text-white hover:bg-lime-600 md:py-4 md:px-10 md:text-lg"
