@@ -19,7 +19,7 @@
         leave-to-class="opacity-0"
       >
         <div
-          v-if="show"
+          v-if="showSuccess"
           class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden"
         >
           <div class="p-4">
@@ -33,7 +33,7 @@
               </div>
               <div class="ml-4 flex-shrink-0 flex">
                 <button
-                  @click="show = false"
+                  @click="showSuccess = false"
                   class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                   <span class="sr-only">Close</span>
@@ -105,11 +105,11 @@
             <h1
               class="text-4xl font-extrabold tracking-tight text-warm-gray-900 sm:text-5xl lg:text-6xl"
             >
-              Get in touch
+              Kontaktiere uns
             </h1>
             <p class="mt-6 text-xl text-warm-gray-500 max-w-3xl">
-              Vel nunc non ut montes, viverra tempor. Proin lectus nibh phasellus morbi non morbi.
-              In elementum urna ut volutpat. Sagittis et vel et fermentum amet consequat.
+              Sollte es Probleme, Bugs oder sonstiges geben, bitte nicht scheuen uns hier zu
+              kontaktieren. Wir Danken für jede Nachricht!
             </p>
           </div>
         </div>
@@ -152,7 +152,7 @@
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="relative bg-white shadow-xl">
-            <h2 id="contact-heading" class="sr-only">Contact us</h2>
+            <h2 id="contact-heading" class="sr-only">Kontaktiere uns</h2>
 
             <div class="grid grid-cols-1 lg:grid-cols-3">
               <!-- Contact information -->
@@ -256,24 +256,21 @@
                     </defs>
                   </svg>
                 </div>
-                <h3 class="text-lg font-medium text-white">Contact information</h3>
-                <p class="mt-6 text-base text-lime-50 max-w-3xl">
+                <h3 class="text-lg font-medium text-white">Kontakt Informationen</h3>
+                <!-- <p class="mt-6 text-base text-lime-50 max-w-3xl">
                   Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst
                   amet. Sapien tortor lacus arcu.
-                </p>
+                </p> -->
                 <dl class="mt-8 space-y-6">
                   <dt><span class="sr-only">Phone number</span></dt>
                   <dd class="flex text-base text-lime-50">
                     <PhoneIcon class="flex-shrink-0 w-6 h-6 text-lime-200" aria-hidden="true" />
-                    <span class="ml-3">+1 (555) 123-4567</span>
+                    <span class="ml-3">+43 650 2821919</span>
                   </dd>
                   <dt><span class="sr-only">Email</span></dt>
                   <dd class="flex text-base text-lime-50">
-                    <EnvelopeIcon
-                      class="flex-shrink-0 w-6 h-6 text-lime-200"
-                      aria-hidden="true"
-                    />
-                    <span class="ml-3">support@workcation.com</span>
+                    <EnvelopeIcon class="flex-shrink-0 w-6 h-6 text-lime-200" aria-hidden="true" />
+                    <span class="ml-3">wemanage.service@gmail.com</span>
                   </dd>
                 </dl>
                 <ul role="list" class="mt-8 flex space-x-12">
@@ -331,11 +328,11 @@
 
               <!-- Contact form -->
               <div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-                <h3 class="text-lg font-medium text-warm-gray-900">Send us a message</h3>
+                <h3 class="text-lg font-medium text-warm-gray-900">Sende uns eine Nachricht</h3>
                 <form class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
                   <div>
                     <label for="first-name" class="block text-sm font-medium text-warm-gray-900"
-                      >First name</label
+                      >Vorname</label
                     >
                     <div class="mt-1">
                       <input
@@ -358,7 +355,7 @@
                   </div>
                   <div>
                     <label for="last-name" class="block text-sm font-medium text-warm-gray-900"
-                      >Last name</label
+                      >Nachname</label
                     >
                     <div class="mt-1">
                       <input
@@ -403,7 +400,7 @@
                   <div>
                     <div class="flex justify-between">
                       <label for="phone" class="block text-sm font-medium text-warm-gray-900"
-                        >Phone</label
+                        >Telefonnummer</label
                       >
                       <span id="phone-optional" class="text-sm text-warm-gray-500">Optional</span>
                     </div>
@@ -424,7 +421,7 @@
                   </div>
                   <div class="sm:col-span-2">
                     <label for="subject" class="block text-sm font-medium text-warm-gray-900"
-                      >Subject</label
+                      >Grund</label
                     >
                     <div class="mt-1">
                       <input
@@ -446,10 +443,10 @@
                   <div class="sm:col-span-2">
                     <div class="flex justify-between">
                       <label for="message" class="block text-sm font-medium text-warm-gray-900"
-                        >Message</label
+                        >Nachricht</label
                       >
                       <span id="message-max" class="text-sm text-warm-gray-500"
-                        >Max. 500 characters</span
+                        >Max. 500 Zeichen</span
                       >
                     </div>
                     <div class="mt-1">
@@ -484,7 +481,7 @@
                       :disabled="checkError"
                       class="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 sm:w-auto"
                     >
-                      Submit
+                      Senden...
                     </button>
                   </div>
                 </form>
@@ -505,12 +502,13 @@ import { CheckCircleIcon, XCircleIcon } from '@heroicons/vue/24/outline';
 import { XMarkIcon } from '@heroicons/vue/20/solid';
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline';
 import { computed, reactive } from 'vue';
+import emailjs from '@emailjs/browser';
 // Vuelidate Imports
 import useValidate from '@vuelidate/core';
 import { required, email, maxLength } from '@vuelidate/validators';
 import axios from 'axios';
 
-let show = ref(false);
+let showSuccess = ref(false);
 let showError = ref(false);
 // Inputs
 let state = reactive({
@@ -540,14 +538,27 @@ async function submitForm(e) {
     if (!v$.value.$error) {
       state.date = getDate();
       //TODO neue URL + Route einfügen
-      const res = await axios.post('http://localhost:2410/contact', state);
-      console.log(res);
-      if (res.status == 201) show.value = true;
-      else showError.value = true;
-      setTimeout(() => {
-        show.value = false;
-        showError.value = false;
-      }, 5000);
+      const emailResponse = await emailjs.send(
+        'service_bzg4w98',
+        'template_8z7r5fc',
+        {
+          vorname: state.vorname,
+          nachname: state.nachname,
+          email: state.emailAddr,
+          telnr: state.telNr,
+
+          grund: state.betreff,
+          nachricht: state.nachricht,
+        },
+        'CP9kubXi0pj5bbIY8',
+      );
+
+      if (emailResponse.status == 200) {
+        showSuccess.value = true;
+      } else {
+        showSuccess.value = false;
+        showError.value = true;
+      }
     } else {
       console.log('Fehler');
     }
@@ -566,4 +577,18 @@ function getDate() {
   let date = new Date();
   return `${date.getFullYear()}-0${date.getMonth() + 1}-${date.getDate()}`;
 }
+
+/*
+----Google----
+Vorname:WeManage
+Nachname:WeManage
+Email:wemanage.service@gmail.com
+Passwort:WeManage2410
+
+Geb: 24.10.2003
+
+----EmailJs----
+Email: 
+Passwort: wemanage.service@gmail.com
+*/
 </script>
