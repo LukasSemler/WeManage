@@ -27,7 +27,8 @@
       <div class="relative lg:grid lg:grid-cols-3 lg:gap-x-8">
         <div class="lg:col-span-1">
           <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            A better way to send money.
+            Dein Team! <br />
+            Deine Möglichkeiten alles heraus zuholen!
           </h2>
         </div>
         <dl
@@ -51,32 +52,37 @@
 </template>
 
 <script setup>
-import { BoltIcon, EnvelopeIcon, GlobeAltIcon, ScaleIcon } from '@heroicons/vue/24/outline';
+import {
+  BoltIcon,
+  BanknotesIcon,
+  ArrowsPointingInIcon,
+  Square2StackIcon,
+} from '@heroicons/vue/24/outline';
 
 const features = [
   {
-    name: 'Competitive rates',
+    name: 'Bedienung & Handhabung',
     description:
-      'Consequuntur omnis dicta cumque, inventore atque ab dolores aspernatur tempora ab doloremque.',
-    icon: GlobeAltIcon,
-  },
-  {
-    name: 'No hidden fees',
-    description:
-      'Corporis quisquam nostrum nulla veniam recusandae temporibus aperiam officia incidunt at distinctio ratione.',
-    icon: ScaleIcon,
-  },
-  {
-    name: 'Instant transfers',
-    description:
-      'Omnis, illo delectus? Libero, possimus nulla nemo tenetur adipisci repellat dolore eligendi velit doloribus mollitia.',
+      'Das Zusammenspiel neuer Technologien in Verbindung mit maximaler Innovation spricht nach einfacher Bedienung. Um es wirklich jedem recht zu machen!',
     icon: BoltIcon,
   },
   {
-    name: 'Reminder emails',
+    name: 'Design & Aussehen',
     description:
-      'Veniam necessitatibus reiciendis fugit explicabo dolorem nihil et omnis assumenda odit? Quisquam unde accusantium.',
-    icon: EnvelopeIcon,
+      'Das Zusammenspiel moderner Design-Elemente, mit genügend Hirnschmalz um alles so darzustellen wie man es braucht, lässt sich sehen!',
+    icon: Square2StackIcon,
+  },
+  {
+    name: 'Preis & Kosten',
+    description:
+      'Keine versteckten Kosten, welche sich während Laufzeit der Reihe nach aufdecken. Preise werden im Vorhinein durch Abonnements festgelegt.',
+    icon: BanknotesIcon,
+  },
+  {
+    name: 'Ein Platz',
+    description:
+      'Für alle Mitglieder egal ob Spieler- oder Trainer-Position ein Platz. Alle Aufgaben auf einem Platz vereint! ',
+    icon: ArrowsPointingInIcon,
   },
 ];
 </script>
