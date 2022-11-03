@@ -17,6 +17,7 @@
     "@vuelidate/validators": "^2.0.0-alpha.28",
     "@vuepic/vue-datepicker": "^3.4.8",
     "axios": "^0.26.1",
+    "chart.js": "^3.9.1",
     "daisyui": "^2.31.0",
     "install": "^0.13.0",
     "lightvue": "^0.4.8",
@@ -24,6 +25,7 @@
     "pinia": "^2.0.13",
     "vue": "^3.2.29",
     "vue-cal": "^4.8.0",
+    "vue-chartjs": "^4.1.2",
     "vue-router": "^4.0.13"
   },
   "devDependencies": {

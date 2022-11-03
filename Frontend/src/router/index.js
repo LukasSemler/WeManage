@@ -174,7 +174,10 @@ const router = createRouter({
           path: 'mitglieder',
           component: () => import('../views/Mannschaften/Subview/Mitglieder.vue'),
         },
-        { path: 'statistik', component: () => import('../views/UnderConstruction.vue') },
+        {
+          path: 'statistik',
+          component: () => import('../views/Mannschaften/Subview/statistics.vue'),
+        },
         { path: 'health', component: () => import('../views/Mannschaften/Subview/health.vue') },
         { path: 'settings', component: () => import('../views/UnderConstruction.vue') },
       ],
