@@ -1,0 +1,1 @@
+import{e as t,a as r,c as s,f as a,t as o,u as c}from"./vendor.bde65cd9.js";const n={class:"text-center text-3xl font-bold"},d={setup(u){const e=t().currentRoute.value.params.id;return(i,p)=>(r(),s("div",null,[a("h1",n,"Spieler Health "+o(c(e)),1)]))}};export{d as default};
