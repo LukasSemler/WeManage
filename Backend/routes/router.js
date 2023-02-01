@@ -23,7 +23,7 @@ import {
   getSpielerAbwendheiten,
   getTrainerSpielerHealth,
 } from '../controllers/spieler.js';
-import { getAllTrainer, getTrainer } from '../controllers/trainer.js';
+import { getAllTrainer, getTrainer, getTrainerLog, logTraining } from '../controllers/trainer.js';
 import { postNews, getNews, delNews } from '../controllers/news.js';
 import {
   addTraining,
@@ -76,8 +76,7 @@ router.patch('/changeSpielerData', asyncHandler(changeSpielerSettings));
 
 router.patch('/changeSpielerKommt/:id', asyncHandler(changeSpielerKommt));
 router.patch('/changeAnwesenheit/:training_id/:s_id', asyncHandler(changeAnwesenheit));
-router.get("/abwesenheiten/:s_id", asyncHandler(getSpielerAbwendheiten))
-
+router.get('/abwesenheiten/:s_id', asyncHandler(getSpielerAbwendheiten));
 
 router.patch('/changeTraining/:id', asyncHandler(changeTraining));
 router.delete('/delTraining/:id', asyncHandler(deleteTraining));
@@ -92,5 +91,7 @@ router.get('/spielerHealth/:id', asyncHandler(getSpielerHealth));
 router.get('/trainerSpielerHealth/:id', asyncHandler(getTrainerSpielerHealth));
 router.patch('/spielerHealth/:id', asyncHandler(patchSpielerHealth));
 
+router.get('/getTrainerLog/:id', asyncHandler(getTrainerLog));
+router.post('/logTraining/:id', asyncHandler(logTraining));
 
 export default router;

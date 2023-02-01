@@ -339,6 +339,7 @@ import {
   Cog6ToothIcon,
   HomeIcon,
   XMarkIcon,
+  BookOpenIcon
 } from '@heroicons/vue/24/outline';
 import { ChevronUpDownIcon } from '@heroicons/vue/20/solid';
 
@@ -355,7 +356,8 @@ const sidebarOpen = ref(false);
 const navigation = [
   { name: 'Home', icon: HomeIcon, current: false, path: '/homeTrainer' },
   { name: 'My teams', icon: Bars4Icon, current: false, path: '/homeTrainer/teams' },
-  // { name: 'Settings', icon: Cog6ToothIcon, current: false, path: '/homeTrainer/settings' },
+  { name: 'Log Training', icon: BookOpenIcon, current: false, path: '/homeTrainer/logTraining' },
+  { name: 'Settings', icon: Cog6ToothIcon, current: false, path: '/homeTrainer/settings' },
 ];
 
 onMounted(async () => {

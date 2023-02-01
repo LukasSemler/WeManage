@@ -81,6 +81,11 @@ const router = createRouter({
       component: () => import('../views/Allgemeines/ContactView.vue'),
     },
     {
+      path: '/addTrainingLog',
+      name: 'Add Training Log',
+      component: () => import('../views/Trainer/TrainerLogErstellen.vue'),
+    },
+    {
       path: '/homeTrainer',
       name: 'Home',
       component: () => import('../views/Trainer/HomeViewTrainer.vue'),
@@ -90,6 +95,10 @@ const router = createRouter({
         {
           path: 'settings',
           component: () => import('../views/Trainer/Subviews/TrainerSettings.vue'),
+        },
+        {
+          path: 'logTraining',
+          component: () => import('../views/Trainer/Subviews/TrainerLogTraining.vue'),
         },
       ],
       beforeEnter: (to, from, next) => {

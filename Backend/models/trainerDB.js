@@ -26,4 +26,20 @@ const getTraininerByIdDB = async (id) => {
   if (rows[0]) return rows[0];
   return null;
 };
-export { getAllTrainerDB, getTrainerDB, getTraininerByIdDB };
+
+const getTrainerLogDB = async (id) => {
+  const { rows } = await query('SELECT * FROM "trainerLog" WHERE fk_trainer = $1', [id]);
+  if (rows[0]) return rows;
+  return null;
+};
+
+const logTrainingDB = async (date, von, bis, id) => {
+  const { rows } = await query(
+    'INSERT INTO "trainerLog" (date, von, bis, fk_trainer) VALUES ($1, $2, $3, $4) RETURNING *',
+    [date, von, bis, id],
+  );
+  if (rows[0]) return rows[0];
+  return null;
+};
+
+export { getAllTrainerDB, getTrainerDB, getTraininerByIdDB, getTrainerLogDB, logTrainingDB };
