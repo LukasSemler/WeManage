@@ -49,3 +49,9 @@ Content-Type: application/json
 
 ############# Alle Spieler von einer Mannschaft bekommen
 GET http://localhost:2410/getSpieler/15
+
+
+
+##############
+GET http://localhost:2410/statistic/7
+

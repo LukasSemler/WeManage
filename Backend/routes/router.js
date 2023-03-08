@@ -35,6 +35,7 @@ import {
   deleteTraining,
   getAllTrainings,
   getAllTrainingsSpieler,
+  getAbwesenheitStatistic,
 } from '../controllers/training.js';
 
 const router = express.Router();
@@ -93,5 +94,7 @@ router.patch('/spielerHealth/:id', asyncHandler(patchSpielerHealth));
 
 router.get('/getTrainerLog/:id', asyncHandler(getTrainerLog));
 router.post('/logTraining/:id', asyncHandler(logTraining));
+
+router.get('/statistic/:id', asyncHandler(getAbwesenheitStatistic)); //Abwesenheiten der Spieler bekommen, über die Mannschafts-ID
 
 export default router;

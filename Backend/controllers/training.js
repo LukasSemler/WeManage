@@ -9,6 +9,7 @@ import {
   deleteTrainingDB,
   getAllTrainingsDB,
   getAllTrainingsSpielerDB,
+  getAbwesenheitStatisticDB
 } from '../models/trainingDB.js';
 
 const addTraining = async (req, res) => {
@@ -85,8 +86,6 @@ const changeAnwesenheit = async (req, res) => {
   const { training_id, s_id, begründung } = req.params;
   const { kommt } = req.body;
 
-  
-
   const result = await changeAnwesenheitDB(kommt, training_id, s_id);
 
   if (result) return res.status(200).json(result);
@@ -149,6 +148,19 @@ const getAllTrainingsSpieler = async (req, res) => {
   return res.status(500).send('Fehler beim Holen');
 };
 
+const getAbwesenheitStatistic = async (req, res) => {
+  const { id: m_id } = req.params;
+
+  const AbwesenheitsResult = await getAbwesenheitStatisticDB(m_id);
+
+  if (!AbwesenheitsResult)
+    return res
+      .status(400)
+      .send('Leider ist beim bekommen Fehlender Spieler ein Fehler aufgetreten');
+
+  res.status(200).json(AbwesenheitsResult);
+};
+
 export {
   addTraining,
   getTrainings,
@@ -159,4 +171,5 @@ export {
   deleteTraining,
   getAllTrainings,
   getAllTrainingsSpieler,
+  getAbwesenheitStatistic,
 };

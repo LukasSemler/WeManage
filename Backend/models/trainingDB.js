@@ -181,6 +181,70 @@ ORDER BY trainingdatum ASC;`,
   return false;
 };
 
+const getAbwesenheitStatisticDB = async (m_id) => {
+  //Spieler die Abwesend waren herausfinden
+  const { rows: SpielerAbwesenheiten } = await query(
+    `SELECT
+      CONCAT(s2.vorname, ' ',s2.nachname) as Name,
+      count(tr.titel) as FehlendeTrainings
+    from trainings tr
+
+    JOIN spielerbesuchttraining s on tr.training_id = s.fk_training_id
+    JOIN spieler s2 on s2.s_id = s.fk_s_id
+    JOIN mannschaft m on m.m_id = tr.fk_m_id
+
+    WHERE trainingdatum < now() AND m.m_id = $1 AND s.istgekommen = false
+    GROUP BY Name;`,
+    [m_id],
+  );
+  if (!SpielerAbwesenheiten[0]) return null;
+
+  //Anzahl der stattgefundenen Trainings
+  const { rows: AnzahlTrainings } = await query(
+    `SELECT count(tr.training_id) as AnzahlDerStattgefundenenTrainings
+    from trainings tr
+    
+    JOIN mannschaft m on m.m_id = tr.fk_m_id
+    
+    WHERE trainingdatum < now() AND m.m_id = $1;`,
+    [m_id],
+  );
+  if (!AnzahlTrainings[0]) return null;
+
+  //Insgesamt abwesende Trainings
+  const { rows: AnzahlDerFehleinheiten } = await query(
+    `SELECT
+          count(tr.titel) as FehlendeTrainingsInsgesamt
+      from trainings tr
+
+      JOIN spielerbesuchttraining s on tr.training_id = s.fk_training_id
+      JOIN spieler s2 on s2.s_id = s.fk_s_id
+      JOIN mannschaft m on m.m_id = tr.fk_m_id
+
+      WHERE trainingdatum < now() AND m.m_id = $1 AND s.istgekommen = false;`,
+    [m_id],
+  );
+  if (!AnzahlTrainings[0]) return null;
+  
+  //Anzahl der Spieler in der Mannschaft bekommen
+  const { rows: SpielerAnzahl } = await query(
+    `SELECT COUNT(s.vorname) AS SpielerAnzahl FROM spieler_mannschaft
+    JOIN mannschaft m on m.m_id = spieler_mannschaft.m_id
+    JOIN spieler s on s.s_id = spieler_mannschaft.s_id
+    WHERE m.m_id = $1;`,
+    [m_id],
+  );
+  if (!AnzahlTrainings[0]) return null;
+  
+
+  return {
+    Abwensenheiten: SpielerAbwesenheiten,
+    InsegesamteAnzahlTrainings: AnzahlTrainings[0].anzahlderstattgefundenentrainings,
+    AnzahlDerFehleinheiten: AnzahlDerFehleinheiten[0].fehlendetrainingsinsgesamt,
+    SpielerAnzahl: SpielerAnzahl[0].spieleranzahl,
+  };
+};
+
 export {
   addTrainingDBWH,
   getTrainingsDB,
@@ -192,4 +256,5 @@ export {
   deleteTrainingDB,
   getAllTrainingsDB,
   getAllTrainingsSpielerDB,
+  getAbwesenheitStatisticDB,
 };
