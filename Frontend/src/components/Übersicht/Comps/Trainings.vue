@@ -19,7 +19,12 @@
                     class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                     aria-hidden="true"
                   />
-                  <p>{{ neuesDatum }} Treffpunkt: {{ training.trainingtreffpunkt }}</p>
+                  <p>
+                    {{ new Date(training.trainingdatum).getDay() }}.{{
+                      new Date(training.trainingdatum).getMonth()
+                    }}.{{ new Date(training.trainingdatum).getFullYear() }} | Treffpunkt:
+                    {{ training.trainingtreffpunkt }}
+                  </p>
                 </div>
                 <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                   <MapPinIcon
@@ -61,6 +66,7 @@ const id = ref(router.currentRoute.value.params.id);
 try {
   const { data: training } = await axios.get(`/getTrainings/${id.value}`);
   trainings.value = training;
+  console.log(trainings.value);
 } catch (error) {
   console.log(error);
 }

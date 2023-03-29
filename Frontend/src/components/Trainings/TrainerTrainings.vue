@@ -25,7 +25,11 @@
                     aria-hidden="true"
                   />
                   <p>
-                    {{ training.trainingdatum }} | Beginn: {{ training.trainingbeginn }}, Ende:
+                    {{new Date(training.trainingdatum).getDay()}}.{{
+                      new Date(training.trainingdatum).getMonth()
+                    }}.{{new Date(training.trainingdatum).getFullYear()}}
+                    | Beginn:
+                    {{ training.trainingbeginn }}, Ende:
                     {{ training.trainingende }}
                   </p>
                 </div>
