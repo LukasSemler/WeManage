@@ -101,7 +101,7 @@
         src="../../assets/icons/placeholder_icon.png"
         alt="Electronic City"
       />
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Register</h2>
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Registrieren</h2>
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-3xl">
@@ -181,7 +181,7 @@
 
                 <div class="sm:col-span-2">
                   <label for="password" class="block text-sm font-medium text-gray-700"
-                    >Password</label
+                    >Passwort</label
                   >
                   <div class="mt-1">
                     <input
@@ -204,7 +204,7 @@
 
                 <div class="sm:col-span-2">
                   <label for="phone" class="block text-sm font-medium text-gray-700"
-                    >Confirm Password</label
+                    >Passwort wiederholen</label
                   >
                   <div class="mt-1">
                     <input

@@ -112,8 +112,8 @@
             </div>
 
             <div class="text-sm">
-              <a href="#" class="font-medium text-lime-500 hover:text-lime-600">
-                Forgot your password?
+              <a class="font-medium text-lime-500 hover:text-lime-600">
+                Passwort vergessen?
               </a>
             </div>
           </div>

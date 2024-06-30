@@ -6,13 +6,15 @@
       <h1 class="text-3xl font-bold text-gray-900">Gesundheitsstatus</h1>
     </div>
   </div>
-  <Suspense>
+
+  <h1 class="text-center font-bold text-3xl mt-12">In Progress, stay tuned...</h1>
+  <!-- <Suspense>
     <TrainerSpielerHealth></TrainerSpielerHealth>
 
     <template #fallback>
       <h1>Loading</h1>
     </template>
-  </Suspense>
+  </Suspense> -->
 </template>
 
 <script setup>

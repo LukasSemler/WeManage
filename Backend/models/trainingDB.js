@@ -70,6 +70,8 @@ const getTrainingDetailDB = async (id) => {
 };
 
 const getTrainingDetailSpielerDB = async (id) => {
+  console.log(id);
+
   const { rows } = await query(
     `SELECT s2.s_id, s2.vorname, s2.nachname, s2.email, s2.avatarpath, s.kommt, s.abwesenheitsgrund, titel, training_id
 from trainings
@@ -79,6 +81,7 @@ WHERE training_id = $1`,
     [id],
   );
 
+  console.log(rows[0]);
   if (rows[0]) return rows;
 
   return false;
@@ -225,7 +228,7 @@ const getAbwesenheitStatisticDB = async (m_id) => {
     [m_id],
   );
   if (!AnzahlTrainings[0]) return null;
-  
+
   //Anzahl der Spieler in der Mannschaft bekommen
   const { rows: SpielerAnzahl } = await query(
     `SELECT COUNT(s.vorname) AS SpielerAnzahl FROM spieler_mannschaft
@@ -235,7 +238,6 @@ const getAbwesenheitStatisticDB = async (m_id) => {
     [m_id],
   );
   if (!AnzahlTrainings[0]) return null;
-  
 
   return {
     Abwensenheiten: SpielerAbwesenheiten,
